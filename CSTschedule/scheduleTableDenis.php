@@ -1,49 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-
-</head>
-<body>
-<style type="text/css">
-	.filledCell{background-color: #1e90f0;
-	vertical-align: text-top;
-	color: white;
-	font-size: 75%;
-	text-align: center;
-	width: 18%;
-	position: relative;} 
-
-	.emptyCell {width: 18%;
-		height: 15px;
-	position: relative;}
-
-	.timeCell {width: 6%;
-	vertical-align: text-top;
-	}
-
-	.linkSpan {
-	  position:absolute; 
-	  width:100%;
-	  height:100%;
-	  top:0;
-	  left: 0;
-
-	  /* edit: added z-index */
-	  z-index: 1;
-
-	  /* edit: fixes overlap error in IE7/8, 
-	     make sure you have an empty gif */
-	  background-image: url('empty.gif');
-	}
-
-	table {
-		border-collapse:collapse;
-		height: 100%;
-	}
-
-	}
-</style>
 <?php
+$q=$_REQUEST["q"]; $hint="";
     require_once('config.php');
     session_start();
 
@@ -51,22 +7,35 @@
 	mysql_connect(DB_HOST, DB_USER, DB_PASSWORD)or die("cannot connect");
 	mysql_select_db(DB_DATABASE)or die("cannot select DB");
 	$tbl_name="schdule1"; // Table name
-?>
-<table border="1">
-<tr>
-	<td width="6%"></td>
-	<th>Mon</th>
-	<th>Tue</th>
-	<th>Wed</th>
-	<th>Thu</th>
-	<th>Fri</th>
-</tr>
-<?php 
-$sql="SELECT * FROM $tbl_name ORDER BY id DESC";
-	// ORDER BY id DESC is order result by descending
 
-    //6c Enables the table to show the name of the user who posted the topic
-    $sql="SELECT * FROM $tbl_name JOIN members1 ON members1.level_id = schdule1.level_id"; 
+//Gets week code for current date
+$mydate=getdate();
+//$mydate=getdate($mydate[0] - 86400 * 4); //line for testing other dates
+if($mydate[wday] <= 5) {
+		$dayShifter = 1 - $mydate[wday];
+	}
+if($mydate[wday] >= 6) {
+		$dayShifter = 8 - $mydate[wday];
+	}
+$monArray = getdate($mydate[0] + 86400 * $dayShifter);
+$tueArray = getdate($monArray[0] + 86400 * + 1);
+$wedArray = getdate($monArray[0] + 86400 * + 2);
+$thuArray = getdate($monArray[0] + 86400 * + 3);
+$friArray = getdate($monArray[0] + 86400 * + 4);
+$week = $monArray[mon] . $monArray[mday];
+echo "<table border=\"1\">
+	<caption>$monArray[month] $monArray[mday] to $friArray[month] $friArray[mday]</caption>
+	<tr>
+		<td width=\"6%\"></td>
+		<th>Mon $monArray[mon]/$monArray[mday]</th>
+		<th>Tue $tueArray[mon]/$tueArray[mday]</th>
+		<th>Wed $wedArray[mon]/$wedArray[mday]</th>
+		<th>Thu $thuArray[mon]/$thuArray[mday]</th>
+		<th>Fri $friArray[mon]/$friArray[mday]</th>
+	</tr>";
+$sql="SELECT * FROM $tbl_name Where  week = '$week' ORDER BY id DESC";
+
+		
 $monSpan = 0;
 $tueSpan = 0;
 $wedSpan = 0;
@@ -78,14 +47,14 @@ for ($row=0; $row<20; $row++) {
 	$hourFrom = round($hourFrom);
 
 	if($row % 2 == 0) {
-		$minFrom = ":00";
+		$minFrom = "00";
 		$hourRow = 1;
 	}
 	else {
-		$minFrom = ":30";
+		$minFrom = "30";
 		$hourRow = 0;
 	}
-	$timeFrom = $hourFrom . $minFrom;
+	$timeFrom = $hourFrom . ":" . $minFrom;
 
 	echo "<tr>";
 	for ($col=1; $col<=5; $col++) {
@@ -115,8 +84,8 @@ for ($row=0; $row<20; $row++) {
 			$friSpan--;
 			$curSpan = $friSpan;
 		}
-
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '$timeFrom' and datetime = '$weekDay'";
+	$cellId = $weekDay . $hourFrom . $minFrom;
+	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '$timeFrom' and datetime = '$weekDay' and week = '$week'";
     $blk = mysql_query($blocks);
     $b = mysql_fetch_array($blk);
 	$spans = $b['timeBlocks'];
@@ -142,23 +111,26 @@ if($curSpan < 1) {
 	echo "<td width=\"15%\" class=\"$cellClass\" rowspan=\"$spans\">";
 	
 	if($spans != null) {
-		echo "<a href=\"CSTScheduleDenis.html\"><span class=\"linkSpan\"></span></a>";
-		$sql="SELECT * FROM $tbl_name WHERE timefrom = '$timeFrom' and datetime = '$weekDay'";
+		echo "<a href=\"#eventInfo\" onClick=\"detailsJs('$cellId')\"><span class=\"linkSpan\"></span></a>";
+		$sql="SELECT * FROM $tbl_name WHERE timefrom = '$timeFrom' and datetime = '$weekDay' and week = '$week'";
 		$result=mysql_query($sql);   
 		while($rows=mysql_fetch_array($result)){ // Start looping table row
 			// ORDER BY id DESC is order result by descending
-		echo $timeFrom, " - ", $rows['timeto'],"<br>",
+		echo $timeFrom, " - ", $rows['timeto'], "<br>",
 			$rows['eventname'], "<br>", 
-			$rows['instructor'], "&nbsp", $rows['location'];}
+			$rows['location'];
+		echo "<div class=\"hiddenInfo\" id=\"$cellId\">",
+				$rows['eventname'], "<br>", 
+				$weekDay, " ", $timeFrom, " - ", $rows['timeto'], "<br>",
+				$rows['instructor'], "<br>",
+				$rows['location'],
+				$rows['week'],
+			"</div>";}
 	}
 	echo "</td>";
 	} 
 }
 	echo "</tr>";
-}
-mysql_close();	
+}	
+echo "</table>";
 ?>
-</table>
-</body>
-</html>
-  
