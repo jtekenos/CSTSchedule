@@ -74,4 +74,33 @@ function weekPicker() {
 	+ tues +"<br>"+ wed +"<br>"+ thur +"<br>"+ fri;
 }
 
+//uses AJAX to display the right schedule for the selected week
+function tableSelector(direction) { 
+	if(direction == "current") {
+	}
+	else if(direction == "later") {
+		numDate = document.getElementById("numDateId").innerHTML;
+		numDate = parseInt(numDate) + 86400 * 7;
+	}
+	else if(direction == "earlier") {
+		numDate = document.getElementById("numDateId").innerHTML;
+		numDate = parseInt(numDate) - 86400 * 7;
+	}
+
+ var xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      document.getElementById("tableHere").innerHTML=xmlhttp.responseText;
+    }
+  }
+
+if(direction == "current") {
+	xmlhttp.open("GET","scheduleTableDenis.php?q=",true);
+}
+else {
+	xmlhttp.open("GET","scheduleTableDenis.php?q="+numDate,true);
+}
+  
+  xmlhttp.send();
+}
 

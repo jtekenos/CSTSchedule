@@ -29,8 +29,7 @@ $wedArray = getdate($monArray[0] + 86400 * + 2);
 $thuArray = getdate($monArray[0] + 86400 * + 3);
 $friArray = getdate($monArray[0] + 86400 * + 4);
 $week = $monArray[mon] . $monArray[mday];
-echo "<div id=\"numDateId\">$monArray[0]</div> 
-<table border=\"1\">
+echo "<table border=\"1\">
 	<caption>$monArray[month] $monArray[mday] to $friArray[month] $friArray[mday]</caption>
 	<tr>
 		<td width=\"6%\"></td>
@@ -139,5 +138,6 @@ if($curSpan < 1) {
 }
 	echo "</tr>";
 }	
-echo "</table>";
+echo "</table>
+<div id=\"numDateId\">$monArray[0]</div>";
 ?>
