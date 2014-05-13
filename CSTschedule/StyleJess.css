@@ -1,0 +1,132 @@
+#navHeader {background-color: #003C7A;
+height: 53px;}
+
+#header {
+padding: 10px;
+border: 0px;}
+
+#backButton {padding: 0px;
+margin: 0px;
+border: 0px;
+background-color: #003C7A}
+
+#editButton {width: 70px;
+float: left;
+position: relative;
+left: 80px;}
+
+#profileButton {float: right;
+width: 100px;
+}
+
+#GetScheduleButton {width: 130px;
+margin: auto;}
+
+th,td,table {
+border:1px solid black;
+border-collapse:collapse;
+font-size: 80%;}
+.tableCol {min-width: 20%;}
+.timeCol {min-width:22px;
+font-size: 60%;}
+
+
+#footer {background-color: #CCCCCC;
+border: 0px;
+position:absolute;
+bottom:5px;
+width: 100%;}
+
+.footerButtons {margin: auto;
+width: 99%;
+padding: 0px;}
+
+#LoginButton {width: 30%;
+margin: 2px;}
+#RegisterButton {width: 30%;
+margin: 2px;
+float: right;}
+
+.sliderDiv {float: right;}
+
+#notifyLabel {margin-bottom: 0px;
+clear: both;
+float: left;}
+
+
+#RegisterButtonDiv {clear: both;
+margin-top: 170px;}
+
+.profileHeaderDiv {clear: both;
+float: right;
+background-color: red;
+height: 100%;}
+
+#profileLinkSpan {float:; right;
+width: 100px;
+height: 100%;
+;
+z-index: 1;
+text-align: center;
+}
+.userHeaderDiv {float: right;
+padding-right: 5px}
+
+#userHeaderButton: {max-width: 40%;}
+
+#uNameProfile {text-align: center;}
+
+#scheduleContent {
+	padding: 0px;
+}
+#scheduleTable {width: 100%;
+	min-height: 90%;
+	margin: 0px;
+border: 0px;
+border: 0px;
+text-align: center;}
+
+#scheduleHeadings {background-color: white;}
+
+td {border-bottom: 0px;
+border-top: 0px;
+border-color: #777777;
+min-height: 100px;
+}
+
+tr {min-height: 100px;}
+
+tr:nth-child(odd) {background-color: white;}
+
+.filledSlot { background-color: #EE7777;
+width: 100%;
+height: 100%;
+margin: 0px;
+border-bottom: 0px;
+padding: 0px;
+text-align: center;
+text-decoration: none;
+font-weight: bold;
+}
+
+#timeButtons {
+	clear:both;
+}
+
+#setCheckbox {
+	max-width: 40%;
+	float: left;
+}
+
+#addEventNotification {
+	float: right;
+}
+
+
+input.error {
+    background-color: #FFCCCC;
+    color: white;
+}
+label.error {
+    color: #FF0000;
+}
