@@ -79,8 +79,17 @@ function dynamicSetCheckbox() {
 	}
 } 
 
+function getLevel(lvlId) {
+	var storeLevel = document.getElementById(lvlId).value;
+	return storeLevel;
+}
+
+function getSet(setId) {
+	var storeSet = document.getElementById(setId).value;
+	return storeSet;
+}
+
 function header(destinationId) {
-	
 	var mainHeader = document.getElementById("navHeader1").innerHTML;
 	var destinationMenu = document.getElementById(destinationId).innerHTML;
 	//document.write(document.getElementById(destinationId).innerHTML);
