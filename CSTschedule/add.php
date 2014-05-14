@@ -5,24 +5,16 @@
 	//Include database connection details
 	require_once('config.php');
 
-	//Array to store validation errors
-	$errmsg_arr = array();
-	
-	//Validation error flag
-	$errflag = false;
-	
-	//Connect to mysql server
-	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-	if(!$link) {
-		die('Failed to connect to server: ' . mysql_error());
-	}
-	
-	//Select database
-	$db = mysql_select_db(DB_DATABASE);
-	if(!$db) {
-		die("Unable to select database");
-	}
-	
+	$con=mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+
+if (mysqli_connect_errno()) {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
+/*
+	mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+	mysql_select_db(DB_DATABASE);
+
+	*/
 	//Function to sanitize values received from the form. Prevents SQL injection
 	function clean($str) {
 		$str = @trim($str);
@@ -33,6 +25,18 @@
 	}
 	
 	//Sanitize the POST values
+$event = mysqli_real_escape_string($con, $_POST['addEventName']);
+$prof = mysqli_real_escape_string($con, $_POST['addProfName']);
+$location = mysqli_real_escape_string($con, $_POST['addLocation']);
+$eventType = mysqli_real_escape_string($con, $_POST['eventType']);
+$set = mysqli_real_escape_string($con, $_POST['selSet']);
+$level = mysqli_real_escape_string($con, $_POST['selLevel']);
+$startTime = mysqli_real_escape_string($con, $_POST['selStartTime']);
+$endTime = mysqli_real_escape_string($con, $_POST['selEndTime']);
+$date = mysqli_real_escape_string($con, $_POST['date']);
+
+
+/*
 	$event = clean($_POST['addEventName']);
 	$prof = clean($_POST['addProfName']);
 	$location = clean($_POST['addLocation']);
@@ -43,8 +47,8 @@
 	$sliderSMS = clean($_POST['notifySliderSMS']);
 	$startTime = clean($_POST['selStartTime']);
 	$endTime = clean($_POST['selEndTime']);
-	$date = clean($_POST['date']);
-	$fakeDayOfTheWeek = 'Mon'; //Denis change this pls
+	//$date = clean($_POST['date']);
+	//$fakeDayOfTheWeek = 'Mon'; //Denis change this pls
 	
 	//Input Validations
 	if($event == '') {
@@ -99,29 +103,40 @@
 		header("location: CSTSchedule.html");
 		exit();
 	}
+	*/
 	//test values
-	$testId = "30";
-	$event = "test2";
-	$location = "asdf";
-	$startTime = "12:30";
-	$endTime = "14:30";
-	$prof = "testprof";
-	$level = "1";
-	$eventType = "adsf";
-	$dayOfweek = "Thu";
-	$tBlocks = "2";
-	$weekCode = "66";
-	//Create INSERT query
-	$qry = "INSERT INTO schdule1 (id, eventname, location, timefrom, timeto, instructor, 
-		level_id, comments, datetime, timeBlocks, week)
-	VALUES ('$testId', $event','$location','$startTime','$endTime','$prof','$level','$eventType',
-		'$dayOfweek', '$tBlocks', '$weekCode')";
-	$result = mysql_query($qry);
-	
-	if($result) {
-		header("location: add_form.html");
-		exit();
-	}else {
-		die("Query failed");
+	//$testId = rand(0,999999);
+	$timestamp = strtotime($date);
+	$inputDateArray = getdate($timestamp);
+	$dayOfweek = substr($inputDateArray[weekday],0,3);
+
+	if($inputDateArray[wday] <= 5) {
+		$dayShifter = 1 - $inputDateArray[wday];
 	}
+if($inputDateArray[wday] >= 6) {
+		$dayShifter = 8 - $inputDateArray[wday];
+	}
+$dateArray = getdate($timestamp + 86400 * $dayShifter);
+$week = $dateArray[mon] . $dateArray[mday];
+	$weekCode = $dateArray[mon] . $dateArray[mday];
+	$levelSet = $level . $set;
+	$tBlocks = "2";
+	//$weekCode = $date;
+	//Create INSERT query
+	$sql="INSERT INTO schdule1 (eventname, location, timefrom, timeto, instructor, 
+		level_id, comments, datetime, timeBlocks, week)
+	VALUES ('$event','$location','$startTime','$endTime','$prof','$levelSet','$eventType',
+		'$dayOfweek', '$tBlocks', '$weekCode')";
+		
+if (!mysqli_query($con,$sql)) {
+  die('Error: ' . mysqli_error($con));
+}
+
+ /*
+ // modify schedule sample
+mysqli_query($con,"UPDATE schdule1 SET comments='test comments'
+WHERE week='55'");
+*/
+mysqli_close($con);
+header("Location: CSTScheduleDenis.html");
 ?>
