@@ -104,3 +104,8 @@ else {
   xmlhttp.send();
 }
 
+function detailsJs(sourceId) {
+	//alert("its working")
+	var detailInfo = document.getElementById(sourceId).innerHTML;
+	document.getElementById("eventInfoContent").innerHTML = detailInfo;
+}
