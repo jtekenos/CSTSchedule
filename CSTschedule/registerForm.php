@@ -37,18 +37,40 @@
 		unset($_SESSION['ERRMSG_ARR']);
 	}
 ?>
-<form id="registerForm" name="registerForm" method="post" action="register.php">
-	<input type="text" id="uName" name="login" placeholder="User name">
-	<input type="password" id="password" name="password" placeholder="Password">
-	<input type="password" id="cpassword" name="cpassword" placeholder="Re-enter Password">
-	<input type="email" id="txtEmail" name="email" placeholder="Email">
+<h1 align="center">User Registration</h1>
+<div role="main" class="ui-content">
+<form id="registerForm" name="registerForm" method="post">
+	<input type="text" id="uName" name="uName" placeholder="User name" required>
+	<input type="email" id="txtEmail" name="email" placeholder="Email" required>
+	<input type="password" id="pwd" name="pwd" placeholder="Password" required>
+	<input type="password" id="confimPwd" name="confirmPwd" placeholder="Re-enter Password" required>
+
+	<script>
+	$( "#registerForm" ).validate({
+		rules: {
+    			confirmPwd: {
+      			equalTo: "#pwd"
+    		}
+  		},
+		messages: {
+			uName: "Username is required.",
+			email: {
+				required: "Email is required",
+				txtEmail: "Please provide valid email"
+			}
+		}
+	});
+	</script>
+
 	<select name= "level">
+			<option>Select Level</option>
       		<option value="lvl1">Level 1</option>
       		<option value="lvl2">Level 2</option>
       		<option value="lvl3">Level 3</option>
       		<option value="lvl4">Level 4</option>
     </select>
 	<select name = "set">
+			<option>Select Set</option>
       		<option value="setA">Set A</option>
       		<option value="setB">Set B</option>
       		<option value="setC">Set C</option>
@@ -72,6 +94,7 @@
 
 	<div id="RegisterButtonDiv">
 	<input class="button" type="submit" value="Register" name="Register">	
+	<input class="button" type="reset" value="Reset" name="Reset" data-icon="delete">	
 	</div>
 	
 </form>
