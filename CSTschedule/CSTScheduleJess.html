@@ -2712,9 +2712,9 @@ mysql_close();
 			<option value="assignmentEvent">Assignment Due</option>
 			<option value="classEvent">Class</option>
 		</select>
-		<select name="selLevel">
+		<select id="selLevel" name="selLevel">
 			<option>Select Level</option>
-			<option value="lvl1">Level 1</option>
+			<option value="lvl1" onclick="dynamicSetCheckbox()">Level 1</option>
       		<option value="lvl2">Level 2</option>
       		<option value="lvl3">Level 3</option>
       		<option value="lvl4">Level 4</option>
@@ -2724,12 +2724,24 @@ mysql_close();
 		<div id="setCheckbox" data-role="fieldcontain">
  			<fieldset data-role="controlgroup">
 			<legend>Set (select all that apply)</legend>
-			<input type="checkbox" name="checkboxSet" id="checkbox-1" value="setA">
-			<input type="checkbox" name="checkboxSet" id="checkbox-2" value="setB">
-			<input type="checkbox" name="checkboxSet" id="checkbox-3" value="setA">
 			<label for="checkbox-1">Set A</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-1" value="setA">
 			<label for="checkbox-2">Set B</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-2" value="setB">
 			<label for="checkbox-3">Set C</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-3" value="setC">
+			<label for="checkbox-4">Set D</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-4" value="setD">
+			<label for="checkbox-5">Set E</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-5" value="setE">
+			<label for="checkbox-6">Set G</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-6" value="setG">
+			<label for="checkbox-7">Set L</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-7" value="setL">
+			<label for="checkbox-8">Set O</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-8" value="setO">
+			<label for="checkbox-9">Set Q</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-9" value="setQ">
     		</fieldset>
 		</div>
 		<div id="addEventNotification">

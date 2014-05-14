@@ -47,6 +47,13 @@ function menuSelector(sourceId, destinationId) {
 	}
 }
 
+function dynamicSetCheckbox(sourceId,destinationId) {
+	var selectedLevel = document.getElementById(sourceId).innerHTML;
+	var destinationMenu = document.getElementById(destinationId).innerHTML;
+	document.getElementById(destinationId).innerHTML = selectedLevel;
+	alert(selectedLevel);
+} 
+
 function header(destinationId) {
 	
 	var mainHeader = document.getElementById("navHeader1").innerHTML;
