@@ -93,7 +93,7 @@
 	</div>
 
 	<div id="RegisterButtonDiv">
-	<input class="button" type="submit" value="Register" name="Register">	
+	<input class="button" type="submit" value="Register" name="Register" data-icon="check">	
 	<input class="button" type="reset" value="Reset" name="Reset" data-icon="delete">	
 	</div>
 	
