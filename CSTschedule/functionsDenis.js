@@ -75,7 +75,7 @@ function weekPicker() {
 }
 
 //uses AJAX to display the right schedule for the selected week
-function tableSelector(direction) { 
+function tableSelector(direction, tableId) { 
 	if(direction == "current") {
 	}
 	else if(direction == "later") {
@@ -90,7 +90,7 @@ function tableSelector(direction) {
  var xmlhttp=new XMLHttpRequest();
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      document.getElementById("tableHere").innerHTML=xmlhttp.responseText;
+      document.getElementById(tableId).innerHTML=xmlhttp.responseText;
     }
   }
 

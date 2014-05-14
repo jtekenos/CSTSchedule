@@ -40,20 +40,17 @@
 		<?php	
 			session_start();
 			include "functions.php"; 
-			
-			if (isLoggedIn()){
-				echo '<div class="loginInfo" id="userName">' . $_SESSION["SESS_LOGIN_NAME"] . '</div>';
-				echo '<div class="loginInfo"><form method="link" action="forum/logout.php">
-					<input type="submit" class="button" value="Logout"></form></div>';
-			} 
+
+				echo $_SESSION["SESS_LOGIN_NAME"];
+
 			?>
 <!-- /content -->
 
 <div id="footer" data-role="footer">
 
 	<div class="footerButtons">
-		<a href="#login" id="LoginButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Login</a>
-		<a href="#register" id="RegisterButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Register</a>
+		<a href="LoginForm.php" id="LoginButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Login</a>
+		<a href="registerForm.php" id="RegisterButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Register</a>
 	</div>
 </div><!-- /footer -->
 </div><!-- /page -->
@@ -1430,7 +1427,7 @@ mysql_close();
 
 <h1 align="center">User Login</h1>
 <div role="main" class="ui-content">
-<form id="loginForm" name="loginForm" method="post" action="login.php">
+<form id="loginForm" name="loginForm" method="post" action="login.php" data-ajax="false">
 	<input type="text" id="username" name="username">
 	<input type="password" id="password" name="password">
 

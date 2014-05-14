@@ -5,12 +5,10 @@
 <link rel="stylesheet" href="themes/BCITTheme.min.css" />
 <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css" />
-<link rel="stylesheet" href="StyleJess.css" />
+<link rel="stylesheet" href="Style.css" />
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
-<script src="http://jquery.bassistance.de/validate/jquery.validate.js"></script>
-<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
-<script src="functionsJess.js"></script> 
+<script src="functions.js"></script> 
 <meta charset="UTF-8">
 <title>CST Schedule</title>
 </head>
@@ -24,7 +22,7 @@
 </div><!-- /header -->
 
 <div role="main" class="ui-content">
-<div id="levelCollapsible" data-role="collapsible" data-theme="b" data-content-theme="b">
+<div data-role="collapsible" data-theme="b" data-content-theme="b">
     <h4 ><span id="lvlHeader">Level</span></h4>
     <button id="lvl1" class="ui-btn ui-btn-a" onClick="menuSelector('lvl1', 'lvlHeader')">Level 1</button>
     <button id="lvl2" class="ui-btn ui-btn-a" onClick="menuSelector('lvl2', 'lvlHeader')">Level 2</button>
@@ -36,14 +34,8 @@
     <button id="setA" class="ui-btn ui-btn-a" onClick="menuSelector('setA', 'setHeader')">Set A</button>
     <button id="setB" class="ui-btn ui-btn-a" onClick="menuSelector('setB', 'setHeader')">Set B</button>
     <button id="setC" class="ui-btn ui-btn-a" onClick="menuSelector('setC', 'setHeader')">Set C</button>
-    <button id="setD" class="ui-btn ui-btn-a" onClick="menuSelector('setD', 'setHeader')">Set D</button>
-    <button id="setE" class="ui-btn ui-btn-a" onClick="menuSelector('setE', 'setHeader')">Set E</button>
-    <button id="setG" class="ui-btn ui-btn-a" onClick="menuSelector('setG', 'setHeader')">Set G</button>
-    <button id="setL" class="ui-btn ui-btn-a" onClick="menuSelector('setL', 'setHeader')">Set L</button>
-    <button id="setO" class="ui-btn ui-btn-a" onClick="menuSelector('setO', 'setHeader')">Set O</button>
-    <button id="setQ" class="ui-btn ui-btn-a" onClick="menuSelector('setQ', 'setHeader')">Set Q</button>
 </div>
-<a href="#schedule" id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Get Schedule</a>
+<a href="#schedule" id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Get Schedule</a>
 </div><!-- /content -->
 
 <div id="footer" data-role="footer">
@@ -70,7 +62,7 @@
 </div><!-- /header -->
 
 <div role="main" id="scheduleContent" class="ui-content">
-	<?php
+	<h3>May</h3><?php
     require_once('config.php');
     session_start();
 
@@ -80,15 +72,15 @@
 	$tbl_name="schdule1"; // Table name
 ?>
 
-<table id="scheduleTable" cellpadding="0" cellspacing="1">
+<table width="90%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#CCCCCC">
 
-<tr id="scheduleHeadings">
-<td width="6%" align="center"><strong></strong></td>
-<td width="13%" align="center"><strong>Mon</strong></td>
-<td width="13%" align="center"><strong>Tue</strong></td>
-<td width="13%" align="center"><strong>Wed</strong></td>
-<td width="13%" align="center"><strong>Thu</strong></td>
-<td width="13%" align="center"><strong>Fri</strong></td>
+<tr>
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong></strong></td>
+<td width="13%" align="center" bgcolor="#E6E6E6"><strong>Mon</strong></td>
+<td width="13%" align="center" bgcolor="#E6E6E6"><strong>Tue</strong></td>
+<td width="13%" align="center" bgcolor="#E6E6E6"><strong>Wed</strong></td>
+<td width="13%" align="center" bgcolor="#E6E6E6"><strong>Thu</strong></td>
+<td width="13%" align="center" bgcolor="#E6E6E6"><strong>Fri</strong></td>
 </tr>
 
 <?php
@@ -97,1307 +89,1123 @@
 
     //6c Enables the table to show the name of the user who posted the topic
     $sql="SELECT * FROM $tbl_name JOIN members1 ON members1.level_id = schdule1.level_id"; 
-    $blocks="SELECT * FROM $tbl_name WHERE timefrom = '8:00' and datetime = 'Mon'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }
   ?>
 
 <tr>
-<td width="6%" align="center"><strong>8:00</strong></td>
-<td  rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>8:00</strong></td>
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '8:00' and datetime = 'Mon'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	echo "<span class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</span>";}
-
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '8:00' and datetime = 'Tue'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }
-    
-    ?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '8:00' and datetime = 'Tue'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '8:00' and datetime = 'Wed'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '8:00' and datetime = 'Wed'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '8:00' and datetime = 'Thu'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '8:00' and datetime = 'Thu'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '8:00' and datetime = 'Fri'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '8:00' and datetime = 'Fri'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '8:30' and datetime = 'Mon'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 </tr>
 <tr>
-<td width="6%" align="center"><strong>8:30</strong></td>
-
-<td rowspan = "<?php echo $b['timeBlocks'] ?>">
-	<?php 
-
-		$sql="SELECT * FROM $tbl_name WHERE timefrom = '8:30' and datetime = 'Mon'";
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>8:30</strong></td>
+<td bgcolor="#FFFFFF"><?php 
+ 	$sql="SELECT * FROM $tbl_name WHERE timefrom = '8:30' and datetime = 'Mon'";
 	$result=mysql_query($sql);   
-	while($rows=mysql_fetch_array($result)){ 
-
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '8:30' and datetime = 'Tue'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	while($rows=mysql_fetch_array($result)){ // Start looping table row
+		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '8:30' and datetime = 'Tue'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '8:30' and datetime = 'Wed'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '8:30' and datetime = 'Wed'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '8:30' and datetime = 'Thu'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '8:30' and datetime = 'Thu'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '8:30' and datetime = 'Fri'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '8:30' and datetime = 'Fri'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '9:00' and datetime = 'Mon'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 </tr>
 
 <tr>
-<td width="6%" align="center"><strong>9:00</strong></td>
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>9:00</strong></td>
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '9:00' and datetime = 'Mon'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '9:00' and datetime = 'Tue'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '9:00' and datetime = 'Tue'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '9:00' and datetime = 'Wed'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '9:00' and datetime = 'Wed'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '9:00' and datetime = 'Thu'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '9:00' and datetime = 'Thu'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '9:00' and datetime = 'Fri'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '9:00' and datetime = 'Fri'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '9:30' and datetime = 'Mon'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 </tr>
 
 <tr>
-<td width="6%" align="center"><strong>9:30</strong></td>
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>9:30</strong></td>
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '9:30' and datetime = 'Mon'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '9:30' and datetime = 'Tue'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '9:30' and datetime = 'Tue'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '9:30' and datetime = 'Wed'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '9:30' and datetime = 'Wed'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '9:30' and datetime = 'Thu'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '9:30' and datetime = 'Thu'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '9:30' and datetime = 'Fri'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '9:30' and datetime = 'Fri'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '10:00' and datetime = 'Mon'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 </tr>
 <tr>
-<td width="6%" align="center"><strong>10:00</strong></td>
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>10:00</strong></td>
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '10:00' and datetime = 'Mon'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '10:00' and datetime = 'Tue'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '10:00' and datetime = 'Tue'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '10:00' and datetime = 'Wed'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '10:00' and datetime = 'Wed'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '10:00' and datetime = 'Thu'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '10:00' and datetime = 'Thu'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '10:00' and datetime = 'Fri'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '10:00' and datetime = 'Fri'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '10:30' and datetime = 'Mon'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 </tr>
 
 <tr>
-<td width="6%" align="center"><strong>10:30</strong></td>
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>10:30</strong></td>
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '10:30' and datetime = 'Mon'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '10:30' and datetime = 'Tue'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '10:30' and datetime = 'Tue'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '10:30' and datetime = 'Wed'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '10:30' and datetime = 'Wed'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '10:30' and datetime = 'Thu'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '10:30' and datetime = 'Thu'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '10:30' and datetime = 'Fri'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '10:30' and datetime = 'Fri'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '11:00' and datetime = 'Mon'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 </tr>
 <tr>
-<td width="6%" align="center"><strong>11:00</strong></td>
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>11:00</strong></td>
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '11:00' and datetime = 'Mon'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '11:00' and datetime = 'Tue'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '11:00' and datetime = 'Tue'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '11:00' and datetime = 'Wed'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '11:00' and datetime = 'Wed'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '11:00' and datetime = 'Thu'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '11:00' and datetime = 'Thu'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '11:00' and datetime = 'Fri'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '11:00' and datetime = 'Fri'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '11:30' and datetime = 'Mon'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 </tr>
 
 <tr>
-<td width="6%" align="center"><strong>11:30</strong></td>
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>11:30</strong></td>
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '11:30' and datetime = 'Mon'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '11:30' and datetime = 'Tue'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '11:30' and datetime = 'Tue'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '11:30' and datetime = 'Wed'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '11:30' and datetime = 'Wed'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '11:30' and datetime = 'Thu'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '11:30' and datetime = 'Thu'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '11:30' and datetime = 'Fri'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '11:30' and datetime = 'Fri'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '12:00' and datetime = 'Mon'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 </tr>
 <tr>
-<td width="6%" align="center"><strong>12:00</strong></td>
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>12:00</strong></td>
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '12:00' and datetime = 'Mon'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '12:00' and datetime = 'Tue'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '12:00' and datetime = 'Tue'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '12:00' and datetime = 'Wed'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '12:00' and datetime = 'Wed'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '12:00' and datetime = 'Thu'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '12:00' and datetime = 'Thu'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '12:00' and datetime = 'Fri'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '12:00' and datetime = 'Fri'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '12:30' and datetime = 'Mon'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 </tr>
 
 <tr>
-<td width="6%" align="center"><strong>12:30</strong></td>
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>12:30</strong></td>
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '12:30' and datetime = 'Mon'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '12:30' and datetime = 'Tue'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '12:30' and datetime = 'Tue'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '12:30' and datetime = 'Wed'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '12:30' and datetime = 'Wed'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '12:30' and datetime = 'Thu'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '12:30' and datetime = 'Thu'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '12:30' and datetime = 'Fri'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '12:30' and datetime = 'Fri'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '13:00' and datetime = 'Mon'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 </tr>
 <tr>
-<td width="6%" align="center"><strong>13:00</strong></td>
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>13:00</strong></td>
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '13:00' and datetime = 'Mon'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '13:00' and datetime = 'Tue'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '13:00' and datetime = 'Tue'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '13:00' and datetime = 'Wed'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '13:00' and datetime = 'Wed'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '13:00' and datetime = 'Thu'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '13:00' and datetime = 'Thu'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '13:00' and datetime = 'Fri'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '13:00' and datetime = 'Fri'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '13:30' and datetime = 'Mon'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 </tr>
 <tr>
-<td width="6%" align="center"><strong>13:30</strong></td>
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>13:30</strong></td>
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '13:30' and datetime = 'Mon'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '13:30' and datetime = 'Tue'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '13:30' and datetime = 'Tue'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '13:30' and datetime = 'Wed'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '13:30' and datetime = 'Wed'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '13:30' and datetime = 'Thu'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '13:30' and datetime = 'Thu'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '13:30' and datetime = 'Fri'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '13:30' and datetime = 'Fri'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '14:00' and datetime = 'Mon'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 </tr>
 
 <tr>
-<td width="6%" align="center"><strong>14:00</strong></td>
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>14:00</strong></td>
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '14:00' and datetime = 'Mon'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '14:00' and datetime = 'Tue'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '14:00' and datetime = 'Tue'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '14:00' and datetime = 'Wed'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '14:00' and datetime = 'Wed'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '14:00' and datetime = 'Thu'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '14:00' and datetime = 'Thu'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '14:00' and datetime = 'Fri'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '14:00' and datetime = 'Fri'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '14:30' and datetime = 'Mon'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 </tr>
 <tr>
-<td width="6%" align="center"><strong>14:30</strong></td>
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>14:30</strong></td>
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '14:30' and datetime = 'Mon'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '14:30' and datetime = 'Tue'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '14:30' and datetime = 'Tue'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '14:30' and datetime = 'Wed'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '14:30' and datetime = 'Wed'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '14:30' and datetime = 'Thu'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '14:30' and datetime = 'Thu'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '14:30' and datetime = 'Fri'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '14:30' and datetime = 'Fri'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '15:00' and datetime = 'Mon'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 </tr>
 <tr>
-<td width="6%" align="center"><strong>15:00</strong></td>
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>15:00</strong></td>
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '15:00' and datetime = 'Mon'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '15:00' and datetime = 'Tue'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '15:00' and datetime = 'Tue'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '15:00' and datetime = 'Wed'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '15:00' and datetime = 'Wed'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '15:00' and datetime = 'Thu'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '15:00' and datetime = 'Thu'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '15:00' and datetime = 'Fri'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '15:00' and datetime = 'Fri'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '15:30' and datetime = 'Mon'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 </tr>
 <tr>
-<td width="6%" align="center"><strong>15:30</strong></td>
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>15:30</strong></td>
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '15:30' and datetime = 'Mon'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '15:30' and datetime = 'Tue'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '15:30' and datetime = 'Tue'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '15:30' and datetime = 'Wed'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '15:30' and datetime = 'Wed'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '15:30' and datetime = 'Thu'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '15:30' and datetime = 'Thu'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '15:30' and datetime = 'Fri'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '15:30' and datetime = 'Fri'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '16:00' and datetime = 'Mon'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 </tr>
 
 <tr>
-<td width="6%" align="center"><strong>16:00</strong></td>
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>16:00</strong></td>
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '16:00' and datetime = 'Mon'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '16:00' and datetime = 'Tue'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '16:00' and datetime = 'Tue'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '16:00' and datetime = 'Wed'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '16:00' and datetime = 'Wed'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '16:00' and datetime = 'Thu'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td align="center" rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td align="center" bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '16:00' and datetime = 'Thu'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '16:00' and datetime = 'Fri'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 
-<td rowspan = "<?php echo $b['timeBlocks'] ?>"><?php 
+<td bgcolor="#FFFFFF"><?php 
  	$sql="SELECT * FROM $tbl_name WHERE timefrom = '16:00' and datetime = 'Fri'";
 	$result=mysql_query($sql);   
 	while($rows=mysql_fetch_array($result)){ // Start looping table row
 		// ORDER BY id DESC is order result by descending
-	
-	echo "<div class=\"filledSlot\">", $rows['eventname'], "\n", $rows['instructor'], "&nbsp", $rows['location'], "</div>";}
-	
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '16:30' and datetime = 'Mon'";
-    $blk = mysql_query($blocks);
-    $b = mysql_fetch_array($blk);
-    if ($b['timeBlocks'] == null){
-    	$b['timeBlocks'] = "1";
-    }?> </td>    
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+</tr>
+<tr>
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>16:30</strong></td>
+<td bgcolor="#FFFFFF"><?php 
+ 	$sql="SELECT * FROM $tbl_name WHERE timefrom = '16:30' and datetime = 'Mon'";
+	$result=mysql_query($sql);   
+	while($rows=mysql_fetch_array($result)){ // Start looping table row
+		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
+ 	$sql="SELECT * FROM $tbl_name WHERE timefrom = '16:30' and datetime = 'Tue'";
+	$result=mysql_query($sql);   
+	while($rows=mysql_fetch_array($result)){ // Start looping table row
+		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
+ 	$sql="SELECT * FROM $tbl_name WHERE timefrom = '16:30' and datetime = 'Wed'";
+	$result=mysql_query($sql);   
+	while($rows=mysql_fetch_array($result)){ // Start looping table row
+		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+
+<td align="center" bgcolor="#FFFFFF"><?php 
+ 	$sql="SELECT * FROM $tbl_name WHERE timefrom = '16:30' and datetime = 'Thu'";
+	$result=mysql_query($sql);   
+	while($rows=mysql_fetch_array($result)){ // Start looping table row
+		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+
+<td bgcolor="#FFFFFF"><?php 
+ 	$sql="SELECT * FROM $tbl_name WHERE timefrom = '16:30' and datetime = 'Fri'";
+	$result=mysql_query($sql);   
+	while($rows=mysql_fetch_array($result)){ // Start looping table row
+		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
 </tr>
 
+<tr>
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>17:00</strong></td>
+<td bgcolor="#FFFFFF"><?php 
+ 	$sql="SELECT * FROM $tbl_name WHERE timefrom = '17:00' and datetime = 'Mon'";
+	$result=mysql_query($sql);   
+	while($rows=mysql_fetch_array($result)){ // Start looping table row
+		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
+ 	$sql="SELECT * FROM $tbl_name WHERE timefrom = '17:00' and datetime = 'Tue'";
+	$result=mysql_query($sql);   
+	while($rows=mysql_fetch_array($result)){ // Start looping table row
+		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
+ 	$sql="SELECT * FROM $tbl_name WHERE timefrom = '17:00' and datetime = 'Wed'";
+	$result=mysql_query($sql);   
+	while($rows=mysql_fetch_array($result)){ // Start looping table row
+		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+
+<td align="center" bgcolor="#FFFFFF"><?php 
+ 	$sql="SELECT * FROM $tbl_name WHERE timefrom = '17:00' and datetime = 'Thu'";
+	$result=mysql_query($sql);   
+	while($rows=mysql_fetch_array($result)){ // Start looping table row
+		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+
+<td bgcolor="#FFFFFF"><?php 
+ 	$sql="SELECT * FROM $tbl_name WHERE timefrom = '17:00' and datetime = 'Fri'";
+	$result=mysql_query($sql);   
+	while($rows=mysql_fetch_array($result)){ // Start looping table row
+		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+</tr>
+<tr>
+<td width="6%" align="center" bgcolor="#E6E6E6"><strong>17:30</strong></td>
+<td bgcolor="#FFFFFF"><?php 
+ 	$sql="SELECT * FROM $tbl_name WHERE timefrom = '17:30' and datetime = 'Mon'";
+	$result=mysql_query($sql);   
+	while($rows=mysql_fetch_array($result)){ // Start looping table row
+		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
+ 	$sql="SELECT * FROM $tbl_name WHERE timefrom = '17:30' and datetime = 'Tue'";
+	$result=mysql_query($sql);   
+	while($rows=mysql_fetch_array($result)){ // Start looping table row
+		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+<td align="center" bgcolor="#FFFFFF"><?php 
+ 	$sql="SELECT * FROM $tbl_name WHERE timefrom = '17:30' and datetime = 'Wed'";
+	$result=mysql_query($sql);   
+	while($rows=mysql_fetch_array($result)){ // Start looping table row
+		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+
+<td align="center" bgcolor="#FFFFFF"><?php 
+ 	$sql="SELECT * FROM $tbl_name WHERE timefrom = '17:30' and datetime = 'Thu'";
+	$result=mysql_query($sql);   
+	while($rows=mysql_fetch_array($result)){ // Start looping table row
+		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+
+<td bgcolor="#FFFFFF"><?php 
+ 	$sql="SELECT * FROM $tbl_name WHERE timefrom = '17:30' and datetime = 'Fri'";
+	$result=mysql_query($sql);   
+	while($rows=mysql_fetch_array($result)){ // Start looping table row
+		// ORDER BY id DESC is order result by descending
+	echo $rows['eventname'];
+	echo "\n";
+	echo $rows['instructor'];
+	echo "&nbsp";
+	echo $rows['location'];} ?></td>    
+</tr>
 <?php
 // Exit looping and close connection
 
 mysql_close();
 ?>
 <tr>
-<td colspan="6" align="center"><a href="add_topic_form.php"><strong></strong> </a></td>
+<td colspan="6" align="center" bgcolor="#E6E6E6"><a href="add_topic_form.php"><strong></strong> </a></td>
 </tr>
 </table>
 
@@ -1428,6 +1236,7 @@ mysql_close();
 </div><!-- /content -->
 </div><!-- /page -->
 
+
 <!-- ***************************REGISTER PAGE*************************** -->
 <div id="register" data-role="page">
 
@@ -1440,31 +1249,11 @@ mysql_close();
 
 <h1 align="center">User Registration</h1>
 <div role="main" class="ui-content">
-<form id="registerForm" name="registerForm" method="post">
-	<input type="text" id="uName" name="uName" placeholder="User name" required>
-	<input type="email" id="txtEmail" name="email" placeholder="Email" required>
-	<input type="password" id="pwd" name="pwd" placeholder="Password" required>
-	<input type="password" id="confimPwd" name="confirmPwd" placeholder="Re-enter Password" required>
-
-	<!-- from http://blogs.telerik.com/appbuilder/posts/14-01-16/four-options-for-mobile-form-validation -->
-	<script>
-	$( "#registerForm" ).validate({
-		rules: {
-    			confirmPwd: {
-      			equalTo: "#pwd"
-    		}
-  		},
-		messages: {
-			uName: "Username is required.",
-			email: {
-				required: "Email is required",
-				txtEmail: "Please provide valid email"
-			}
-		}
-	});
-	</script>
-	<!--end-->
-
+<form id="registerForm" name="registerForm" method="post" action="">
+	<input type="text" id="uName" name="login" placeholder="User name">
+	<input type="email" id="txtEmail" name="email" placeholder="Email">
+	<input type="password" id="password" name="password" placeholder="Password">
+	<input type="password" id="cpassword" name="cpassword" placeholder="Re-enter Password">
 	<select>
 			<option>Select Level</option>
       		<option value="lvl1">Level 1</option>
@@ -2733,7 +2522,6 @@ mysql_close();
     		</fieldset>
 		</div>
 		<div id="addEventNotification">
-			<br>
 			<label for="notifySlider1">Notify by email:</label>
 			<div class="sliderDiv">
 				<select name="slider" id="notifySlider1" data-role="slider">
@@ -2851,7 +2639,6 @@ mysql_close();
 			<label for="checkbox-3">Set C</label>
     		</fieldset>
 		</div>
-		<br>
 		<div id="addEventNotification">
 		<label for="notifySlider1">Notify by email:</label>
 		<div class="sliderDiv">
