@@ -110,7 +110,7 @@
 	
 	//Check whether the query was successful or not
 	if($result) {
-		header("location: CSTSchedule.php?login=".$login."&password=".$password);
+		header("location: CSTSchedule.html?login=".$login."&password=".$password);
 		exit();
 	}else {
 		die("Query failed");
