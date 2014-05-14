@@ -118,6 +118,31 @@ font-weight: bold;
 	float: left;
 }
 
+#setCheckboxLvl0 {
+	max-width: 40%;
+	float: left;
+}
+#setCheckboxLvl1 {
+	display:none;
+	max-width: 40%;
+	float: left;
+}
+#setCheckboxLvl2 {
+	display:none;
+	max-width: 40%;
+	float: left;
+}
+#setCheckboxLvl3 {
+	display: none;
+	max-width: 40%;
+	float: left;
+}
+#setCheckboxLvl4 {
+	display: none;
+	max-width: 40%;
+	float: left;
+}
+
 #addEventNotification {
 	float: right;
 }

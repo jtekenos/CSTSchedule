@@ -1,5 +1,4 @@
 function menuSelector(sourceId, destinationId) {
-	
 	var clickedMenu = document.getElementById(sourceId).innerHTML;
 	var destinationMenu = document.getElementById(destinationId).innerHTML;
 	//document.write(document.getElementById(destinationId).innerHTML);
@@ -14,6 +13,7 @@ function menuSelector(sourceId, destinationId) {
     	document.getElementById('setL').style.display = 'none';
     	document.getElementById('setO').style.display = 'none';
     	document.getElementById('setQ').style.display = 'none';
+    	$("#levelCollapsible").collapsible({collapsed:true});
 	} else if (clickedMenu == 'Level 2') {
 		document.getElementById('setA').style.display = 'block';
     	document.getElementById('setB').style.display = 'block';
@@ -24,6 +24,7 @@ function menuSelector(sourceId, destinationId) {
     	document.getElementById('setL').style.display = 'none';
     	document.getElementById('setO').style.display = 'none';
     	document.getElementById('setQ').style.display = 'none';
+    	$("#levelCollapsible").collapsible({collapsed:true});
 	} else if (clickedMenu == 'Level 3') {
 		document.getElementById('setA').style.display = 'none';
     	document.getElementById('setB').style.display = 'none';
@@ -34,6 +35,7 @@ function menuSelector(sourceId, destinationId) {
     	document.getElementById('setL').style.display = 'block';
     	document.getElementById('setO').style.display = 'none';
     	document.getElementById('setQ').style.display = 'none';
+    	$("#levelCollapsible").collapsible({collapsed:true});
 	} else if (clickedMenu == 'Level 4') {
 		document.getElementById('setA').style.display = 'block';
     	document.getElementById('setB').style.display = 'block';
@@ -44,8 +46,39 @@ function menuSelector(sourceId, destinationId) {
     	document.getElementById('setL').style.display = 'none';
     	document.getElementById('setO').style.display = 'block';
     	document.getElementById('setQ').style.display = 'block';
-	}
+    	$("#levelCollapsible").collapsible({collapsed:true});
+	} 
 }
+
+function dynamicSetCheckbox() {
+	var selectedLevel = $( "#selLevel" ).val();
+	if (selectedLevel == 'lvl1') {
+		$( "#setCheckboxLvl0" ).hide();
+		$( "#setCheckboxLvl1" ).show();
+		$( "#setCheckboxLvl2" ).hide();
+		$( "#setCheckboxLvl3" ).hide();
+		$( "#setCheckboxLvl4" ).hide();
+	} else if (selectedLevel == 'lvl2') {
+		$( "#setCheckboxNull" ).hide();
+		$( "#setCheckboxLvl1" ).hide();
+		$( "#setCheckboxLvl2" ).show();
+		$( "#setCheckboxLvl3" ).hide();
+		$( "#setCheckboxLvl4" ).hide();
+	} else if (selectedLevel == 'lvl3') {
+		$( "#setCheckboxLvl0" ).hide();
+		$( "#setCheckboxLvl1" ).hide();
+		$( "#setCheckboxLvl2" ).hide();
+		$( "#setCheckboxLvl3" ).show();
+		$( "#setCheckboxLvl4" ).hide();		
+	} else if (selectedLevel == 'lvl4') {
+		$( "#setCheckboxLvl0" ).hide();
+		$( "#setCheckboxLvl1" ).hide();
+		$( "#setCheckboxLvl2" ).hide();
+		$( "#setCheckboxLvl3" ).hide();
+		$( "#setCheckboxLvl4" ).show();
+	}
+} 
+
 
 function header(destinationId) {
 	

@@ -31,7 +31,7 @@
     <button id="lvl3" class="ui-btn ui-btn-a" onClick="menuSelector('lvl3', 'lvlHeader')">Level 3</button>
     <button id="lvl4" class="ui-btn ui-btn-a" onClick="menuSelector('lvl4', 'lvlHeader')">Level 4</button>
 </div>
-<div data-role="collapsible" data-theme="b" data-content-theme="b">
+<div data-role="collapsible" id="setCollapsible" data-theme="b" data-content-theme="b">
     <h4><span id="setHeader">Set</span></h4>
     <button id="setA" class="ui-btn ui-btn-a" onClick="menuSelector('setA', 'setHeader')">Set A</button>
     <button id="setB" class="ui-btn ui-btn-a" onClick="menuSelector('setB', 'setHeader')">Set B</button>
@@ -2712,7 +2712,7 @@ mysql_close();
 			<option value="assignmentEvent">Assignment Due</option>
 			<option value="classEvent">Class</option>
 		</select>
-		<select name="selLevel">
+		<select id="selLevel" name="selLevel" onchange="dynamicSetCheckbox()">
 			<option>Select Level</option>
 			<option value="lvl1">Level 1</option>
       		<option value="lvl2">Level 2</option>
@@ -2721,15 +2721,63 @@ mysql_close();
 		</select>
 
 		<div id="setAndNotificationDiv">
-		<div id="setCheckbox" data-role="fieldcontain">
+		<div id="setCheckboxLvl0" data-role="fieldcontain">
  			<fieldset data-role="controlgroup">
 			<legend>Set (select all that apply)</legend>
-			<input type="checkbox" name="checkboxSet" id="checkbox-1" value="setA">
-			<input type="checkbox" name="checkboxSet" id="checkbox-2" value="setB">
-			<input type="checkbox" name="checkboxSet" id="checkbox-3" value="setA">
+			<label for="checkbox-1">Please Select Level First</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-1">
+    		</fieldset>
+		</div>
+		<div id="setCheckboxLvl1" data-role="fieldcontain">
+ 			<fieldset data-role="controlgroup">
+			<legend>Set (select all that apply)</legend>
 			<label for="checkbox-1">Set A</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-1" value="setA">
 			<label for="checkbox-2">Set B</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-2" value="setB">
 			<label for="checkbox-3">Set C</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-3" value="setC">
+    		</fieldset>
+		</div>
+		<div id="setCheckboxLvl2" data-role="fieldcontain">
+ 			<fieldset data-role="controlgroup">
+			<legend>Set (select all that apply)</legend>
+			<label for="checkbox-1">Set A</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-1" value="setA">
+			<label for="checkbox-2">Set B</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-2" value="setB">
+			<label for="checkbox-3">Set C</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-3" value="setC">
+			<label for="checkbox-4">Set D</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-4" value="setD">
+			<label for="checkbox-5">Set E</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-5" value="setE">
+    		</fieldset>
+		</div>
+		<div id="setCheckboxLvl3" data-role="fieldcontain">
+ 			<fieldset data-role="controlgroup">
+			<legend>Set (select all that apply)</legend>
+			<label for="checkbox-3">Set C</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-3" value="setC">
+			<label for="checkbox-4">Set D</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-4" value="setD">
+			<label for="checkbox-7">Set L</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-7" value="setL">
+    		</fieldset>
+		</div>
+		<div id="setCheckboxLvl4" data-role="fieldcontain">
+ 			<fieldset data-role="controlgroup">
+			<legend>Set (select all that apply)</legend>
+			<label for="checkbox-1">Set A</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-1" value="setA">
+			<label for="checkbox-2">Set B</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-2" value="setB">
+			<label for="checkbox-6">Set G</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-6" value="setG">
+			<label for="checkbox-8">Set O</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-8" value="setO">
+			<label for="checkbox-9">Set Q</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-9" value="setQ">
     		</fieldset>
 		</div>
 		<div id="addEventNotification">
