@@ -37,20 +37,7 @@ $date = mysqli_real_escape_string($con, $_POST['date']);
 
 
 /*
-	$event = clean($_POST['addEventName']);
-	$prof = clean($_POST['addProfName']);
-	$location = clean($_POST['addLocation']);
-	$eventType = clean($_POST['eventType']);
-	$set = clean($_POST['selSet']);
-	$level = clean($_POST['selLevel']);
-	$sliderEmail = clean($_POST['notifySliderEmail']);
-	$sliderSMS = clean($_POST['notifySliderSMS']);
-	$startTime = clean($_POST['selStartTime']);
-	$endTime = clean($_POST['selEndTime']);
-	//$date = clean($_POST['date']);
-	//$fakeDayOfTheWeek = 'Mon'; //Denis change this pls
-	
-	//Input Validations
+ //Input Validations - TO IMPLEMENT LATER
 	if($event == '') {
 		$errmsg_arr[] = 'Event name missing';
 		$errflag = true;
@@ -104,8 +91,7 @@ $date = mysqli_real_escape_string($con, $_POST['date']);
 		exit();
 	}
 	*/
-	//test values
-	//$testId = rand(0,999999);
+	/*//old date format code LEAVE IT IN FOR NOW
 	$timestamp = strtotime($date);
 	$inputDateArray = getdate($timestamp);
 	$dayOfweek = substr($inputDateArray[weekday],0,3);
@@ -119,24 +105,19 @@ if($inputDateArray[wday] >= 6) {
 $dateArray = getdate($timestamp + 86400 * $dayShifter);
 $week = $dateArray[mon] . $dateArray[mday];
 	$weekCode = $dateArray[mon] . $dateArray[mday];
+	*/
 	$levelSet = $level . $set;
 	$tBlocks = "2";
-	//$weekCode = $date;
 	//Create INSERT query
 	$sql="INSERT INTO schdule1 (eventname, location, timefrom, timeto, instructor, 
-		level_id, comments, datetime, timeBlocks, week)
+		level_id, comments, timeBlocks, event_date)
 	VALUES ('$event','$location','$startTime','$endTime','$prof','$levelSet','$eventType',
-		'$dayOfweek', '$tBlocks', '$weekCode')";
+		'$tBlocks', '$date')";
 		
 if (!mysqli_query($con,$sql)) {
   die('Error: ' . mysqli_error($con));
 }
 
- /*
- // modify schedule sample
-mysqli_query($con,"UPDATE schdule1 SET comments='test comments'
-WHERE week='55'");
-*/
 mysqli_close($con);
 header("Location: CSTScheduleDenis.html");
 ?>
