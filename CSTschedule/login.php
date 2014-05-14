@@ -69,7 +69,7 @@
 			//$_SESSION['SESS_LAST_NAME'] = $member['lastname'];
 			$_SESSION['SESS_LOGIN_NAME'] = $member['username'];
 			session_write_close();
-			header("location: Austin.php");
+			header("location: CSTSchedule.php");
 			exit();
 		}else {
 			//Login failed
