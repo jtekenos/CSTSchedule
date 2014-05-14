@@ -100,7 +100,7 @@
 	if($errflag) {
 		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 		session_write_close();
-		header("location: CSTSchedule.html");
+		header("location: registerForm.php");
 		exit();
 	}
 
@@ -110,7 +110,7 @@
 	
 	//Check whether the query was successful or not
 	if($result) {
-		header("location: CSTSchedule.html?login=".$login."&password=".$password);
+		header("location: CSTSchedule.php?login=".$login."&password=".$password);
 		exit();
 	}else {
 		die("Query failed");

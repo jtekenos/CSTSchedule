@@ -50,12 +50,12 @@
 	if($errflag) {
 		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 		session_write_close();
-		header("location: ".HOMEURL."#login");
+		header("location: LoginForm.php");
 		exit();
 	}
 	
 	//Create query
-	$qry="SELECT * FROM accounts WHERE username='$login' AND password='".md5($_REQUEST['password'])."'";
+	$qry="SELECT * FROM accounts WHERE username='$login' AND password='$password'";
 	$result=mysql_query($qry);
 	
 	//Check whether the query was successful or not
@@ -69,13 +69,13 @@
 			//$_SESSION['SESS_LAST_NAME'] = $member['lastname'];
 			$_SESSION['SESS_LOGIN_NAME'] = $member['username'];
 			session_write_close();
-			header("location: ".HOMEURL);
+			header("location: CSTSchedule.php");
 			exit();
 		}else {
 			//Login failed
 			$errmsg_arr[] = 'Login failed';
 			$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-			header("location: ".HOMEURL."#login");
+			header("location: LoginForm.php");
 			exit();
 		}
 	}else {
