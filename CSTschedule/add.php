@@ -10,21 +10,7 @@
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-/*
-	mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-	mysql_select_db(DB_DATABASE);
-
-	*/
-	//Function to sanitize values received from the form. Prevents SQL injection
-	function clean($str) {
-		$str = @trim($str);
-		if(get_magic_quotes_gpc()) {
-			$str = stripslashes($str);
-		}
-		return mysql_real_escape_string($str);
-	}
-	
-	//Sanitize the POST values
+//Sanitize the POST values
 $event = mysqli_real_escape_string($con, $_POST['addEventName']);
 $prof = mysqli_real_escape_string($con, $_POST['addProfName']);
 $location = mysqli_real_escape_string($con, $_POST['addLocation']);
