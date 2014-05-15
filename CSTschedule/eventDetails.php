@@ -2,7 +2,7 @@
 $primaryKey = $_REQUEST["q1"];
 $field = $_REQUEST["q2"];
 $levelSet = $_REQUEST["q3"];
-$tableName = "schdule1"
+$tableName = "schdule1";
 session_start();
 	
 require_once('config.php');

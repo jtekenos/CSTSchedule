@@ -45,6 +45,7 @@
 </div>
 <a href="#schedule" onclick="tableSelector('current', 'tableHere')"id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Get Schedule</a>
 </div><!-- /content -->
+</div><!--page -->
 <!-- ************************SCHEDULE PAGE*************************** -->
 <div id="schedule" data-role="page">
 
@@ -102,7 +103,7 @@
 <div role="main" class="ui-content">
 	
 	<h1 align="center">Modify Event</h1>
-	<form id="addForm" name="addForm" method="post" action="modifyDenis.php">
+	<form id="addForm" name="addForm" method="post" action="modify.php">
 
 		<label for="addEventName" id="eventname"></label>
 		<input type="text" id="addEventName" name="addEventName" placeholder="Event Name">
@@ -354,7 +355,7 @@
 	<span id="event_date"></span>
 	<span id="comments"></span>
 	<p>
-	<form id="addForm" name="addForm" method="post" action="addDenis.php">
+	<form id="addForm" name="addForm" method="post" action="add.php">
 		<input type="text" id="addEventName" name="addEventName" placeholder="Event Name">
 		<input type="text" id="addProfName" name="addProfName" placeholder="Instructor Name">
 		<label for="addLocation" id="location"></label>

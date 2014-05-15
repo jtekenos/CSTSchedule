@@ -52,26 +52,25 @@ function menuSelector(sourceId, destinationId) {
 
 function dynamicSetCheckbox() {
 	var selectedLevel = $( "#selLevel" ).val();
-	if (selectedLevel == '1') {
-		alert("selected level " + selectedLevel);
+	if (selectedLevel == 'lvl1') {
 		$( "#setCheckboxLvl0" ).hide();
 		$( "#setCheckboxLvl1" ).show();
 		$( "#setCheckboxLvl2" ).hide();
 		$( "#setCheckboxLvl3" ).hide();
 		$( "#setCheckboxLvl4" ).hide();
-	} else if (selectedLevel == '2') {
+	} else if (selectedLevel == 'lvl2') {
 		$( "#setCheckboxNull" ).hide();
 		$( "#setCheckboxLvl1" ).hide();
 		$( "#setCheckboxLvl2" ).show();
 		$( "#setCheckboxLvl3" ).hide();
 		$( "#setCheckboxLvl4" ).hide();
-	} else if (selectedLevel == '3') {
+	} else if (selectedLevel == 'lvl3') {
 		$( "#setCheckboxLvl0" ).hide();
 		$( "#setCheckboxLvl1" ).hide();
 		$( "#setCheckboxLvl2" ).hide();
 		$( "#setCheckboxLvl3" ).show();
 		$( "#setCheckboxLvl4" ).hide();		
-	} else if (selectedLevel == '4') {
+	} else if (selectedLevel == 'lvl4') {
 		$( "#setCheckboxLvl0" ).hide();
 		$( "#setCheckboxLvl1" ).hide();
 		$( "#setCheckboxLvl2" ).hide();
