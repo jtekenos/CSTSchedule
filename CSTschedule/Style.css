@@ -10,7 +10,12 @@ margin: 0px;
 border: 0px;
 background-color: #003C7A}
 
-#editButton {width: 70px;
+#addButton {width: 70px;
+float: left;
+position: relative;
+left: 80px;}
+
+#scheduleButton {width: 70px;
 float: left;
 position: relative;
 left: 80px;}
