@@ -109,7 +109,7 @@ function weekPicker() {
 	+ tues +"<br>"+ wed +"<br>"+ thur +"<br>"+ fri;
 }
 
-//displays the schedule for selected week and set Ajax => scheduleTableDenis.php
+//displays the schedule for selected week and set Ajax => scheduleTable.php
 function tableSelector(direction, tableId) { 
 	if(direction == "current") {
 	}
@@ -130,10 +130,10 @@ function tableSelector(direction, tableId) {
   }
 
 if(direction == "current") {
-	xmlhttp.open("GET","scheduleTableDenis.php?q=",true);
+	xmlhttp.open("GET","scheduleTable.php?q=",true);
 }
 else {
-	xmlhttp.open("GET","scheduleTableDenis.php?q="+numDate,true);
+	xmlhttp.open("GET","scheduleTable.php?q="+numDate,true);
 }
   
   xmlhttp.send();
