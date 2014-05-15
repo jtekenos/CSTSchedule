@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="themes/BCITTheme.min.css" />
+<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+<link rel="stylesheet" href="Style.css" />
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+<script src="http://jquery.bassistance.de/validate/jquery.validate.js"></script>
+<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
+<script src="functionsDenis.js"></script> 
+<meta charset="UTF-8">
+<title>CST Schedule</title>
+</head>
+<body>
+
+<!-- ************************INDEX PAGE*************************** -->
+<div id="index" data-role="page">
+
+<div id="header" data-role="header">
+<img src="Logo.jpg" width="316" height="100" alt="CST Schedule"/>
+</div><!-- /header -->
+
+<div role="main" class="ui-content">
+<div id="levelCollapsible" data-role="collapsible" data-theme="b" data-content-theme="b">
+    <h4 ><span id="lvlHeader">Level</span></h4>
+    <button id="lvl1" class="ui-btn ui-btn-a" value="1" onClick="menuSelector('lvl1', 'lvlHeader'); getLevel('lvl1')">Level 1</button>
+    <button id="lvl2" class="ui-btn ui-btn-a" value="2" onClick="menuSelector('lvl2', 'lvlHeader'); getLevel('lvl2')">Level 2</button>
+    <button id="lvl3" class="ui-btn ui-btn-a" value="3" onClick="menuSelector('lvl3', 'lvlHeader'); getLevel('lvl3')">Level 3</button>
+    <button id="lvl4" class="ui-btn ui-btn-a" value="4" onClick="menuSelector('lvl4', 'lvlHeader'); getLevel('lvl4')">Level 4</button>
+</div>
+<div data-role="collapsible" id="setCollapsible" data-theme="b" data-content-theme="b">
+    <h4><span id="setHeader">Set</span></h4>
+    <button id="setA" class="ui-btn ui-btn-a" value="A" onClick="menuSelector('setA', 'setHeader'); getSet('setA')">Set A</button>
+    <button id="setB" class="ui-btn ui-btn-a" value="B" onClick="menuSelector('setB', 'setHeader'); getSet('setB')">Set B</button>
+    <button id="setC" class="ui-btn ui-btn-a" value="C" onClick="menuSelector('setC', 'setHeader'); getSet('setC')">Set C</button>
+    <button id="setD" class="ui-btn ui-btn-a" value="D" onClick="menuSelector('setD', 'setHeader'); getSet('setD')">Set D</button>
+    <button id="setE" class="ui-btn ui-btn-a" value="E" onClick="menuSelector('setE', 'setHeader'); getSet('setE')">Set E</button>
+    <button id="setG" class="ui-btn ui-btn-a" value="G" onClick="menuSelector('setG', 'setHeader'); getSet('setG')">Set G</button>
+    <button id="setL" class="ui-btn ui-btn-a" value="L" onClick="menuSelector('setL', 'setHeader'); getSet('setL')">Set L</button>
+    <button id="setO" class="ui-btn ui-btn-a" value="O" onClick="menuSelector('setO', 'setHeader'); getSet('setO')">Set O</button>
+    <button id="setQ" class="ui-btn ui-btn-a" value="Q" onClick="menuSelector('setQ', 'setHeader'); getSet('setQ')">Set Q</button>
+</div>
+<a href="#schedule" onclick="tableSelector('current', 'tableHere')"id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Get Schedule</a>
+</div><!-- /content -->
+
+<div id="footer" data-role="footer">
+
+	<div class="footerButtons">
+		<a href="LoginForm.php" id="LoginButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Login</a>
+		<a href="registerForm.php" id="RegisterButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Register</a>
+	</div>
+</div><!-- /footer -->
+</div><!-- /page -->
+
+
+<!-- ************************SCHEDULE PAGE*************************** -->
+<div id="schedule" data-role="page">
+
+<div id="navHeader" data-role="header">
+	<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
+	<div class="userHeaderDiv">
+	<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" >User1</a>
+	</div>
+	<div>
+		<a href="#edit" id="editButton" class=" ui-btn ui-btn-aui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Edit</a>
+	</div>	
+</div><!-- /header -->
+
+<div role="main" id="scheduleContent" class="ui-content">
+
+
+<a onClick="tableSelector('earlier', 'tableHere')" id="previousWeek" data-transition="slidedown" class="ui-btn ui-btn-icon-right ui-icon-carat-l" data-form="ui-btn-up-a" data-theme="a"></a>
+<a onClick="tableSelector('later', 'tableHere')" id="nextWeek" data-transition="slidedown" class="ui-btn ui-btn-icon-right ui-icon-carat-r" data-form="ui-btn-up-a" data-theme="a"></a>
+
+<div id="tableHere"></div>
+
+</div><!-- /content -->
+</div><!-- /page -->
+
+<!-- ***************************Event Info PAGE*************************** -->
+<div id="eventInfo" data-role="page">
+
+<div id="navHeader" data-role="header">
+	<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
+	<div class="userHeaderDiv">
+	<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">User1</a>
+	</div>
+</div><!-- /header -->
+<div role="main" class="ui-content">
+
+<p id="eventInfoContent" align="center">additional class info loading...</p>
+<a href="#schedule" id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">back</a>
+
+<a onclick="cancelEvent()" id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Delete</a>
+
+<a href="#modifyPage "onclick="fillFields()"
+ id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">modify</a>
+</div><!-- /content -->
+</div><!-- /page -->
+
+<!-- ***************************alternate Modify Page*************************** -->
+<div id="modifyPage" data-role="page">
+
+<div id="navHeader" data-role="header">
+	<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
+	<div class="userHeaderDiv">
+	<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">User1</a>
+	</div>
+</div><!-- /header -->
+<div role="main" class="ui-content">
+	<p>placeholder modify page displaying stored data <br>
+	<span id="eventname"></span>
+	<span id="location"></span>
+	<span id="instructor"></span>
+	<span id="from"></span>
+	<span id="to"></span>
+	<span id="event_date"></span>
+	<span id="comments"></span>
+	<p>
+
+</div><!-- /content -->
+</div><!-- /page -->
+
+<!-- ***************************LOGIN PAGE*************************** -->
+<div id="login" data-role="page">
+
+<div id="navHeader" data-role="header">
+	<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
+	<div class="userHeaderDiv">
+	<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">User1</a>
+	</div>
+</div><!-- /header -->
+
+<h1 align="center">User Login</h1>
+<div role="main" class="ui-content">
+<form id="loginForm" name="loginForm" method="post" action="">
+	<input type="text" id="uName" name="login" placeholder="Username">
+	<input type="password" id="password" name="password" placeholder="Password">
+
+	<div id="RegisterButtonDiv">
+	<input class="button" type="submit" value="Login" name="Login">	
+	</div>
+</form>
+</div><!-- /content -->
+</div><!-- /page -->
+
+<!-- ***************************REGISTER PAGE*************************** -->
+<div id="register" data-role="page">
+
+<div id="navHeader" data-role="header">
+	<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
+	<div class="userHeaderDiv">
+	<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" >User1</a>
+	</div>
+</div><!-- /header -->
+
+<h1 align="center">User Registration</h1>
+<div role="main" class="ui-content">
+<form id="registerForm" name="registerForm" method="post">
+	<input type="text" id="uName" name="uName" placeholder="User name" required>
+	<input type="email" id="txtEmail" name="email" placeholder="Email" required>
+	<input type="password" id="pwd" name="pwd" placeholder="Password" required>
+	<input type="password" id="confimPwd" name="confirmPwd" placeholder="Re-enter Password" required>
+
+	<!-- from http://blogs.telerik.com/appbuilder/posts/14-01-16/four-options-for-mobile-form-validation -->
+	<script>
+	$( "#registerForm" ).validate({
+		rules: {
+    			confirmPwd: {
+      			equalTo: "#pwd"
+    		}
+  		},
+		messages: {
+			uName: "Username is required.",
+			email: {
+				required: "Email is required",
+				txtEmail: "Please provide valid email"
+			}
+		}
+	});
+	</script>
+	<!--end-->
+
+	<select>
+			<option>Select Level</option>
+      		<option value="lvl1">Level 1</option>
+      		<option value="lvl2">Level 2</option>
+      		<option value="lvl3">Level 3</option>
+      		<option value="lvl4">Level 4</option>
+    </select>
+	<select>
+			<option>Select Level</option>
+      		<option value="setA">Set A</option>
+      		<option value="setB">Set B</option>
+      		<option value="setC">Set C</option>
+    </select>
+
+	<label for="notifySlider1"><h3 id="notifyLabel">Notify by email:</h3></label>
+	<div class="sliderDiv">
+		<select name="slider" id="notifySlider1" data-role="slider">
+			<option value="yes">No</option>
+			<option value="no">Yes</option>
+		</select> 
+	</div>
+
+	<label for="notifySlider1"><h3 id="notifyLabel">Notify by SMS:</h3></label>
+	<div class="sliderDiv">
+		<select name="slider" id="notifySlider2" data-role="slider">
+			<option value="yes">No</option>
+			<option value="no">Yes</option>
+		</select> 
+	</div>
+
+	<div id="RegisterButtonDiv">
+	<input class="button" type="submit" value="Register" name="Register" data-icon="check">
+	<input class="button" type="reset" value="Reset" name="Reset" data-icon="delete">		
+	</div>
+	
+</form>
+</div><!-- /content -->
+</div><!-- /page -->
+
+
+<!-- ***************************EDIT SCHEDULE PAGE*************************** -->
+<div id="edit" data-role="page">
+
+<div id="navHeader" data-role="header">
+	<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
+	<div class="userHeaderDiv">
+	<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" >User1</a>
+	</div>	
+</div><!-- /header -->
+
+<div role="main" class="ui-content">
+	<h1 align="center">Edit Schedule</h1>
+	<a href="#add" id="addButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Add Event</a>
+	<a href="#modify" id="modifyButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Modify Event</a>
+	<a href="#cancel" id="cancelButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Cancel Class</a>
+</div><!-- /content -->
+</div><!-- /page -->
+
+<!-- ***************************MODIFY SCHEDULE PAGE*************************** -->
+<div id="modify" data-role="page">
+
+<div id="navHeader" data-role="header">
+	<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
+	<div class="userHeaderDiv">
+	<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" >User1</a>
+	</div>
+	<div>
+		<a href="#edit" id="editButton" class=" ui-btn ui-btn-a ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Edit</a>
+	</div>	
+</div><!-- /header -->
+
+<div role="main" id="modify" class="ui-content">
+
+
+<a onClick="tableSelector('earlier')" id="previousWeek" class=" ui-btn ui-btn-a ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Previous</a>
+<a onClick="tableSelector('later')" id="nextWeek" class=" ui-btn ui-btn-a ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Next</a>
+
+<div id="tableHere"></div>
+		<a href="#add" id="okButton" class=" ui-btn ui-btn-a ui-icon-check ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">OK</a>
+	<a href="#add" id="revertButton" class=" ui-btn ui-btn-a ui-icon-delete ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Cancel Changes</a>
+</div><!-- /content -->
+</div><!-- /page -->
+
+
+<!-- ***************************ADD SCHEDULE PAGE*************************** -->
+<div id="add" data-role="page">
+
+<div id="navHeader" data-role="header">
+	<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
+	<div class="userHeaderDiv">
+	<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" >User1</a>
+	</div>
+	<div>
+		<a href="#edit" id="editButton" class=" ui-btn ui-btn-a ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Edit</a>
+	</div>	
+</div><!-- /header -->
+
+<div role="main" class="ui-content">
+	<h1 align="center">Add Event</h1>
+	<form id="addForm">
+		<input type="text" id="addEventName" name="addEventName" placeholder="Event Name">
+		<input type="text" id="addProfName" name="addProfName" placeholder="Instructor Name">
+		<select name="eventType" size="1">
+			<option>Select Event Type</option>
+			<option value="testEvent">Test</option>
+			<option value="assignmentEvent">Assignment Due</option>
+			<option value="classEvent">Class</option>
+		</select>
+		<select id="selLevel" name="selLevel" onchange="dynamicSetCheckbox()">
+			<option>Select Level</option>
+			<option value="lvl1">Level 1</option>
+      		<option value="lvl2">Level 2</option>
+      		<option value="lvl3">Level 3</option>
+      		<option value="lvl4">Level 4</option>
+		</select>
+
+		<div id="setAndNotificationDiv">
+		<div id="setCheckboxLvl0" data-role="fieldcontain">
+ 			<fieldset data-role="controlgroup">
+			<legend>Set (select all that apply)</legend>
+			<label for="checkbox-1">Please Select Level First</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-1">
+    		</fieldset>
+		</div>
+		<div id="setCheckboxLvl1" data-role="fieldcontain">
+ 			<fieldset data-role="controlgroup">
+			<legend>Set (select all that apply)</legend>
+			<label for="checkbox-1">Set A</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-1" value="setA">
+			<label for="checkbox-2">Set B</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-2" value="setB">
+			<label for="checkbox-3">Set C</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-3" value="setC">
+    		</fieldset>
+		</div>
+		<div id="setCheckboxLvl2" data-role="fieldcontain">
+ 			<fieldset data-role="controlgroup">
+			<legend>Set (select all that apply)</legend>
+			<label for="checkbox-1">Set A</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-1" value="setA">
+			<label for="checkbox-2">Set B</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-2" value="setB">
+			<label for="checkbox-3">Set C</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-3" value="setC">
+			<label for="checkbox-4">Set D</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-4" value="setD">
+			<label for="checkbox-5">Set E</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-5" value="setE">
+    		</fieldset>
+		</div>
+		<div id="setCheckboxLvl3" data-role="fieldcontain">
+ 			<fieldset data-role="controlgroup">
+			<legend>Set (select all that apply)</legend>
+			<label for="checkbox-3">Set C</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-3" value="setC">
+			<label for="checkbox-4">Set D</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-4" value="setD">
+			<label for="checkbox-7">Set L</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-7" value="setL">
+    		</fieldset>
+		</div>
+		<div id="setCheckboxLvl4" data-role="fieldcontain">
+ 			<fieldset data-role="controlgroup">
+			<legend>Set (select all that apply)</legend>
+			<label for="checkbox-1">Set A</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-1" value="setA">
+			<label for="checkbox-2">Set B</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-2" value="setB">
+			<label for="checkbox-6">Set G</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-6" value="setG">
+			<label for="checkbox-8">Set O</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-8" value="setO">
+			<label for="checkbox-9">Set Q</label>
+			<input type="checkbox" name="checkboxSet" id="checkbox-9" value="setQ">
+    		</fieldset>
+		</div>
+		<div id="addEventNotification">
+			<br>
+			<label for="notifySlider1">Notify by email:</label>
+			<div class="sliderDiv">
+				<select name="slider" id="notifySlider1" data-role="slider">
+					<option value="yes">No</option>
+					<option value="no">Yes</option>
+				</select> 
+			</div>
+			<label for="notifySlider1">Notify by SMS:</label>
+			<div class="sliderDiv">
+				<select name="slider" id="notifySlider2" data-role="slider">
+					<option value="yes">No</option>
+					<option value="no">Yes</option>
+				</select> 
+			</div>
+		</div>
+		</div>
+
+		<div id="timeButtons">
+		<select name="Position" size="1">
+			<option>Select Start Time</option>
+			  <option>6:00</option>
+			  <option>6:30</option>
+			  <option>7:00</option>
+			  <option>7:30</option>
+			  <option>8:00</option>
+			  <option>8:30</option>
+			  <option>9:00</option>
+			  <option>9:30</option>
+			  <option>10:00</option>
+			  <option>10:30</option>
+			  <option>11:00</option>
+			  <option>11:30</option>
+			  <option>12:00</option>
+			  <option>12:30</option>
+			  <option>13:00</option>
+			  <option>13:30</option>
+			  <option>14:00</option>
+			  <option>14:30</option>
+			  <option>15:00</option>
+			  <option>15:30</option>
+			  <option>16:00</option>
+			  <option>16:30</option>
+			  <option>17:00</option>
+			  <option>17:30</option>
+			</select>
+			<select name="Position" size="1">
+			<option>Select End Time</option>
+			  <option>6:00</option>
+			  <option>6:30</option>
+			  <option>7:00</option>
+			  <option>7:30</option>
+			  <option>8:00</option>
+			  <option>8:30</option>
+			  <option>9:00</option>
+			  <option>9:30</option>
+			  <option>10:00</option>
+			  <option>10:30</option>
+			  <option>11:00</option>
+			  <option>11:30</option>
+			  <option>12:00</option>
+			  <option>12:30</option>
+			  <option>13:00</option>
+			  <option>13:30</option>
+			  <option>14:00</option>
+			  <option>14:30</option>
+			  <option>15:00</option>
+			  <option>15:30</option>
+			  <option>16:00</option>
+			  <option>16:30</option>
+			  <option>17:00</option>
+			  <option>17:30</option>
+			</select>
+		</div>
+			<br><br>
+			<input class="button" type="submit" value="Add" name="Update" data-form="ui-btn-up-a" data-theme="a" data-icon="check">
+			<input class="button" type="reset" value="Reset" name="Reset" data-form="ui-btn-up-a" data-theme="a" data-icon="delete">			
+	</form>
+</div><!-- /content -->
+</div><!-- /page -->
+
+<!-- ***************************CANCEL SCHEDULE PAGE*************************** -->
+<div id="cancel" data-role="page">
+
+<div id="navHeader" data-role="header">
+	<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
+	<div class="userHeaderDiv">
+	<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">User1</a>
+	</div>
+	<div>
+		<a href="#edit" id="editButton" class=" ui-btn ui-btn-a ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Edit</a>
+	</div>	
+</div><!-- /header -->
+
+<div role="main" class="ui-content">
+	<form id="addForm">
+		<input type="text" id="cancelClassName" name="cancelClassName" placeholder="Class Name">
+
+		<select name="selLevel">
+			<option>Select Level</option>
+			<option value="lvl1">Level 1</option>
+      		<option value="lvl2">Level 2</option>
+      		<option value="lvl3">Level 3</option>
+      		<option value="lvl4">Level 4</option>
+		</select>
+
+		<div id="setAndNotificationDiv">
+		<div id="setCheckbox" data-role="fieldcontain">
+ 			<fieldset data-role="controlgroup">
+			<legend>Set (select all that apply)</legend>
+			<input type="checkbox" name="checkboxSet" id="checkbox-1" value="setA">
+			<input type="checkbox" name="checkboxSet" id="checkbox-2" value="setB">
+			<input type="checkbox" name="checkboxSet" id="checkbox-3" value="setA">
+			<label for="checkbox-1">Set A</label>
+			<label for="checkbox-2">Set B</label>
+			<label for="checkbox-3">Set C</label>
+    		</fieldset>
+		</div>
+		<br>
+		<div id="addEventNotification">
+		<label for="notifySlider1">Notify by email:</label>
+		<div class="sliderDiv">
+			<select name="slider" id="notifySlider1" data-role="slider">
+				<option value="yes">No</option>
+				<option value="no">Yes</option>
+			</select> 
+		</div>
+		<label for="notifySlider1">Notify by SMS:</label>
+		<div class="sliderDiv">
+			<select name="slider" id="notifySlider2" data-role="slider">
+				<option value="yes">No</option>
+				<option value="no">Yes</option>
+			</select> 
+		</div>
+		</div>
+		</div>
+
+
+		<div id="timeButtons">
+		<select name="Position" size="1">
+			<option>Select Start Time</option>
+			  <option>5:00</option>
+			  <option>5:30</option>
+			  <option>6:00</option>
+			  <option>6:30</option>
+			  <option>7:00</option>
+			  <option>7:30</option>
+			  <option>8:00</option>
+			  <option>8:30</option>
+			  <option>9:00</option>
+			  <option>9:30</option>
+			  <option>10:00</option>
+			  <option>10:30</option>
+			  <option>11:00</option>
+			  <option>11:30</option>
+			  <option>12:00</option>
+			  <option>12:30</option>
+			  <option>13:00</option>
+			  <option>13:30</option>
+			  <option>14:00</option>
+			  <option>14:30</option>
+			  <option>15:00</option>
+			  <option>15:30</option>
+			  <option>16:00</option>
+			  <option>16:30</option>
+			  <option>17:00</option>
+			  <option>17:30</option>
+			</select>
+		<select name="Position" size="1">
+			<option>Select End Time</option>
+			  <option>5:00</option>
+			  <option>5:30</option>
+			  <option>6:00</option>
+			  <option>6:30</option>
+			  <option>7:00</option>
+			  <option>7:30</option>
+			  <option>8:00</option>
+			  <option>8:30</option>
+			  <option>9:00</option>
+			  <option>9:30</option>
+			  <option>10:00</option>
+			  <option>10:30</option>
+			  <option>11:00</option>
+			  <option>11:30</option>
+			  <option>12:00</option>
+			  <option>12:30</option>
+			  <option>13:00</option>
+			  <option>13:30</option>
+			  <option>14:00</option>
+			  <option>14:30</option>
+			  <option>15:00</option>
+			  <option>15:30</option>
+			  <option>16:00</option>
+			  <option>16:30</option>
+			  <option>17:00</option>
+			  <option>17:30</option>
+			</select>
+		</div>
+			<br><br>
+			<input class="button" type="submit" value="Cancel Class" name="cancelClass" data-form="ui-btn-up-a" data-theme="a" data-icon="check">
+			<input class="button" type="reset" value="Reset" name="Reset" data-form="ui-btn-up-a" data-theme="a" data-icon="delete">
+	</form>
+</div><!-- /content -->
+</div><!-- /page -->
+
+<!-- ***************************USER PROFILE PAGE*************************** -->
+<div id="profile" data-role="page">
+<div id="navHeader" data-role="header">
+	<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
+	<div class="userHeaderDiv">
+	<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" >User1</a>
+	</div>	
+</div><!-- /header -->
+
+<div role="main" class="ui-content">
+<h2 id="uNameProfile">User Profile</h2>
+<form id="registerForm" name="registerForm" method="post" action="">
+	<input type="password" id="password" name="password" placeholder="Change Password">
+	<input type="password" id="cpassword" name="cpassword" placeholder="Re-enter Password">
+	<input type="email" id="txtEmail" name="email" placeholder="Email: bob123@gmail.com">
+	<select>
+			<option>Select Level</option>
+      		<option value="lvl1">Level 1</option>
+      		<option value="lvl2">Level 2</option>
+      		<option value="lvl3">Level 3</option>
+      		<option value="lvl4">Level 4</option>
+    </select>
+	<select>
+			<option>Select Set</option>
+      		<option value="setA">Set A</option>
+      		<option value="setB">Set B</option>
+      		<option value="setC">Set C</option>
+    </select>
+
+	<label for="notifySlider1"><h3 id="notifyLabel">Notify by email:</h3></label>
+	<div class="sliderDiv">
+		<select name="slider" id="notifySlider1" data-role="slider">
+			<option value="yes">No</option>
+			<option value="no">Yes</option>
+		</select> 
+	</div>
+
+	<label for="notifySlider1"><h3 id="notifyLabel">Notify by SMS:</h3></label>
+	<div class="sliderDiv">
+		<select name="slider" id="notifySlider2" data-role="slider">
+			<option value="yes">No</option>
+			<option value="no">Yes</option>
+		</select> 
+	</div>
+
+	<div id="RegisterButtonDiv">
+	<input class="button" type="submit" value="Update" name="Update" data-icon="check">
+	<input class="button" type="reset" value="Reset" name="Reset" data-form="ui-btn-up-a" data-theme="a" data-icon="delete">	
+	</div>
+	
+</form>
+</div><!-- /content -->
+</div><!-- /page -->
+
+</body>
+</html>
