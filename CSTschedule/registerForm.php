@@ -38,7 +38,7 @@
 ?>
 <h1 align="center">User Registration</h1>
 <div role="main" class="ui-content">
-<form id="registerForm" name="registerForm" method="post">
+<form id="registerForm" name="registerForm" method="post" action="register.php">
 	<input type="text" id="uName" name="uName" placeholder="User name" required>
 	<input type="email" id="txtEmail" name="email" placeholder="Email" required>
 	<input type="password" id="pwd" name="pwd" placeholder="Password" required>
