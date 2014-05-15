@@ -1,6 +1,6 @@
 <?php
 $primaryKey = $_REQUEST["q"];
-$tableName = "schdule1";
+$tableName = "set" . $_REQUEST["q2"];
 
 	session_start();
 	
@@ -14,7 +14,7 @@ if (mysqli_connect_errno()) {
 }
 
 mysqli_query($con,"DELETE FROM $tableName WHERE id = '$primaryKey'");
-echo "php ran";
+echo "entry Deleted";
 mysqli_close($con);
 
 ?>

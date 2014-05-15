@@ -80,12 +80,12 @@ function dynamicSetCheckbox() {
 } 
 
 function getLevel(lvlId) {
-	var storeLevel = document.getElementById(lvlId).value;
+	storeLevel = document.getElementById(lvlId).value;
 	return storeLevel;
 }
 
 function getSet(setId) {
-	var storeSet = document.getElementById(setId).value;
+	storeSet = document.getElementById(setId).value;
 	return storeSet;
 }
 
@@ -109,16 +109,17 @@ function weekPicker() {
 	+ tues +"<br>"+ wed +"<br>"+ thur +"<br>"+ fri;
 }
 
-//displays the schedule for selected week and set Ajax => scheduleTable.php
+//displays the schedule for selected week and set Ajax => scheduleTableDenis.php
 function tableSelector(direction, tableId) { 
+	levelSet = storeLevel + storeSet;
 	if(direction == "current") {
 	}
 	else if(direction == "later") {
-		numDate = document.getElementById("numDateId").innerHTML;
+		var numDate = document.getElementById("numDateId").innerHTML;
 		numDate = parseInt(numDate) + 86400 * 7;
 	}
 	else if(direction == "earlier") {
-		numDate = document.getElementById("numDateId").innerHTML;
+		var numDate = document.getElementById("numDateId").innerHTML;
 		numDate = parseInt(numDate) - 86400 * 7;
 	}
 
@@ -130,10 +131,10 @@ function tableSelector(direction, tableId) {
   }
 
 if(direction == "current") {
-	xmlhttp.open("GET","scheduleTable.php?q=",true);
+	xmlhttp.open("GET","scheduleTable.php?q1=&q2=" + levelSet,true);
 }
 else {
-	xmlhttp.open("GET","scheduleTable.php?q="+numDate,true);
+	xmlhttp.open("GET","scheduleTable.php?q1=" + numDate  + "&q2=" + levelSet, true);
 }
   
   xmlhttp.send();
@@ -150,7 +151,8 @@ function detailsJs(sourceId) {
       document.getElementById("eventInfoContent").innerHTML=xmlhttp.responseText;
     }
   }
-	xmlhttp.open("GET","eventDetails.php?q1="+primaryKey + "&q2=" + field,true);
+	xmlhttp.open("GET","eventDetails.php?q1="+primaryKey + "&q2=" + field +
+		"&q3=" + levelSet, true);
 	xmlhttp.send();
 }
 
@@ -163,7 +165,8 @@ function pullField(dataField, destinationId) {
       document.getElementById(destinationId).innerHTML=xmlhttp.responseText;
     }
   }
-	xmlhttp.open("GET","eventDetails.php?q1="+primaryKey + "&q2=" + field,true);
+	xmlhttp.open("GET","eventDetails.php?q1="+primaryKey + "&q2=" + 
+		field + "&q3=" + levelSet,true);
 	xmlhttp.send();
 }
 //deletes selected event via AJAX => cancel.php
@@ -175,7 +178,7 @@ function cancelEvent() {
     }
   }
 
-xmlhttp.open("GET","cancel.php?q="+primaryKey,true);
+xmlhttp.open("GET","cancel.php?q=" + primaryKey + "&q2=" + levelSet,true);
 
   xmlhttp.send();
 }

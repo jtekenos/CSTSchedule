@@ -1,12 +1,13 @@
 <?php
-$numDate=$_REQUEST["q"];
+$numDate=$_REQUEST["q1"];
+$levelSet = $_REQUEST["q2"];
     require_once('config.php');
     session_start();
 
     // Connect to server and select database.
 	mysql_connect(DB_HOST, DB_USER, DB_PASSWORD)or die("cannot connect");
 	mysql_select_db(DB_DATABASE)or die("cannot select DB");
-	$tbl_name="schdule1"; // Table name
+	$tbl_name = "set" . $levelSet;
 
 //Gets week code for current date
 if($numDate == null) {
@@ -37,7 +38,7 @@ $fridate = $friArray[year] . "-" . sprintf("%02d", $friArray[mon]) . "-" . sprin
 
 //$week = $date;
 echo "<table border=\"1\">
-	<caption>$monArray[month] $monArray[mday] to $friArray[month] $friArray[mday]</caption>
+	<caption>$tbl_name $monArray[month] $monArray[mday] to $friArray[month] $friArray[mday]</caption>
 	<tr>
 		<td width=\"6%\"></td>
 		<th>Mon $monArray[mon]/$monArray[mday]</th>

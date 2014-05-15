@@ -1,7 +1,7 @@
 <?php
 $primaryKey = $_REQUEST["q1"];
 $field = $_REQUEST["q2"];
-$tableName = "schdule1";
+$tableName = "set" . $_REQUEST["q3"];
 session_start();
 	
 require_once('config.php');
