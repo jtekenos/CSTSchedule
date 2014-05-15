@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="Style.css" />
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+<script src="http://jquery.bassistance.de/validate/jquery.validate.js"></script>
+<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
 <script src="functions.js"></script> 
 <meta charset="UTF-8">
 <title>CST Schedule</title>
@@ -16,13 +18,10 @@
 <div id="register" data-role="page">
 
 <div id="navHeader" data-role="header">
-	<a href="CSTSchedule.php#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
+	<a href="http://okoceanfisheries.host56.com/CSTschedule/CSTSchedule.html" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
 	<div class="userHeaderDiv">
-	<a href="CSTSchedule.php#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-star ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" >User1</a>
+	<a href="http://okoceanfisheries.host56.com/CSTschedule/CSTSchedule.html#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" >User1</a>
 	</div>
-	<div>
-		<a href="#edit" id="editButton" class=" ui-btn ui-btn-a ui-icon-star ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-icon="star">Edit</a>
-	</div>	
 </div><!-- /header -->
 
 <div role="main" class="ui-content">
@@ -37,18 +36,41 @@
 		unset($_SESSION['ERRMSG_ARR']);
 	}
 ?>
-<form id="registerForm" name="registerForm" method="post" action="register.php">
-	<input type="text" id="uName" name="login" placeholder="User name">
-	<input type="password" id="password" name="password" placeholder="Password">
-	<input type="password" id="cpassword" name="cpassword" placeholder="Re-enter Password">
-	<input type="email" id="txtEmail" name="email" placeholder="Email">
+<h1 align="center">User Registration</h1>
+<div role="main" class="ui-content">
+<form id="registerForm" name="registerForm" method="post">
+	<input type="text" id="uName" name="uName" placeholder="User name" required>
+	<input type="email" id="txtEmail" name="email" placeholder="Email" required>
+	<input type="password" id="pwd" name="pwd" placeholder="Password" required>
+	<input type="password" id="confimPwd" name="confirmPwd" placeholder="Re-enter Password" required>
+
+	<script>
+	$( "#registerForm" ).validate({
+		rules: {
+    			confirmPwd: {
+      			equalTo: "#pwd"
+    		}
+  		},
+		messages: {
+			uName: "Username is required.",
+			email: {
+				required: "Email is required",
+				txtEmail: "Please provide valid email"
+			}
+		}
+	});
+
+	</script>
+
 	<select name= "level">
+			<option>Select Level</option>
       		<option value="lvl1">Level 1</option>
       		<option value="lvl2">Level 2</option>
       		<option value="lvl3">Level 3</option>
       		<option value="lvl4">Level 4</option>
     </select>
 	<select name = "set">
+			<option>Select Set</option>
       		<option value="setA">Set A</option>
       		<option value="setB">Set B</option>
       		<option value="setC">Set C</option>
@@ -71,7 +93,8 @@
 	</div>
 
 	<div id="RegisterButtonDiv">
-	<input class="button" type="submit" value="Register" name="Register">	
+	<input class="button" type="submit" value="Register" name="Register" data-icon="check">	
+	<input class="button" type="reset" value="Reset" name="Reset" data-icon="delete">	
 	</div>
 	
 </form>

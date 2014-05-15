@@ -14,7 +14,7 @@
 <meta charset="UTF-8">
 <title>CST Schedule</title>
 </head>
-<body onload="tableSelector('current', 'tableHere')">
+<body>
 
 <!-- ************************INDEX PAGE*************************** -->
 <div id="index" data-role="page">
@@ -26,24 +26,24 @@
 <div role="main" class="ui-content">
 <div id="levelCollapsible" data-role="collapsible" data-theme="b" data-content-theme="b">
     <h4 ><span id="lvlHeader">Level</span></h4>
-    <button id="lvl1" class="ui-btn ui-btn-a" onClick="menuSelector('lvl1', 'lvlHeader')">Level 1</button>
-    <button id="lvl2" class="ui-btn ui-btn-a" onClick="menuSelector('lvl2', 'lvlHeader')">Level 2</button>
-    <button id="lvl3" class="ui-btn ui-btn-a" onClick="menuSelector('lvl3', 'lvlHeader')">Level 3</button>
-    <button id="lvl4" class="ui-btn ui-btn-a" onClick="menuSelector('lvl4', 'lvlHeader')">Level 4</button>
+    <button id="lvl1" class="ui-btn ui-btn-a" value="1" onClick="menuSelector('lvl1', 'lvlHeader'); getLevel('lvl1')">Level 1</button>
+    <button id="lvl2" class="ui-btn ui-btn-a" value="2" onClick="menuSelector('lvl2', 'lvlHeader'); getLevel('lvl2')">Level 2</button>
+    <button id="lvl3" class="ui-btn ui-btn-a" value="3" onClick="menuSelector('lvl3', 'lvlHeader'); getLevel('lvl3')">Level 3</button>
+    <button id="lvl4" class="ui-btn ui-btn-a" value="4" onClick="menuSelector('lvl4', 'lvlHeader'); getLevel('lvl4')">Level 4</button>
 </div>
 <div data-role="collapsible" id="setCollapsible" data-theme="b" data-content-theme="b">
     <h4><span id="setHeader">Set</span></h4>
-    <button id="setA" class="ui-btn ui-btn-a" onClick="menuSelector('setA', 'setHeader')">Set A</button>
-    <button id="setB" class="ui-btn ui-btn-a" onClick="menuSelector('setB', 'setHeader')">Set B</button>
-    <button id="setC" class="ui-btn ui-btn-a" onClick="menuSelector('setC', 'setHeader')">Set C</button>
-    <button id="setD" class="ui-btn ui-btn-a" onClick="menuSelector('setD', 'setHeader')">Set D</button>
-    <button id="setE" class="ui-btn ui-btn-a" onClick="menuSelector('setE', 'setHeader')">Set E</button>
-    <button id="setG" class="ui-btn ui-btn-a" onClick="menuSelector('setG', 'setHeader')">Set G</button>
-    <button id="setL" class="ui-btn ui-btn-a" onClick="menuSelector('setL', 'setHeader')">Set L</button>
-    <button id="setO" class="ui-btn ui-btn-a" onClick="menuSelector('setO', 'setHeader')">Set O</button>
-    <button id="setQ" class="ui-btn ui-btn-a" onClick="menuSelector('setQ', 'setHeader')">Set Q</button>
+    <button id="setA" class="ui-btn ui-btn-a" value="A" onClick="menuSelector('setA', 'setHeader'); getSet('setA')">Set A</button>
+    <button id="setB" class="ui-btn ui-btn-a" value="B" onClick="menuSelector('setB', 'setHeader'); getSet('setB')">Set B</button>
+    <button id="setC" class="ui-btn ui-btn-a" value="C" onClick="menuSelector('setC', 'setHeader'); getSet('setC')">Set C</button>
+    <button id="setD" class="ui-btn ui-btn-a" value="D" onClick="menuSelector('setD', 'setHeader'); getSet('setD')">Set D</button>
+    <button id="setE" class="ui-btn ui-btn-a" value="E" onClick="menuSelector('setE', 'setHeader'); getSet('setE')">Set E</button>
+    <button id="setG" class="ui-btn ui-btn-a" value="G" onClick="menuSelector('setG', 'setHeader'); getSet('setG')">Set G</button>
+    <button id="setL" class="ui-btn ui-btn-a" value="L" onClick="menuSelector('setL', 'setHeader'); getSet('setL')">Set L</button>
+    <button id="setO" class="ui-btn ui-btn-a" value="O" onClick="menuSelector('setO', 'setHeader'); getSet('setO')">Set O</button>
+    <button id="setQ" class="ui-btn ui-btn-a" value="Q" onClick="menuSelector('setQ', 'setHeader'); getSet('setQ')">Set Q</button>
 </div>
-<a href="#schedule" id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Get Schedule</a>
+<a href="#schedule" onclick="tableSelector('current', 'tableHere')"id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Get Schedule</a>
 </div><!-- /content -->
 
 <div id="footer" data-role="footer">
@@ -91,8 +91,36 @@
 </div><!-- /header -->
 <div role="main" class="ui-content">
 
-<h1 id="eventInfoContent" align="center">additional class info Placeholder</h1>
-<a href="#schedule" id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Schedule</a>
+<p id="eventInfoContent" align="center">additional class info loading...</p>
+<a href="#schedule" id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">back</a>
+
+<a onclick="cancelEvent()" id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Delete</a>
+
+<a href="#modifyPage "onclick="fillFields()"
+ id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">modify</a>
+</div><!-- /content -->
+</div><!-- /page -->
+
+<!-- ***************************alternate Modify Page*************************** -->
+<div id="modifyPage" data-role="page">
+
+<div id="navHeader" data-role="header">
+	<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
+	<div class="userHeaderDiv">
+	<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">User1</a>
+	</div>
+</div><!-- /header -->
+<div role="main" class="ui-content">
+	<p>placeholder modify page displaying stored data <br>
+	<span id="eventname"></span>
+	<span id="location"></span>
+	<span id="instructor"></span>
+	<span id="from"></span>
+	<span id="to"></span>
+	<span id="event_date"></span>
+	<span id="comments"></span>
+	<p>
+
 </div><!-- /content -->
 </div><!-- /page -->
 
@@ -208,7 +236,7 @@
 
 <div role="main" class="ui-content">
 	<h1 align="center">Edit Schedule</h1>
-	<a href="#add" id="addButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Add Event</a>
+	<a href="add_form.html" id="addButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Add Event</a>
 	<a href="#modify" id="modifyButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Modify Event</a>
 	<a href="#cancel" id="cancelButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Cancel Class</a>
 </div><!-- /content -->
