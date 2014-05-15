@@ -242,72 +242,72 @@
 <div id="navHeader" data-role="header">
 	<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
 	<div class="userHeaderDiv">
-	<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" >User1</a>
+		<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" >User1</a>
 	</div>
 </div><!-- /header -->
 
 <h1 align="center">User Registration</h1>
 <div role="main" class="ui-content">
-<form id="registerForm" name="registerForm" method="post">
-	<input type="text" id="uName" name="uName" placeholder="User name" required>
-	<input type="email" id="txtEmail" name="email" placeholder="Email" required>
-	<input type="password" id="pwd" name="pwd" placeholder="Password" required>
-	<input type="password" id="confimPwd" name="confirmPwd" placeholder="Re-enter Password" required>
+	<form id="registerForm" name="registerForm" method="post">
+		<input type="text" id="uName" name="uName" placeholder="User name" required>
+		<input type="email" id="txtEmail" name="email" placeholder="Email" required>
+		<input type="password" id="pwd" name="pwd" placeholder="Password" required>
+		<input type="password" id="confimPwd" name="confirmPwd" placeholder="Re-enter Password" required>
 
-	<!-- from http://blogs.telerik.com/appbuilder/posts/14-01-16/four-options-for-mobile-form-validation -->
-	<script>
-	$( "#registerForm" ).validate({
-		rules: {
-    			confirmPwd: {
-      			equalTo: "#pwd"
-    		}
-  		},
-		messages: {
-			uName: "Username is required.",
-			email: {
-				required: "Email is required",
-				txtEmail: "Please provide valid email"
+		<!-- from http://blogs.telerik.com/appbuilder/posts/14-01-16/four-options-for-mobile-form-validation -->
+		<script>
+			$( "#registerForm" ).validate({
+				rules: {
+    				confirmPwd: {
+      				equalTo: "#pwd"
+    			}
+  			},
+			messages: {
+				uName: "Username is required.",
+				email: {
+					required: "Email is required",
+					txtEmail: "Please provide valid email"
+				}
 			}
-		}
-	});
-	</script>
-	<!--end-->
+			});
+		</script>
+		<!--end-->
 
-	<select>
-		<option>Select Level</option>
-      	<option id="lvl1" value="1">Level 1</option>
-      	<option id="lvl2" value="2">Level 2</option>
-      	<option id="lvl3" value="3">Level 3</option>
-      	<option id="lvl4" value="4">Level 4</option>
-    </select>
-	<select>
-		<option>Select Set</option>
-      	<option id="setA" value="A">Set A</option>
-   		<option id="setB" value="B">Set B</option>
-   		<option id="setC" value="C">Set C</option>
-    </select>
-	<label for="notifySlider1"><h3 id="notifyLabel">Notify by email:</h3></label>
-	<div class="sliderDiv">
-		<select name="slider" id="notifySlider1" data-role="slider">
-			<option value="yes">No</option>
-			<option value="no">Yes</option>
-		</select> 
-	</div>
+		<select>
+			<option>Select Level</option>
+      		<option id="lvl1" value="1">Level 1</option>
+      		<option id="lvl2" value="2">Level 2</option>
+      		<option id="lvl3" value="3">Level 3</option>
+      		<option id="lvl4" value="4">Level 4</option>
+    	</select>
+		<select>
+			<option>Select Set</option>
+      		<option id="setA" value="A">Set A</option>
+   			<option id="setB" value="B">Set B</option>
+   			<option id="setC" value="C">Set C</option>
+    	</select>
+		<label for="notifySlider1"><h3 id="notifyLabel">Notify by email:</h3></label>
+		<div class="sliderDiv">
+			<select name="slider" id="notifySlider1" data-role="slider">
+				<option value="yes">No</option>
+				<option value="no">Yes</option>
+			</select> 
+		</div>
 
-	<label for="notifySlider1"><h3 id="notifyLabel">Notify by SMS:</h3></label>
-	<div class="sliderDiv">
-		<select name="slider" id="notifySlider2" data-role="slider">
-			<option value="yes">No</option>
-			<option value="no">Yes</option>
-		</select> 
-	</div>
+		<label for="notifySlider1"><h3 id="notifyLabel">Notify by SMS:</h3></label>
+		<div class="sliderDiv">
+			<select name="slider" id="notifySlider2" data-role="slider">
+				<option value="yes">No</option>
+				<option value="no">Yes</option>
+			</select> 
+		</div>
 
-	<div id="RegisterButtonDiv">
-	<input class="button" type="submit" value="Register" name="Register" data-icon="check">
-	<input class="button" type="reset" value="Reset" name="Reset" data-icon="delete">		
-	</div>
+		<div id="RegisterButtonDiv">
+			<input class="button" type="submit" value="Register" name="Register" data-icon="check">
+			<input class="button" type="reset" value="Reset" name="Reset" data-icon="delete">		
+		</div>
 	
-</form>
+	</form>
 </div><!-- /content -->
 </div><!-- /page -->
 
@@ -336,7 +336,7 @@
 <div id="navHeader" data-role="header">
 	<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
 	<div class="userHeaderDiv">
-	<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" >User1</a>
+		<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" >User1</a>
 	</div>
 	<div>
 		<a href="#edit" id="editButton" class=" ui-btn ui-btn-a ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Edit</a>
