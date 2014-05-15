@@ -91,8 +91,36 @@
 </div><!-- /header -->
 <div role="main" class="ui-content">
 
-<h1 id="eventInfoContent" align="center">additional class info Placeholder</h1>
-<a href="#schedule" id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Schedule</a>
+<p id="eventInfoContent" align="center">additional class info loading...</p>
+<a href="#schedule" id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">back</a>
+
+<a onclick="cancelEvent()" id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Delete</a>
+
+<a href="#modifyPage "onclick="fillFields()"
+ id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">modify</a>
+</div><!-- /content -->
+</div><!-- /page -->
+
+<!-- ***************************alternate Modify Page*************************** -->
+<div id="modifyPage" data-role="page">
+
+<div id="navHeader" data-role="header">
+	<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
+	<div class="userHeaderDiv">
+	<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">User1</a>
+	</div>
+</div><!-- /header -->
+<div role="main" class="ui-content">
+	<p>placeholder modify page displaying stored data <br>
+	<span id="eventname"></span>
+	<span id="location"></span>
+	<span id="instructor"></span>
+	<span id="from"></span>
+	<span id="to"></span>
+	<span id="event_date"></span>
+	<span id="comments"></span>
+	<p>
+
 </div><!-- /content -->
 </div><!-- /page -->
 

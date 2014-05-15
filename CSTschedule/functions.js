@@ -89,13 +89,7 @@ function getSet(setId) {
 	return storeSet;
 }
 
-function header(destinationId) {
-	var mainHeader = document.getElementById("navHeader1").innerHTML;
-	var destinationMenu = document.getElementById(destinationId).innerHTML;
-	//document.write(document.getElementById(destinationId).innerHTML);
-	document.getElementById(destinationId).innerHTML = mainHeader;
-}
-
+// picks the current week to display a schedule for it (not currently used)
 function weekPicker() {
 	var today = new Date();
 	today = new Date(today.getTime() + (24 * 60 * 60 * 1000 * 0));//for testing different days
@@ -115,8 +109,8 @@ function weekPicker() {
 	+ tues +"<br>"+ wed +"<br>"+ thur +"<br>"+ fri;
 }
 
-//uses AJAX to display the right schedule for the selected week
-function tableSelector(direction) { 
+//displays the schedule for selected week and set Ajax => scheduleTableDenis.php
+function tableSelector(direction, tableId) { 
 	if(direction == "current") {
 	}
 	else if(direction == "later") {
@@ -131,7 +125,7 @@ function tableSelector(direction) {
  var xmlhttp=new XMLHttpRequest();
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      document.getElementById("tableHere").innerHTML=xmlhttp.responseText;
+      document.getElementById(tableId).innerHTML=xmlhttp.responseText;
     }
   }
 
@@ -145,3 +139,53 @@ else {
   xmlhttp.send();
 }
 
+//gets details about selected event AJAX => eventDetails.php
+function detailsJs(sourceId) {
+	var field = "all";
+	primaryKey = sourceId;
+	document.getElementById("eventInfoContent").innerHTML="Loading Details...";
+	var xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      document.getElementById("eventInfoContent").innerHTML=xmlhttp.responseText;
+    }
+  }
+	xmlhttp.open("GET","eventDetails.php?q1="+primaryKey + "&q2=" + field,true);
+	xmlhttp.send();
+}
+
+//displays a field for selected entry in the database AJAX => eventDetails.php
+function pullField(dataField, destinationId) {
+	var field = dataField;
+	var xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      document.getElementById(destinationId).innerHTML=xmlhttp.responseText;
+    }
+  }
+	xmlhttp.open("GET","eventDetails.php?q1="+primaryKey + "&q2=" + field,true);
+	xmlhttp.send();
+}
+//deletes selected event via AJAX => cancel.php
+function cancelEvent() { 
+ var xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      document.getElementById("eventInfoContent").innerHTML=xmlhttp.responseText;
+    }
+  }
+
+xmlhttp.open("GET","cancel.php?q="+primaryKey,true);
+
+  xmlhttp.send();
+}
+
+function fillFields() {
+	pullField("eventname", "eventname");
+	pullField("location", "location");
+	pullField("instructor", "instructor");
+	pullField("from", "from");
+	pullField("to", "to");
+	pullField("event_date", "event_date");
+	pullField("comments", "comments");
+}
