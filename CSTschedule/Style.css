@@ -201,3 +201,21 @@ label.error {
 		width: 80px;
 
 	}
+
+#heading {
+	margin-right: 0px;
+	margin-left: 0px;
+	text-align: center;
+}
+
+#paragraph {
+	margin-right: 20px;
+	margin-left: 20px;
+	text-align: center;
+}
+
+#returnButton {
+	margin-right: 20px;
+	margin-left: 20px;
+	text-align: center;
+}
