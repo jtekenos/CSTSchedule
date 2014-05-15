@@ -110,7 +110,7 @@ function weekPicker() {
 	+ tues +"<br>"+ wed +"<br>"+ thur +"<br>"+ fri;
 }
 
-//displays the schedule for selected week and set Ajax => scheduleTableDenis.php
+//displays the schedule for selected week and set Ajax => scheduleTable.php
 function tableSelector(direction, tableId) { 
 	levelSet = storeLevel + storeSet;
 	if(direction == "current") {
@@ -185,6 +185,7 @@ xmlhttp.open("GET","cancel.php?q=" + primaryKey + "&q2=" + levelSet,true);
 }
 
 function fillFields() {
+	document.getElementsByName("key")[0].value=primaryKey;
 	pullField("eventname", "eventname");
 	pullField("location", "location");
 	pullField("instructor", "instructor");

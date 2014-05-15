@@ -13,7 +13,7 @@ if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-mysqli_query($con,"DELETE FROM $tableName WHERE id = '$primaryKey'");
+mysqli_query($con,"DELETE FROM schdule1 WHERE id = '$primaryKey'");
 echo "entry Deleted";
 mysqli_close($con);
 

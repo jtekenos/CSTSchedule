@@ -7,7 +7,7 @@ $levelSet = $_REQUEST["q2"];
     // Connect to server and select database.
 	mysql_connect(DB_HOST, DB_USER, DB_PASSWORD)or die("cannot connect");
 	mysql_select_db(DB_DATABASE)or die("cannot select DB");
-	$tbl_name = "set" . $levelSet;
+	$tbl_name = "schdule1";
 
 //Gets week code for current date
 if($numDate == null) {
@@ -103,7 +103,7 @@ for ($row=0; $row<20; $row++) {
 			$friSpan--;
 			$curSpan = $friSpan;
 		}
-	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '$timeFrom' and event_date = '$week'";
+	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '$timeFrom' and level_id = '$levelSet' and event_date = '$week'";
     $blk = mysql_query($blocks);
     $b = mysql_fetch_array($blk);
 	$spans = $b['timeBlocks'];
@@ -129,7 +129,7 @@ if($curSpan < 1) {
 	echo "<td width=\"15%\" class=\"$cellClass\" rowspan=\"$spans\">";
 	
 	if($spans != null) {
-		$sql="SELECT * FROM $tbl_name WHERE timefrom = '$timeFrom' and event_date = '$week'";
+		$sql="SELECT * FROM $tbl_name WHERE timefrom = '$timeFrom' and level_id = '$levelSet' and event_date = '$week'";
 		$result=mysql_query($sql);   
 		while($rows=mysql_fetch_array($result)){ // Start looping table row
 			// ORDER BY id DESC is order result by descending
