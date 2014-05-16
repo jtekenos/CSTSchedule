@@ -94,6 +94,7 @@ th,td,table {
 #LoginButton {
 	width:70%;
 	margin: 2px;
+	float:left;
 }
 
 #RegisterButton {
