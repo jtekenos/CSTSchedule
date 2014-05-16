@@ -35,7 +35,7 @@
 }
 
 #twitterFeedWrapper{
-	margin-top: 50px;
+	margin-top: 30px;
 	background-color: #003c79;
 	border:2px solid #a1a1a1;
 	padding:10px;
@@ -92,8 +92,7 @@ th,td,table {
 }
 
 #LoginButton {
-	width:90%;
-	padding
+	width:70%;
 	margin: 2px;
 }
 
