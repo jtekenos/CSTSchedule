@@ -107,9 +107,7 @@
 			<div role="main" id="scheduleContent" class="ui-content">
 
 				<a onClick="tableSelector('earlier', 'tableHere')" data-role="button" id="previousWeek" data-icon="arrow-l" data-iconpos="notext" data-form="ui-btn-up-a">Previous</a>
-				<a onClick="tableSelector('earlier', 'tableHere')" id="previousWeek" class=" ui-btn ui-btn-a ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" iconpos="notext" data-transition="pop">Previous</a>
 				<a onClick="tableSelector('later', 'tableHere')" data-role="button" id="nextWeek" data-icon="arrow-r" data-iconpos="notext" data-form="ui-btn-up-a">Next</a>
-				<a onClick="tableSelector('later', 'tableHere')" id="nextWeek" class=" ui-btn ui-btn-a ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Next</a>
 				<br />
 				<br />
 				<br />
@@ -151,8 +149,7 @@
 			<div role="main" class="ui-content">
 				
 				<h1 align="center">Modify Event</h1>
-				<form id="addForm" name="addForm" method="post" action="modify.php">
-
+				<form id="modForm" name="modForm" method="post" action="modify.php">
 					<label for="addEventName" id="eventname"></label>
 					<input type="text" id="addEventName" name="addEventName" placeholder="Event Name">
 
@@ -168,97 +165,66 @@
 			      		<option value="3">Level 3</option>
 			      		<option value="4">Level 4</option>
 					</select>
-
-					<div id="setAndNotificationDiv">
-					<div id="setList">
-			 			<select name="selSet">
+					<select name="selSet">
 							<option>Select Set</option>
 							<option value="A">Set A</option>
 				      		<option value="B">Set B</option>
 				      		<option value="C">Set C</option>
 						</select>
-					</div>
-					<div id="addEventNotification">
-						<br>
-						<label for="notifySliderEmail">Notify by email:</label>
-						<div class="sliderDiv">
-							<select name="notifySliderEmail" id="notifySliderEmail" data-role="slider">
-								<option value="0">No</option>
-								<option value="1">Yes</option>
-							</select> 
-						</div>
-						<label for="notifySliderSMS">Notify by SMS:</label>
-						<div class="sliderDiv">
-							<select name="notifySliderSMS" id="notifySliderSMS" data-role="slider">
-								<option value="0">No</option>
-								<option value="1">Yes</option>
-							</select> 
-						</div>
-					</div>
-					</div>
-
-					<div id="timeButtons">
-					<select name="selStartTime" size="1">
+						<select name="selStartTime" size="1">
 						<option>Select Start Time</option>
-						  <option>8:00</option>
-						  <option>8:30</option>
-						  <option>9:00</option>
-						  <option>9:30</option>
-						  <option>10:00</option>
-						  <option>10:30</option>
-						  <option>11:00</option>
-						  <option>11:30</option>
-						  <option>12:00</option>
-						  <option>12:30</option>
-						  <option>13:00</option>
-						  <option>13:30</option>
-						  <option>14:00</option>
-						  <option>14:30</option>
-						  <option>15:00</option>
-						  <option>15:30</option>
-						  <option>16:00</option>
-						  <option>16:30</option>
-						  <option>17:00</option>
-						  <option>17:30</option>
+						  <option value="8:00">8:00</option>
+						  <option value="8:30">8:30</option>
+						  <option value="9:00">9:00</option>
+						  <option value="10:00">10:00</option>
+						  <option value="11:00">11:00</option>
+						  <option value="11:30">11:30</option>
+						  <option value="12:00">12:00</option>
+						  <option value="12:30">12:30</option>
+						  <option value="13:00">13:00</option>
+						  <option value="13:30">13:30</option>
+						  <option value="14:00">14:00</option>
+						  <option value="14:30">14:30</option>
+						  <option value="15:00">15:00</option>
+						  <option value="14:30">14:30</option>
+						  <option value="15:00">15:00</option>
+						  <option value="16:30">16:30</option>
+						  <option value="17:00">17:00</option>
+						  <option value="17:30">17:30</option>
+						  
 						</select>
 						<select name="selEndTime" size="1">
 						<option>Select End Time</option>
-						  <option>6:00</option>
-						  <option>6:30</option>
-						  <option>7:00</option>
-						  <option>7:30</option>
-						  <option>8:00</option>
-						  <option>8:30</option>
-						  <option>9:00</option>
-						  <option>9:30</option>
-						  <option>10:00</option>
-						  <option>10:30</option>
-						  <option>11:00</option>
-						  <option>11:30</option>
-						  <option>12:00</option>
-						  <option>12:30</option>
-						  <option>13:00</option>
-						  <option>13:30</option>
-						  <option>14:00</option>
-						  <option>14:30</option>
-						  <option>15:00</option>
-						  <option>15:30</option>
-						  <option>16:00</option>
-						  <option>16:30</option>
-						  <option>17:00</option>
-						  <option>17:30</option>
+						  <option value="8:00">8:00</option>
+						  <option value="8:30">8:30</option>
+						  <option value="9:00">9:00</option>
+						  <option value="10:00">10:00</option>
+						  <option value="11:00">11:00</option>
+						  <option value="11:30">11:30</option>
+						  <option value="12:00">12:00</option>
+						  <option value="12:30">12:30</option>
+						  <option value="13:00">13:00</option>
+						  <option value="13:30">13:30</option>
+						  <option value="14:00">14:00</option>
+						  <option value="14:30">14:30</option>
+						  <option value="15:00">15:00</option>
+						  <option value="14:30">14:30</option>
+						  <option value="15:00">15:00</option>
+						  <option value="16:30">16:30</option>
+						  <option value="17:00">17:00</option>
+						  <option value="17:30">17:30</option>
 						</select>
-					</div>
-					<div>
-						<label for="date">Date Input:</label>
-						<input type="date" name="date" id="date">
-					</div>
-					<input type="text" id="eventType" name="eventType" placeholder="Comments">
-						<br><br>
-						<input class="button" type="submit" value="Update" name="Update" data-form="ui-btn-up-a" data-theme="a" data-icon="check" data-transition="pop">
-						<input class="button" type="reset" value="Reset" name="Reset" data-form="ui-btn-up-a" data-theme="a" data-icon="delete" data-transition="pop">		
-						<input class="hiddenInfo" name="key" value="">	
+
+
+					<input type="date" name="date">
+					<input type="text" name="eventType" placeholder="Comments">
+					
+						<input class="button" type="submit" value="Update" name="Update" data-form="ui-btn-up-a" data-theme="a" data-icon="check">
+						<input class="button" type="reset" value="Reset" name="Reset" data-form="ui-btn-up-a" data-theme="a" data-icon="delete">		
+						<input  name="key" class="hiddenInfo" value="">	
+					
 				</form>
+				
 			</div><!-- /content -->
 		</div><!-- /page -->
 
@@ -392,19 +358,11 @@
 			</div><!-- /header -->
 
 			<div role="main" class="ui-content">
-				<h1 align="center">Add Event</h1>
-				<span id="eventname"></span>
-				<span id="location"></span>
-				<span id="instructor"></span>
-				<span id="from"></span>
-				<span id="to"></span>
-				<span id="event_date"></span>
-				<span id="comments"></span>
-				<p>
-				<form id="addForm" name="addForm" method="post" action="add.php">
+			
+				<form id="addForm" name="addForm" method="post" action="addDenis.php">
 					<input type="text" id="addEventName" name="addEventName" placeholder="Event Name">
 					<input type="text" id="addProfName" name="addProfName" placeholder="Instructor Name">
-					<label for="addLocation" id="location"></label>
+				
 					<input type="text" id="addLocation" name="addLocation" placeholder="Location">
 					<select name="selLevel">
 						<option>Select Level</option>
@@ -445,53 +403,45 @@
 					<div id="timeButtons">
 					<select name="selStartTime" size="1">
 						<option>Select Start Time</option>
-						  <option>8:00</option>
-						  <option>8:30</option>
-						  <option>9:00</option>
-						  <option>9:30</option>
-						  <option>10:00</option>
-						  <option>10:30</option>
-						  <option>11:00</option>
-						  <option>11:30</option>
-						  <option>12:00</option>
-						  <option>12:30</option>
-						  <option>13:00</option>
-						  <option>13:30</option>
-						  <option>14:00</option>
-						  <option>14:30</option>
-						  <option>15:00</option>
-						  <option>15:30</option>
-						  <option>16:00</option>
-						  <option>16:30</option>
-						  <option>17:00</option>
-						  <option>17:30</option>
+						  <option value="8:00">8:00</option>
+						  <option value="8:30">8:30</option>
+						  <option value="9:00">9:00</option>
+						  <option value="10:00">10:00</option>
+						  <option value="11:00">11:00</option>
+						  <option value="11:30">11:30</option>
+						  <option value="12:00">12:00</option>
+						  <option value="12:30">12:30</option>
+						  <option value="13:00">13:00</option>
+						  <option value="13:30">13:30</option>
+						  <option value="14:00">14:00</option>
+						  <option value="14:30">14:30</option>
+						  <option value="15:00">15:00</option>
+						  <option value="14:30">14:30</option>
+						  <option value="15:00">15:00</option>
+						  <option value="16:30">16:30</option>
+						  <option value="17:00">17:00</option>
+						  <option value="17:30">17:30</option>
 						</select>
 						<select name="selEndTime" size="1">
 						<option>Select End Time</option>
-						  <option>6:00</option>
-						  <option>6:30</option>
-						  <option>7:00</option>
-						  <option>7:30</option>
-						  <option>8:00</option>
-						  <option>8:30</option>
-						  <option>9:00</option>
-						  <option>9:30</option>
-						  <option>10:00</option>
-						  <option>10:30</option>
-						  <option>11:00</option>
-						  <option>11:30</option>
-						  <option>12:00</option>
-						  <option>12:30</option>
-						  <option>13:00</option>
-						  <option>13:30</option>
-						  <option>14:00</option>
-						  <option>14:30</option>
-						  <option>15:00</option>
-						  <option>15:30</option>
-						  <option>16:00</option>
-						  <option>16:30</option>
-						  <option>17:00</option>
-						  <option>17:30</option>
+						  <option value="8:00">8:00</option>
+						  <option value="8:30">8:30</option>
+						  <option value="9:00">9:00</option>
+						  <option value="10:00">10:00</option>
+						  <option value="11:00">11:00</option>
+						  <option value="11:30">11:30</option>
+						  <option value="12:00">12:00</option>
+						  <option value="12:30">12:30</option>
+						  <option value="13:00">13:00</option>
+						  <option value="13:30">13:30</option>
+						  <option value="14:00">14:00</option>
+						  <option value="14:30">14:30</option>
+						  <option value="15:00">15:00</option>
+						  <option value="14:30">14:30</option>
+						  <option value="15:00">15:00</option>
+						  <option value="16:30">16:30</option>
+						  <option value="17:00">17:00</option>
+						  <option value="17:30">17:30</option>
 						</select>
 					</div>
 					<div>
@@ -500,9 +450,9 @@
 					</div>
 					<input type="text" id="eventType" name="eventType" placeholder="Comments">
 						<br><br>
-						<input class="button" type="submit" value="Add" name="Add" data-form="ui-btn-up-a" data-theme="a" data-icon="check" data-transition="pop">
+						<input class="button" type="submit" value="Add" name="Add" data-form="ui-btn-up-a" data-theme="a" data-icon="check">
 						<input class="button" type="reset" value="Reset" name="Reset" data-form="ui-btn-up-a" data-theme="a" data-icon="delete">		
-						<input class="hiddenInfo" name="key" value="">	
+				
 				</form>
 			</div><!-- /content -->
 		</div><!-- /page -->

@@ -38,7 +38,7 @@ $fridate = $friArray[year] . "-" . sprintf("%02d", $friArray[mon]) . "-" . sprin
 
 //$week = $date;
 echo "<table border=\"1\">
-	<caption>$tbl_name $monArray[month] $monArray[mday] to $friArray[month] $friArray[mday]</caption>
+	<caption>$monArray[month] $monArray[mday] to $friArray[month] $friArray[mday]</caption>
 	<tr>
 		<td width=\"6%\"></td>
 		<th>Mon $monArray[mon]/$monArray[mday]</th>

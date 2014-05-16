@@ -18,9 +18,9 @@
 <div id="register" data-role="page">
 
 <div id="navHeader" data-role="header">
-	<a href="CSTSchedule.html#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
+	<a href="http://okoceanfisheries.host56.com/CSTschedule/CSTSchedule.html" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
 	<div class="userHeaderDiv">
-	<a href="CSTSchedule.html#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" >User1</a>
+	<a href="http://okoceanfisheries.host56.com/CSTschedule/CSTSchedule.html#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" >User1</a>
 	</div>
 </div><!-- /header -->
 
@@ -64,31 +64,31 @@
 
 	<select name= "level">
 			<option>Select Level</option>
-      		<option value="lvl1">Level 1</option>
-      		<option value="lvl2">Level 2</option>
-      		<option value="lvl3">Level 3</option>
-      		<option value="lvl4">Level 4</option>
+      		<option value="1">Level 1</option>
+      		<option value="2">Level 2</option>
+      		<option value="3">Level 3</option>
+      		<option value="4">Level 4</option>
     </select>
 	<select name = "set">
 			<option>Select Set</option>
-      		<option value="setA">Set A</option>
-      		<option value="setB">Set B</option>
-      		<option value="setC">Set C</option>
+      		<option value="A">Set A</option>
+      		<option value="B">Set B</option>
+      		<option value="C">Set C</option>
     </select>
 
 	<label for="notifySlider1"><h3 id="notifyLabel">Notify by email:</h3></label>
 	<div class="sliderDiv">
 		<select name="slideremail" id="notifySlider1" data-role="slider">
-			<option value="yes">No</option>
-			<option value="no">Yes</option>
+			<option value="0">No</option>
+			<option value="1">Yes</option>
 		</select> 
 	</div>
 
 	<label for="notifySlider1"><h3 id="notifyLabel">Notify by SMS:</h3></label>
 	<div class="sliderDiv">
 		<select name="slidersms" id="notifySlider2" data-role="slider">
-			<option value="yes">No</option>
-			<option value="no">Yes</option>
+			<option value="0">No</option>
+			<option value="1">Yes</option>
 		</select> 
 	</div>
 
