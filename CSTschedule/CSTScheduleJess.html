@@ -10,6 +10,10 @@
 <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 <script src="http://jquery.bassistance.de/validate/jquery.validate.js"></script>
 <script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
+<script src="realtime-notifications/src/lib/gritter/js/jquery.gritter.min.js"></script>
+<link href="realtime-notifications/src/lib/gritter/css/jquery.gritter.css"rel="stylesheet" type="text/css" />
+<script src="http://js.pusher.com/2.2/pusher.min.js"></script>
+<script src="realtime-notifications/src/PusherNotifier.js"></script>
 <script src="functionsJess.js"></script> 
 <meta charset="UTF-8">
 <title>CST Schedule</title>
@@ -2856,7 +2860,15 @@ mysql_close();
 			</select>
 		</div>
 			<br><br>
-			<input class="button" type="submit" value="Add" name="Update" data-form="ui-btn-up-a" data-theme="a" data-icon="check">
+			 
+	<script>
+		$(function() {
+  			var pusher = new Pusher('39df1a92e712efa11685');
+  			var channel = pusher.subscribe('my_notifications');
+  			var notifier = new PusherNotifier(channel);
+		});
+ 	</script>
+			<input class="button" type="submit" value="Add" name="Update" data-form="ui-btn-up-a" data-theme="a" data-icon="check" onsubmit="function()">
 			<input class="button" type="reset" value="Reset" name="Reset" data-form="ui-btn-up-a" data-theme="a" data-icon="delete">			
 	</form>
 </div><!-- /content -->

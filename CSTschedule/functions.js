@@ -50,6 +50,10 @@ function menuSelector(sourceId, destinationId) {
 	} 
 }
 
+function collapseSet() {
+	$("#setCollapsible").collapsible({collapsed:true})
+}
+
 function dynamicSetCheckbox() {
 	var selectedLevel = $( "#selLevel" ).val();
 	if (selectedLevel == 'lvl1') {
