@@ -44,13 +44,49 @@
 				    <button id="setQ" class="ui-btn ui-btn-a" value="Q" onClick="menuSelector('setQ', 'setHeader'); getSet('setQ'); collapseSet()">Set Q</button>
 				</div>
 				<a href="#schedule" onclick="tableSelector('current', 'tableHere')"id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Get Schedule</a>
+				<div id="twitterFeedDiv">
+					<div id="twitterFeedWrapper">
+					<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/CSTSchedule" data-widget-id="467345651915694082" data-chrome="transparent" data-tweet-limit="5">Tweets by @CSTSchedule</a>
+					<script>
+						!function(d,s,id) {
+							var js,fjs=d.getElementsByTagName(s)[0],
+								p=/^http:/.test(d.location)?'http':'https';
+							if(!d.getElementById(id)) {
+								js=d.createElement(s);
+								js.id=id;js.src=p+"://platform.twitter.com/widgets.js";
+								fjs.parentNode.insertBefore(js,fjs);
+							}
+						}
+						(document,"script","twitter-wjs");
+					</script>
+					</div>
+				</div>
 			</div><!-- /content -->
 
 			<div id="footer" data-role="footer">
 
 				<div class="footerButtons">
+					<div id="loginButtonDiv">
 					<a href="#login" id="LoginButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Login</a>
+					</div>
+					<div id="registerButtonDiv2">
 					<a href="#register" id="RegisterButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Register</a>
+					</div>
+					<div id="twitterButtonDiv">
+					<a href="https://twitter.com/CSTSchedule" class="twitter-follow-button" data-show-count="false">Follow @CSTSchedule</a>
+					<script>
+						!function(d,s,id) {
+							var js,fjs=d.getElementsByTagName(s)[0],
+								p=/^http:/.test(d.location)?'http':'https';
+							if(!d.getElementById(id)) {
+								js=d.createElement(s);
+								js.id=id;js.src=p+'://platform.twitter.com/widgets.js';
+								fjs.parentNode.insertBefore(js,fjs);
+							}
+						}
+						(document, 'script', 'twitter-wjs');
+					</script>	
+					</div>	
 				</div>
 
 			</div>
