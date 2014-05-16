@@ -45,21 +45,20 @@
 	<input type="password" id="confimPwd" name="confirmPwd" placeholder="Re-enter Password" required>
 
 	<script>
-	$( "#registerForm" ).validate({
-		rules: {
-    			confirmPwd: {
-      			equalTo: "#pwd"
-    		}
-  		},
-		messages: {
-			uName: "Username is required.",
-			email: {
-				required: "Email is required",
-				txtEmail: "Please provide valid email"
+		$( "#registerForm" ).validate({
+			rules: {
+			    confirmPwd: {
+			      	equalTo: "#pwd"
+			    }
+			},
+			messages: {
+				uName: "Username is required.",
+				email: {
+					required: "Email is required",
+					txtEmail: "Please provide valid email"
+				}
 			}
-		}
-	});
-
+		});
 	</script>
 
 	<select name= "level">
