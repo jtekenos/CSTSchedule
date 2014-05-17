@@ -276,10 +276,12 @@ table {
 
 #previousWeek {
 	float: left;
+	z-index: 1;
 }
 
 #nextWeek {
 	float: right;
+	z-index: 1;
 }
 
 #heading {
@@ -307,4 +309,13 @@ table {
 #tableHere {
 	position: relative;
 	top: -15px;
+}
+
+#eventInfoContent {
+	font-size: 140%;
+	font-weight: bold;
+}
+
+#detailComments {
+	color: red;
 }

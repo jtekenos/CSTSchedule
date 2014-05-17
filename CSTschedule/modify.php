@@ -29,16 +29,16 @@ $levelSet = $level . $set;
 	if ($location != '') {
 		mysqli_query($con,"UPDATE $tableName SET location = '$location'	WHERE id = '$primaryKey'");
 	}
-	if ($startTime != "Select Start Time") {
+	if ($startTime != '') {
 		mysqli_query($con,"UPDATE $tableName SET timefrom = '$startTime'	WHERE id = '$primaryKey'");
 	}
-	if ($endTime != "Select End Time") {
+	if ($endTime != '') {
 		mysqli_query($con,"UPDATE $tableName SET timeto = '$endTime'	WHERE id = '$primaryKey'");
 	}
 	if ($prof != '') {
 		mysqli_query($con,"UPDATE $tableName SET instructor = '$prof'	WHERE id = '$primaryKey'");
 	}
-	if ($levelSet != '') {
+	if (strlen($levelSet) <= 2) {
 		mysqli_query($con,"UPDATE $tableName SET level_id = '$levelSet'	WHERE id = '$primaryKey'");
 	}
 	if ($eventType != '') {
@@ -50,5 +50,5 @@ $levelSet = $level . $set;
 
 	mysqli_close($con);
 
-	header("Location: CSTScheduleDenis.html#schedule");
+	header("Location: CSTSchedule.html");
 ?>

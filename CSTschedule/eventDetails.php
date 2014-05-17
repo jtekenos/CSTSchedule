@@ -20,9 +20,9 @@ while($row = mysqli_fetch_array($result)) {
 	  echo  $row['eventname'], "<br>", 
 	  $row['event_date'], "<br>",
 	  $row['timefrom'], " - ", $row['timeto'], 
-	  "<br>Location: ", $row['location'], 
-	  "<br>Instructor: ", $row['instructor'],  
-	  "<br>", $row['comments'], "<br>";
+	  "<br>", $row['location'], 
+	  "<br>", $row['instructor'],  
+	  "<br><span id=\"detailComments\">", $row['comments'], "</span><br>";
 }
 	else if($field == "location"){
 		echo $row['location'];
