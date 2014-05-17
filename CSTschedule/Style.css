@@ -299,3 +299,12 @@ table {
 	margin-left: 20px;
 	text-align: center;
 }
+
+#changeScheduleButton {
+	width: 210px;
+	margin: auto;
+}
+#tableHere {
+	position: relative;
+	top: -15px;
+}

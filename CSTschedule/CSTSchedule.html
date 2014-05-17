@@ -107,14 +107,47 @@
 			<div role="main" id="scheduleContent" class="ui-content">
 
 				<a onClick="tableSelector('earlier', 'tableHere')" data-role="button" id="previousWeek" data-icon="arrow-l" data-iconpos="notext" data-form="ui-btn-up-a">Previous</a>
+
 				<a onClick="tableSelector('later', 'tableHere')" data-role="button" id="nextWeek" data-icon="arrow-r" data-iconpos="notext" data-form="ui-btn-up-a">Next</a>
 				<br />
-				<br />
-				<br />
+
 				<div id="tableHere"></div>
 
 			</div><!-- /content -->
+			
+			
+				
+			
 		</div><!-- /page -->
+
+		<!-- **************************Change schedule Dialog Box************************** -->
+		<div data-role="page" id="scheduleDialog">
+					<input type="date" name="changedate" value="" id="changeDate">
+
+					<div id="levelCollapsible2" data-role="collapsible" data-theme="b" data-content-theme="b">
+				    <h4 ><span id="lvlHeader2">Level</span></h4>
+				    <button id="lvl1" class="ui-btn ui-btn-a" value="1" onClick="menuSelector('lvl1', 'lvlHeader2'); getLevel('lvl1'); collapseLevel2()">Level 1</button>
+				    <button id="lvl2" class="ui-btn ui-btn-a" value="2" onClick="menuSelector('lvl2', 'lvlHeader2'); getLevel('lvl2'); collapseLevel2()">Level 2</button>
+				    <button id="lvl3" class="ui-btn ui-btn-a" value="3" onClick="menuSelector('lvl3', 'lvlHeader2'); getLevel('lvl3'); collapseLevel2()">Level 3</button>
+				    <button id="lvl4" class="ui-btn ui-btn-a" value="4" onClick="menuSelector('lvl4', 'lvlHeader2'); getLevel('lvl4'); collapseLevel2()">Level 4</button>
+				</div>
+				<div data-role="collapsible" id="setCollapsible2" data-theme="b" data-content-theme="b">
+				    <h4><span id="setHeader2">Set</span></h4>
+				    <button id="setA" class="ui-btn ui-btn-a" value="A" onClick="menuSelector('setA', 'setHeader2'); getSet('setA'); collapseSet2()">Set A</button>
+				    <button id="setB" class="ui-btn ui-btn-a" value="B" onClick="menuSelector('setB', 'setHeader2'); getSet('setB'); collapseSet2()">Set B</button>
+				    <button id="setC" class="ui-btn ui-btn-a" value="C" onClick="menuSelector('setC', 'setHeader2'); getSet('setC'); collapseSet2()">Set C</button>
+				    <button id="setD" class="ui-btn ui-btn-a" value="D" onClick="menuSelector('setD', 'setHeader2'); getSet('setD'); collapseSet2()">Set D</button>
+				    <button id="setE" class="ui-btn ui-btn-a" value="E" onClick="menuSelector('setE', 'setHeader2'); getSet('setE'); collapseSet2()">Set E</button>
+				    <button id="setG" class="ui-btn ui-btn-a" value="G" onClick="menuSelector('setG', 'setHeader2'); getSet('setG'); collapseSet2()">Set G</button>
+				    <button id="setL" class="ui-btn ui-btn-a" value="L" onClick="menuSelector('setL', 'setHeader2'); getSet('setL'); collapseSet2()">Set L</button>
+				    <button id="setO" class="ui-btn ui-btn-a" value="O" onClick="menuSelector('setO', 'setHeader2'); getSet('setO'); collapseSet2()">Set O</button>
+				    <button id="setQ" class="ui-btn ui-btn-a" value="Q" onClick="menuSelector('setQ', 'setHeader2'); getSet('setQ'); collapseSet2()">Set Q</button>
+				</div>
+
+					<a href="#schedule" onClick="tableSelectorDate('tableHere') "class=" ui-btn ui-btn-aui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop" data-rel="page">Get Schedule</a>
+
+
+		</div>
 
 		<!-- ***************************Event Info PAGE*************************** -->
 		<div id="eventInfo" data-role="page">
@@ -228,123 +261,7 @@
 			</div><!-- /content -->
 		</div><!-- /page -->
 
-		<!-- ***************************LOGIN PAGE*************************** -->
-		<div id="login" data-role="page">
-
-			<div id="navHeader" data-role="header">
-				<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home" data-transition="pop"/></a>
-				<div class="userHeaderDiv">
-					<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">User</a>
-				</div>
-			</div><!-- /header -->
-
-			<h1 align="center">User Login</h1>
-			<div role="main" class="ui-content">
-				<form id="loginForm" name="loginForm" method="post" action="">
-					<input type="text" id="uName" name="login" placeholder="Username">
-					<input type="password" id="password" name="password" placeholder="Password">
-
-					<div id="RegisterButtonDiv">
-					<input class="button" type="submit" value="Login" name="Login" data-icon="check" data-transition="pop">
-					<input class="button" type="reset" value="Reset" name="Reset" data-form="ui-btn-up-a" data-theme="a" data-icon="delete">		
-					</div>
-				</form>
-			</div><!-- /content -->
-		</div><!-- /page -->
-
-		<!-- ***************************REGISTER PAGE*************************** -->
-		<div id="register" data-role="page">
-
-			<div id="navHeader" data-role="header">
-				<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
-				<div class="userHeaderDiv">
-					<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">User1</a>
-				</div>
-			</div><!-- /header -->
-
-			<h1 align="center">User Registration</h1>
-			<div role="main" class="ui-content">
-				<form id="registerForm" name="registerForm" method="post">
-					<input type="text" id="uName" name="uName" placeholder="User name" required>
-					<input type="email" id="txtEmail" name="email" placeholder="Email" required>
-					<input type="password" id="pwd" name="pwd" placeholder="Password" required>
-					<input type="password" id="confimPwd" name="confirmPwd" placeholder="Re-enter Password" required>
-
-					<script>
-						$( "#registerForm" ).validate({
-							rules: {
-			    				confirmPwd: {
-			      				equalTo: "#pwd"
-			    			}
-			  			},
-						messages: {
-							uName: "Username is required.",
-							email: {
-								required: "Email is required",
-								txtEmail: "Please provide valid email"
-							}
-						}
-						});
-					</script>
-					<!--end-->
-
-					<select>
-						<option>Select Level</option>
-			      		<option id="lvl1" value="1">Level 1</option>
-			      		<option id="lvl2" value="2">Level 2</option>
-			      		<option id="lvl3" value="3">Level 3</option>
-			      		<option id="lvl4" value="4">Level 4</option>
-			    	</select>
-					<select>
-						<option>Select Set</option>
-			      		<option id="setA" value="A">Set A</option>
-			   			<option id="setB" value="B">Set B</option>
-			   			<option id="setC" value="C">Set C</option>
-			    	</select>
-					<label for="notifySlider1"><h3 id="notifyLabel">Notify by email:</h3></label>
-					<div class="sliderDiv">
-						<select name="slider" id="notifySlider1" data-role="slider">
-							<option value="yes">No</option>
-							<option value="no">Yes</option>
-						</select> 
-					</div>
-
-					<label for="notifySlider1"><h3 id="notifyLabel">Notify by SMS:</h3></label>
-					<div class="sliderDiv">
-						<select name="slider" id="notifySlider2" data-role="slider">
-							<option value="yes">No</option>
-							<option value="no">Yes</option>
-						</select> 
-					</div>
-
-					<div id="RegisterButtonDiv">
-						<input class="button" type="submit" value="Register" name="Register" data-icon="check" data-transition="pop">
-						<input class="button" type="reset" value="Reset" name="Reset" data-icon="delete">		
-					</div>
-				
-				</form>
-			</div><!-- /content -->
-		</div><!-- /page -->
-
-
-		<!--***************************OLD EDIT SCHEDULE PAGE***************************
-		<div id="edit" data-role="page">
-
-		<div id="navHeader" data-role="header">
-			<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
-			<div class="userHeaderDiv">
-			<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" >User1</a>
-			</div>	
-		</div>
-
-		<div role="main" class="ui-content">
-			<h1 align="center">Edit Schedule</h1>
-			<a href="#modify" id="modifyButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Modify Event</a>
-			<a href="#cancel" id="cancelButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Cancel Class</a>
-		</div>
-		</div>
-		-->
-		<!--***************************ADD SCHEDULE PAGE***************************-->
+<!--***************************ADD SCHEDULE PAGE***************************-->
 		<div id="add" data-role="page">
 
 			<div id="navHeader" data-role="header">
@@ -457,6 +374,105 @@
 			</div><!-- /content -->
 		</div><!-- /page -->
 
+		<!-- ***************************LOGIN PAGE*************************** -->
+		<div id="login" data-role="page">
+
+			<div id="navHeader" data-role="header">
+				<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home" data-transition="pop"/></a>
+				<div class="userHeaderDiv">
+					<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">User</a>
+				</div>
+			</div><!-- /header -->
+
+			<h1 align="center">User Login</h1>
+			<div role="main" class="ui-content">
+				<form id="loginForm" name="loginForm" method="post" action="">
+					<input type="text" id="uName" name="login" placeholder="Username">
+					<input type="password" id="password" name="password" placeholder="Password">
+
+					<div id="RegisterButtonDiv">
+					<input class="button" type="submit" value="Login" name="Login" data-icon="check" data-transition="pop">
+					<input class="button" type="reset" value="Reset" name="Reset" data-form="ui-btn-up-a" data-theme="a" data-icon="delete">		
+					</div>
+				</form>
+			</div><!-- /content -->
+		</div><!-- /page -->
+
+		<!-- ***************************REGISTER PAGE*************************** -->
+		<div id="register" data-role="page">
+
+			<div id="navHeader" data-role="header">
+				<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
+				<div class="userHeaderDiv">
+					<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">User1</a>
+				</div>
+			</div><!-- /header -->
+
+			<h1 align="center">User Registration</h1>
+			<div role="main" class="ui-content">
+				<form id="registerForm" name="registerForm" method="post">
+					<input type="text" id="uName" name="uName" placeholder="User name" required>
+					<input type="email" id="txtEmail" name="email" placeholder="Email" required>
+					<input type="password" id="pwd" name="pwd" placeholder="Password" required>
+					<input type="password" id="confimPwd" name="confirmPwd" placeholder="Re-enter Password" required>
+
+					<script>
+						$( "#registerForm" ).validate({
+							rules: {
+			    				confirmPwd: {
+			      				equalTo: "#pwd"
+			    			}
+			  			},
+						messages: {
+							uName: "Username is required.",
+							email: {
+								required: "Email is required",
+								txtEmail: "Please provide valid email"
+							}
+						}
+						});
+					</script>
+					<!--end-->
+
+					<select>
+						<option>Select Level</option>
+			      		<option id="lvl1" value="1">Level 1</option>
+			      		<option id="lvl2" value="2">Level 2</option>
+			      		<option id="lvl3" value="3">Level 3</option>
+			      		<option id="lvl4" value="4">Level 4</option>
+			    	</select>
+					<select>
+						<option>Select Set</option>
+			      		<option id="setA" value="A">Set A</option>
+			   			<option id="setB" value="B">Set B</option>
+			   			<option id="setC" value="C">Set C</option>
+			    	</select>
+					<label for="notifySlider1"><h3 id="notifyLabel">Notify by email:</h3></label>
+					<div class="sliderDiv">
+						<select name="slider" id="notifySlider1" data-role="slider">
+							<option value="yes">No</option>
+							<option value="no">Yes</option>
+						</select> 
+					</div>
+
+					<label for="notifySlider1"><h3 id="notifyLabel">Notify by SMS:</h3></label>
+					<div class="sliderDiv">
+						<select name="slider" id="notifySlider2" data-role="slider">
+							<option value="yes">No</option>
+							<option value="no">Yes</option>
+						</select> 
+					</div>
+
+					<div id="RegisterButtonDiv">
+						<input class="button" type="submit" value="Register" name="Register" data-icon="check" data-transition="pop">
+						<input class="button" type="reset" value="Reset" name="Reset" data-icon="delete">		
+					</div>
+				
+				</form>
+			</div><!-- /content -->
+		</div><!-- /page -->
+
+		
 		<!-- ***************************USER PROFILE PAGE*************************** -->
 		<div id="profile" data-role="page">
 			<div id="navHeader" data-role="header">

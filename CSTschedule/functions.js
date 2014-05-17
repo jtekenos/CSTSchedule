@@ -54,6 +54,15 @@ function collapseSet() {
 	$("#setCollapsible").collapsible({collapsed:true})
 }
 
+function collapseSet2() {
+	$("#setCollapsible2").collapsible({collapsed:true})
+}
+
+function collapseLevel2() {
+	$("#levelCollapsible2").collapsible({collapsed:true});
+}
+
+
 function dynamicSetCheckbox() {
 	var selectedLevel = $( "#selLevel" ).val();
 	if (selectedLevel == 'lvl1') {
@@ -142,6 +151,31 @@ else {
 }
   
   xmlhttp.send();
+}
+
+//displays the schedule for selected date and set Ajax => scheduleTable.php
+function tableSelectorDate(tableId) { 
+	levelSet = storeLevel + storeSet;
+	var newDate = document.getElementById("changeDate").value;
+	if(newDate == "") {
+		var numDate = new Date().getTime() / 1000;;
+	}
+	else {
+		var numDate = new Date(newDate).getTime() / 1000;
+	}
+	
+
+ var xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      document.getElementById(tableId).innerHTML=xmlhttp.responseText;
+    }
+  }
+
+	xmlhttp.open("GET","scheduleTable.php?q1=" + numDate  + "&q2=" + levelSet, true);
+
+  
+  xmlhttp.send(); 
 }
 
 //gets details about selected event AJAX => eventDetails.php

@@ -36,17 +36,20 @@ $weddate = $wedArray[year] . "-" . sprintf("%02d", $wedArray[mon]) . "-" . sprin
 $thudate = $thuArray[year] . "-" . sprintf("%02d", $thuArray[mon]) . "-" . sprintf("%02d", $thuArray[mday]);
 $fridate = $friArray[year] . "-" . sprintf("%02d", $friArray[mon]) . "-" . sprintf("%02d", $friArray[mday]);
 
-//$week = $date;
-echo "<table border=\"1\">
-	<caption>$monArray[month] $monArray[mday] to $friArray[month] $friArray[mday]</caption>
-	<tr>
-		<td width=\"6%\"></td>
-		<th>Mon $monArray[mon]/$monArray[mday]</th>
-		<th>Tue $tueArray[mon]/$tueArray[mday]</th>
-		<th>Wed $wedArray[mon]/$wedArray[mday]</th>
-		<th>Thu $thuArray[mon]/$thuArray[mday]</th>
-		<th>Fri $friArray[mon]/$friArray[mday]</th>
-	</tr>";
+$startMonth = substr($monArray[month], 0, 3);
+$endMonth = substr($friArray[month], 0, 3);
+
+echo "<a href=\"#scheduleDialog\" id=\"changeScheduleButton\" class=\"ui-btn ui-btn-aui-shadow ui-corner-all\" data-form=\"ui-btn-up-a\" data-theme=\"a\" data-transition=\"pop\" data-rel=\"dialog\">Set:$levelSet &nbsp $startMonth $monArray[mday] to $endMonth $friArray[mday]</a>
+
+	<table border=\"1\">
+		<tr>
+			<td width=\"6%\"></td>
+			<th>Mon $monArray[mon]/$monArray[mday]</th>
+			<th>Tue $tueArray[mon]/$tueArray[mday]</th>
+			<th>Wed $wedArray[mon]/$wedArray[mday]</th>
+			<th>Thu $thuArray[mon]/$thuArray[mday]</th>
+			<th>Fri $friArray[mon]/$friArray[mday]</th>
+		</tr>";
 $sql="SELECT * FROM $tbl_name Where  event_date = '$week' ORDER BY id DESC";
 
 		
