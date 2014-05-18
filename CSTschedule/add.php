@@ -1,3 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="themes/BCITTheme.min.css" />
+		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+			
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+		<script src="http://jquery.bassistance.de/validate/jquery.validate.js"></script>
+		<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
+		<script src="functions.js"></script> 
+		<meta charset="UTF-8">
+		<?php include "functions.php";?>
+		<title>Add Schedule</title>
+	</head>
+	<body>
+
 <?php
 	//Start session
 	session_start();
@@ -21,101 +40,82 @@ $startTime = mysqli_real_escape_string($con, $_POST['selStartTime']);
 $endTime = mysqli_real_escape_string($con, $_POST['selEndTime']);
 $date = mysqli_real_escape_string($con, $_POST['date']);
 
-$startTimeValue = 0;
-if ($startTime == "8:00") {
-	$startTimeValue = 16;
-} elseif ($startTime == "8:30") {
-	$startTimeValue = 17;
-} elseif ($startTime == "9:00") {
-	$startTimeValue == 18;
-} elseif ($startTime == "9:30") {
-	$startTimeValue = 19;
-} elseif ($startTime == "10:00") {
-	$startTimeValue = 20;
-} elseif ($startTime == "10:30") {
-	$startTimeValue = 21;
-} elseif ($startTime == "11:00") {
-	$startTimeValue = 22;
-} elseif ($startTime == "11:30") {
-	$startTimeValue = 23;
-} elseif ($startTime == "12:00") {
-	$startTimeValue = 24;
-} elseif ($startTime == "12:30") {
-	$startTimeValue = 25;
-} elseif ($startTime == "13:00") {
-	$startTimeValue = 26;
-} elseif ($startTime == "13:30") {
-	$startTimeValue = 27;
-} elseif ($startTime == "14:00") {
-	$startTimeValue = 28;
-} elseif ($startTime == "14:30") {
-	$startTimeValue = 29;
-} elseif ($startTime == "15:00") {
-	$startTimeValue = 30;
-} elseif ($startTime == "15:30") {
-	$startTimeValue = 31;
-} elseif ($startTime == "16:00") {
-	$startTimeValue = 32;
-} elseif ($startTime == "16:30") {
-	$startTimeValue = 33;
-} elseif ($startTime == "17:00") {
-	$startTimeValue = 34;
-} elseif ($startTime == "17:30") {
-	$startTimeValue = 35;
+
+$levelSet = $level . $set;
+
+$startTBlock = tBlockConverter($startTime);
+$tBlocks = tBlockConverter($endTime) - $startTBlock;
+
+$usedBlockArray = array();
+$index = 0;
+for($i=$tBlocks-1; $i>=0; $i--){
+  	$usedBlock = $startTBlock + $i;
+  	$usedBlockArray[$index] = $usedBlock;
+  	$index++;
+  }
+
+$passed = 1;
+if($tBlocks < 1) {
+	echo "<h3>Please select a valid time<h3>";
+	$passed = 0;
+} 
+if($event == "") {
+	echo "<h3>please specify the event name<h3>";
+	$passed = 0;
+}
+if($location == "") {
+	echo "<h3>please specify the location<h3>";
+	$passed = 0;
+}
+if($level == "noLvl" or $set == "noSet") {
+	echo "<h3>please specify the level and set<h3>";
+	$passed = 0;
+}
+if($date == "") {
+	echo "<h3>please specify the date<h3>";
+	$passed = 0;
 }
 
-$endTimeValue = 0;
-if ($endTime == '8:00') {
-	$endTimeValue = 16;
-} elseif ($endTime == "8:30") {
-	$endTimeValue = 17;
-} elseif ($endTime == "9:00") {
-	$endTimeValue = 18;
-} elseif ($endTime == "9:30") {
-	$endTimeValue = 19;
-} elseif ($endTime == "10:00") {
-	$endTimeValue = 20;
-} elseif ($endTime == "10:30") {
-	$endTimeValue = 21;
-} elseif ($endTime == "11:00") {
-	$endTimeValue = 22;
-} elseif ($endTime == "11:30") {
-	$endTimeValue = 23;
-} elseif ($endTime == "12:00") {
-	$endTimeValue = 24;
-} elseif ($endTime == "12:30") {
-	$endTimeValue = 25;
-} elseif ($endTime == "13:00") {
-	$endTimeValue = 26;
-} elseif ($endTime == "13:30") {
-	$endTimeValue = 27;
-} elseif ($endTime == "14:00") {
-	$endTimeValue = 28;
-} elseif ($endTime == "14:30") {
-	$endTimeValue = 29;
-} elseif ($endTime == "15:00") {
-	$endTimeValue = 30;
-} elseif ($endTime == "15:30") {
-	$endTimeValue = 31;
-} elseif ($endTime == "16:00") {
-	$endTimeValue = 32;
-} elseif ($endTime == "16:30") {
-	$endTimeValue = 33;
-} elseif ($endTime == "17:00") {
-	$endTimeValue = 34;
-} elseif ($endTime == "17:30") {
-	$endTimeValue = 35;
+
+
+$result = mysqli_query($con,"SELECT * FROM schdule1 WHERE event_date = '$date' AND level_id = '$levelSet'");
+while($row = mysqli_fetch_array($result)) {
+  $oldStartTBlock = tBlockConverter($row['timefrom']);
+  $oldEndTBlock = tBlockConverter($row['timeto']);
+  $oldtBlocks = $oldEndTBlock - $oldStartTBlock;
+  
+  for($i=$oldtBlocks-1; $i>=0; $i--){
+  	$oldUsedBlock = $oldStartTBlock + $i;
+
+  	foreach ($usedBlockArray as $value) {
+  		if($oldUsedBlock == $value) {
+  			$passed = 2;
+  		}
+	}
+  }
 }
-	$levelSet = $level . $set;
-	$tBlocks = $endTimeValue - $startTimeValue;
-	//Create INSERT query
+if($passed == 2)
+ echo "<h3>please pick another time<h3>";
+
+if($passed == 1) {
 	$sql="INSERT INTO schdule1 (eventname, location, timefrom, timeto, instructor, comments, level_id, timeBlocks, event_date)
 	VALUES ('$event','$location','$startTime','$endTime','$prof','$eventType', '$levelSet', '$tBlocks', '$date')";
 		
-if (!mysqli_query($con,$sql)) {
-  die('Error: ' . mysqli_error($con));
+	if (!mysqli_query($con,$sql)) {
+  		die('Error: ' . mysqli_error($con));
+	}
+	echo "<h2>Entry Added</h2>
+	<a href=\"CSTScheduleDenis.html#schedule\" onClick=\"tableSelectorDate('tableHere')\" id=\"changeScheduleButton\" class=\"ui-btn ui-btn-aui-shadow ui-corner-all\" data-form=\"ui-btn-up-a\" data-theme=\"a\" data-transition=\"pop\">schedule</a>";
+
 }
 
+
+//header("Location: CSTSchedule.html");
+
+
+echo "<a href=\"CSTScheduleDenis.html#add\" id=\"changeScheduleButton\" class=\"ui-btn ui-btn-aui-shadow ui-corner-all\" data-form=\"ui-btn-up-a\" data-theme=\"a\" data-transition=\"pop\">back</a>";
+
 mysqli_close($con);
-header("Location: CSTSchedule.html");
 ?>
+</body>
+</html>

@@ -152,25 +152,25 @@ else {
   
   xmlhttp.send();
 }
-
-//displays the schedule for selected date and set Ajax => scheduleTable.php
-function tableSelectorDate(tableId) { 
-	levelSet = storeLevel + storeSet;
+//updates stored timestamp if a new date is selected
+function dateUpdate() {
 	var newDate = document.getElementById("changeDate").value;
 	if(newDate == "") {
-		var numDate = new Date().getTime() / 1000;;
+		numDate = new Date().getTime() / 1000;
 	}
-	else {
-		var numDate = new Date(newDate).getTime() / 1000;
-	}
+	numDate = new Date(newDate).getTime() / 1000;
 	
-
- var xmlhttp=new XMLHttpRequest();
-  xmlhttp.onreadystatechange=function() {
-    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      document.getElementById(tableId).innerHTML=xmlhttp.responseText;
-    }
-  }
+}
+//displays the schedule for last stored date and set Ajax => scheduleTable.php
+function tableSelectorDate(tableId) { 
+	dateUpdate();
+	levelSet = storeLevel + storeSet;
+	 var xmlhttp=new XMLHttpRequest();
+	  xmlhttp.onreadystatechange=function() {
+	    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+	      document.getElementById(tableId).innerHTML=xmlhttp.responseText;
+	    }
+	  }
 
 	xmlhttp.open("GET","scheduleTable.php?q1=" + numDate  + "&q2=" + levelSet, true);
 
@@ -182,6 +182,7 @@ function tableSelectorDate(tableId) {
 function detailsJs(sourceId) {
 	var field = "all";
 	primaryKey = sourceId;
+	document.getElementsByName("key").value=primaryKey;
 	document.getElementById("eventInfoContent").innerHTML="Loading Details...";
 	var xmlhttp=new XMLHttpRequest();
   xmlhttp.onreadystatechange=function() {

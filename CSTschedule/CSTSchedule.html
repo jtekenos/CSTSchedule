@@ -144,7 +144,7 @@
 				    <button id="setQ" class="ui-btn ui-btn-a" value="Q" onClick="menuSelector('setQ', 'setHeader2'); getSet('setQ'); collapseSet2()">Set Q</button>
 				</div>
 
-					<a href="#schedule" onClick="tableSelectorDate('tableHere') "class=" ui-btn ui-btn-aui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop" data-rel="page">Get Schedule</a>
+					<a href="#schedule" onClick="dateUpdate(); tableSelectorDate('tableHere')" class=" ui-btn ui-btn-aui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop" data-rel="page">Get Schedule</a>
 
 
 		</div>
@@ -166,7 +166,7 @@
 				<br>
 				<a onclick="cancelEvent()" id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Delete class</a>
 				<br>
-				<a href="#schedule" id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Back</a>
+				<a href="#schedule" onclick="tableSelectorDate('tableHere')" id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Back</a>
 			</div><!-- /content -->
 		</div><!-- /page -->
 
@@ -355,8 +355,13 @@
 					<input type="text" id="addProfName" name="addProfName" placeholder="Instructor Name">
 				
 					<input type="text" id="addLocation" name="addLocation" placeholder="Location">
+<<<<<<< HEAD
 					<select name="selLevel" id="selLevel" onchange="dynamicSetCheckbox()">
 						<option>Select Level</option>
+=======
+					<select name="selLevel">
+						<option value="noLvl">Select Level</option>
+>>>>>>> 3877b85b64828ba984307ec74316915f030edce1
 						<option value="1">Level 1</option>
 			      		<option value="2">Level 2</option>
 			      		<option value="3">Level 3</option>
@@ -364,6 +369,7 @@
 					</select>
 
 					<div id="setAndNotificationDiv">
+<<<<<<< HEAD
 					<div id="setCheckboxLvl0" data-role="fieldcontain">
  						<fieldset data-role="controlgroup">
 							<legend>Set (select all that apply)</legend>
@@ -407,6 +413,15 @@
 						<label for="checkbox-7">Set L</label>
 						<input type="checkbox" name="checkboxSet" id="checkbox-7" value="setL">
 			    		</fieldset>
+=======
+					<div id="setList">
+			 			<select name="selSet">
+							<option value="noSet">Select Set</option>
+							<option value="A">Set A</option>
+				      		<option value="B">Set B</option>
+				      		<option value="C">Set C</option>
+						</select>
+>>>>>>> 3877b85b64828ba984307ec74316915f030edce1
 					</div>
 					<div id="setCheckboxLvl4" data-role="fieldcontain">
 			 			<fieldset data-role="controlgroup">
@@ -448,7 +463,9 @@
 						  <option value="8:00">8:00</option>
 						  <option value="8:30">8:30</option>
 						  <option value="9:00">9:00</option>
+						  <option value="9:30">9:30</option>
 						  <option value="10:00">10:00</option>
+						  <option value="10:30">13:00</option>
 						  <option value="11:00">11:00</option>
 						  <option value="11:30">11:30</option>
 						  <option value="12:00">12:00</option>
@@ -469,7 +486,9 @@
 						  <option value="8:00">8:00</option>
 						  <option value="8:30">8:30</option>
 						  <option value="9:00">9:00</option>
+						  <option value="9:30">9:30</option>
 						  <option value="10:00">10:00</option>
+						  <option value="10:30">13:00</option>
 						  <option value="11:00">11:00</option>
 						  <option value="11:30">11:30</option>
 						  <option value="12:00">12:00</option>

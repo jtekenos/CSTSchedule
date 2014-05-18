@@ -1,3 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="themes/BCITTheme.min.css" />
+		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+			
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+		<script src="http://jquery.bassistance.de/validate/jquery.validate.js"></script>
+		<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
+		<script src="functions.js"></script> 
+		<meta charset="UTF-8">
+		<?php include "functions.php";?>
+		<title>Add Schedule</title>
+	</head>
+	<body>
+
 <?php
 	//Start session
 	session_start();
@@ -21,7 +40,12 @@
 	$tableName = "schdule1";
 		//$tableName = "set" . $level . $set;
 	$tBlocks = "2";
+
+
+
 $levelSet = $level . $set;
+
+
 	//check for and ignore blank values
 	if ($event != '') {
 		mysqli_query($con,"UPDATE $tableName SET eventname = '$event'	WHERE id = '$primaryKey'");
@@ -48,7 +72,18 @@ $levelSet = $level . $set;
 		mysqli_query($con,"UPDATE $tableName SET event_date = '$date'	WHERE id = '$primaryKey'");
 	}
 
+
+
+
+echo "<h2>Entry Added</h2>
+	<a href=\"CSTScheduleDenis.html#schedule\" onClick=\"tableSelectorDate('tableHere')\" id=\"changeScheduleButton\" class=\"ui-btn ui-btn-aui-shadow ui-corner-all\" data-form=\"ui-btn-up-a\" data-theme=\"a\" data-transition=\"pop\">schedule</a>";
+
+echo "<a href=\"CSTScheduleDenis.html#add\" id=\"changeScheduleButton\" class=\"ui-btn ui-btn-aui-shadow ui-corner-all\" data-form=\"ui-btn-up-a\" data-theme=\"a\" data-transition=\"pop\">back</a>";
+
+
 	mysqli_close($con);
 
-	header("Location: CSTSchedule.html");
 ?>
+
+</body>
+</html>
