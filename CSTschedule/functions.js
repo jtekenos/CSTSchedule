@@ -65,25 +65,55 @@ function collapseLevel2() {
 
 function dynamicSetCheckbox() {
 	var selectedLevel = $( "#selLevel" ).val();
-	if (selectedLevel == 'lvl1') {
+	if (selectedLevel == 1) {
 		$( "#setCheckboxLvl0" ).hide();
 		$( "#setCheckboxLvl1" ).show();
 		$( "#setCheckboxLvl2" ).hide();
 		$( "#setCheckboxLvl3" ).hide();
 		$( "#setCheckboxLvl4" ).hide();
-	} else if (selectedLevel == 'lvl2') {
-		$( "#setCheckboxNull" ).hide();
+	} else if (selectedLevel == 2) {
+		$( "#setCheckboxLvl0" ).hide();
 		$( "#setCheckboxLvl1" ).hide();
 		$( "#setCheckboxLvl2" ).show();
 		$( "#setCheckboxLvl3" ).hide();
 		$( "#setCheckboxLvl4" ).hide();
-	} else if (selectedLevel == 'lvl3') {
+	} else if (selectedLevel == 3) {
 		$( "#setCheckboxLvl0" ).hide();
 		$( "#setCheckboxLvl1" ).hide();
 		$( "#setCheckboxLvl2" ).hide();
 		$( "#setCheckboxLvl3" ).show();
 		$( "#setCheckboxLvl4" ).hide();		
-	} else if (selectedLevel == 'lvl4') {
+	} else if (selectedLevel == 4) {
+		$( "#setCheckboxLvl0" ).hide();
+		$( "#setCheckboxLvl1" ).hide();
+		$( "#setCheckboxLvl2" ).hide();
+		$( "#setCheckboxLvl3" ).hide();
+		$( "#setCheckboxLvl4" ).show();
+	}
+} 
+
+function dynamicSetCheckbox2() {
+	var selectedLevel2 = $( "#selLevel2" ).val();
+	alert("the fucking level is " + selectedLevel2 + " DicksMcGee");
+	if (selectedLevel2 == 1) {
+		$( "#setCheckboxLvl0" ).hide();
+		$( "#setCheckboxLvl1" ).show();
+		$( "#setCheckboxLvl2" ).hide();
+		$( "#setCheckboxLvl3" ).hide();
+		$( "#setCheckboxLvl4" ).hide();
+	} else if (selectedLevel2 == 2) {
+		$( "#setCheckboxLvl0" ).hide();
+		$( "#setCheckboxLvl1" ).hide();
+		$( "#setCheckboxLvl2" ).show();
+		$( "#setCheckboxLvl3" ).hide();
+		$( "#setCheckboxLvl4" ).hide();
+	} else if (selectedLevel2 == 3) {
+		$( "#setCheckboxLvl0" ).hide();
+		$( "#setCheckboxLvl1" ).hide();
+		$( "#setCheckboxLvl2" ).hide();
+		$( "#setCheckboxLvl3" ).show();
+		$( "#setCheckboxLvl4" ).hide();		
+	} else if (selectedLevel2 == 4) {
 		$( "#setCheckboxLvl0" ).hide();
 		$( "#setCheckboxLvl1" ).hide();
 		$( "#setCheckboxLvl2" ).hide();

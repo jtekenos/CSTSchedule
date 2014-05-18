@@ -191,13 +191,15 @@
 
 					<label for="addLocation" id="location"></label>
 					<input type="text" id="addLocation" name="addLocation" placeholder="Location">
-					<select id="selLevel" name="selLevel" onchange="dynamicSetCheckbox()">
+
+					<select name="selLevel" id="selLevel" onchange="dynamicSetCheckbox()">
 						<option value="noLvl">Select Level</option>
 						<option value="1">Level 1</option>
 			      		<option value="2">Level 2</option>
 			      		<option value="3">Level 3</option>
 			      		<option value="4">Level 4</option>
 					</select>
+
 					<div id="setAndNotificationDiv">
 					<div id="setCheckboxLvl0" data-role="fieldcontain">
 			 			<fieldset data-role="controlgroup">
@@ -282,7 +284,9 @@
 						  <option value="8:00">8:00</option>
 						  <option value="8:30">8:30</option>
 						  <option value="9:00">9:00</option>
+						  <option value="9:30">9:30</option>
 						  <option value="10:00">10:00</option>
+						  <option value="10:30">10:30</option>
 						  <option value="11:00">11:00</option>
 						  <option value="11:30">11:30</option>
 						  <option value="12:00">12:00</option>
@@ -304,7 +308,9 @@
 						  <option value="8:00">8:00</option>
 						  <option value="8:30">8:30</option>
 						  <option value="9:00">9:00</option>
+						  <option value="9:30">9:30</option>
 						  <option value="10:00">10:00</option>
+						  <option value="10:30">10:30</option>
 						  <option value="11:00">11:00</option>
 						  <option value="11:30">11:30</option>
 						  <option value="12:00">12:00</option>
@@ -349,19 +355,13 @@
 			</div><!-- /header -->
 
 			<div role="main" class="ui-content">
-			
 				<form id="addForm" name="addForm" method="post" action="add.php">
 					<input type="text" id="addEventName" name="addEventName" placeholder="Event Name">
 					<input type="text" id="addProfName" name="addProfName" placeholder="Instructor Name">
-				
 					<input type="text" id="addLocation" name="addLocation" placeholder="Location">
-<<<<<<< HEAD
-					<select name="selLevel" id="selLevel" onchange="dynamicSetCheckbox()">
-						<option>Select Level</option>
-=======
-					<select name="selLevel">
+
+					<select name="selLevel2" id="selLevel2" onchange="dynamicSetCheckbox2()">
 						<option value="noLvl">Select Level</option>
->>>>>>> 3877b85b64828ba984307ec74316915f030edce1
 						<option value="1">Level 1</option>
 			      		<option value="2">Level 2</option>
 			      		<option value="3">Level 3</option>
@@ -369,24 +369,23 @@
 					</select>
 
 					<div id="setAndNotificationDiv">
-<<<<<<< HEAD
 					<div id="setCheckboxLvl0" data-role="fieldcontain">
- 						<fieldset data-role="controlgroup">
-							<legend>Set (select all that apply)</legend>
-							<label for="checkbox-1">Please Select Level First</label>
-							<input type="checkbox" name="checkboxSet" id="checkbox-1">
-    					</fieldset>
+			 			<fieldset data-role="controlgroup">
+						<legend>Set (select all that apply)</legend>
+						<label for="checkbox-1">Please Select Level First</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-1">
+			    		</fieldset>
 					</div>
 					<div id="setCheckboxLvl1" data-role="fieldcontain">
- 						<fieldset data-role="controlgroup">
-							<legend>Set (select all that apply)</legend>
-							<label for="checkbox-1">Set A</label>
-							<input type="checkbox" name="checkboxSet" id="checkbox-1" value="setA">
-							<label for="checkbox-2">Set B</label>
-							<input type="checkbox" name="checkboxSet" id="checkbox-2" value="setB">
-							<label for="checkbox-3">Set C</label>
-							<input type="checkbox" name="checkboxSet" id="checkbox-3" value="setC">
-    					</fieldset>
+			 			<fieldset data-role="controlgroup">
+						<legend>Set (select all that apply)</legend>
+						<label for="checkbox-1">Set A</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-1" value="setA">
+						<label for="checkbox-2">Set B</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-2" value="setB">
+						<label for="checkbox-3">Set C</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-3" value="setC">
+			    		</fieldset>
 					</div>
 					<div id="setCheckboxLvl2" data-role="fieldcontain">
 			 			<fieldset data-role="controlgroup">
@@ -413,15 +412,6 @@
 						<label for="checkbox-7">Set L</label>
 						<input type="checkbox" name="checkboxSet" id="checkbox-7" value="setL">
 			    		</fieldset>
-=======
-					<div id="setList">
-			 			<select name="selSet">
-							<option value="noSet">Select Set</option>
-							<option value="A">Set A</option>
-				      		<option value="B">Set B</option>
-				      		<option value="C">Set C</option>
-						</select>
->>>>>>> 3877b85b64828ba984307ec74316915f030edce1
 					</div>
 					<div id="setCheckboxLvl4" data-role="fieldcontain">
 			 			<fieldset data-role="controlgroup">
@@ -437,35 +427,33 @@
 						<label for="checkbox-9">Set Q</label>
 						<input type="checkbox" name="checkboxSet" id="checkbox-9" value="setQ">
 			    		</fieldset>
-					</div>										
+					</div>
 					<div id="addEventNotification">
 						<br>
-						<label for="notifySliderEmail">Notify by email:</label>
+						<label for="notifySlider1">Notify by email:</label>
 						<div class="sliderDiv">
-							<select name="notifySliderEmail" id="notifySliderEmail" data-role="slider">
-								<option value="0">No</option>
-								<option value="1">Yes</option>
+							<select name="slider" id="notifySlider1" data-role="slider">
+								<option value="yes">No</option>
+								<option value="no">Yes</option>
 							</select> 
 						</div>
-						<label for="notifySliderSMS">Notify by SMS:</label>
+						<label for="notifySlider1">Notify by SMS:</label>
 						<div class="sliderDiv">
-							<select name="notifySliderSMS" id="notifySliderSMS" data-role="slider">
-								<option value="0">No</option>
-								<option value="1">Yes</option>
+							<select name="slider" id="notifySlider2" data-role="slider">
+								<option value="yes">No</option>
+								<option value="no">Yes</option>
 							</select> 
 						</div>
 					</div>
 					</div>
 
 					<div id="timeButtons">
-					<select name="selStartTime" size="1">
-						<option>Select Start Time</option>
+						<select name="selStartTime" size="1">
+						<option value="">Select Start Time</option>
 						  <option value="8:00">8:00</option>
 						  <option value="8:30">8:30</option>
 						  <option value="9:00">9:00</option>
-						  <option value="9:30">9:30</option>
 						  <option value="10:00">10:00</option>
-						  <option value="10:30">13:00</option>
 						  <option value="11:00">11:00</option>
 						  <option value="11:30">11:30</option>
 						  <option value="12:00">12:00</option>
@@ -480,15 +468,14 @@
 						  <option value="16:30">16:30</option>
 						  <option value="17:00">17:00</option>
 						  <option value="17:30">17:30</option>
+						  
 						</select>
 						<select name="selEndTime" size="1">
-						<option>Select End Time</option>
+						<option value="">Select End Time</option>
 						  <option value="8:00">8:00</option>
 						  <option value="8:30">8:30</option>
 						  <option value="9:00">9:00</option>
-						  <option value="9:30">9:30</option>
 						  <option value="10:00">10:00</option>
-						  <option value="10:30">13:00</option>
 						  <option value="11:00">11:00</option>
 						  <option value="11:30">11:30</option>
 						  <option value="12:00">12:00</option>
@@ -505,10 +492,9 @@
 						  <option value="17:30">17:30</option>
 						</select>
 					</div>
-					<div>
+
 						<label for="date">Date Input:</label>
 						<input type="date" name="date" id="date">
-					</div>
 					<input type="text" id="eventType" name="eventType" placeholder="Comments">
 						<br><br>
 						<input class="button" type="submit" value="Add" name="Add" data-form="ui-btn-up-a" data-theme="a" data-icon="check">
