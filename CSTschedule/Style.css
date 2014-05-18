@@ -200,7 +200,16 @@ tr:nth-child(odd) {
 	max-width: 40%;
 	float: left;
 }
+#setCheckboxLvl0_2 {
+	max-width: 40%;
+	float: left;
+}
 #setCheckboxLvl1 {
+	display:none;
+	max-width: 40%;
+	float: left;
+}
+#setCheckboxLvl1_2 {
 	display:none;
 	max-width: 40%;
 	float: left;
@@ -210,12 +219,27 @@ tr:nth-child(odd) {
 	max-width: 40%;
 	float: left;
 }
+#setCheckboxLvl2_2 {
+	display:none;
+	max-width: 40%;
+	float: left;
+}
 #setCheckboxLvl3 {
 	display: none;
 	max-width: 40%;
 	float: left;
 }
+#setCheckboxLvl3_2 {
+	display: none;
+	max-width: 40%;
+	float: left;
+}
 #setCheckboxLvl4 {
+	display: none;
+	max-width: 40%;
+	float: left;
+}
+#setCheckboxLvl4_2 {
 	display: none;
 	max-width: 40%;
 	float: left;

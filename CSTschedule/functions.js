@@ -94,31 +94,30 @@ function dynamicSetCheckbox() {
 
 function dynamicSetCheckbox2() {
 	var selectedLevel2 = $( "#selLevel2" ).val();
-	alert("the fucking level is " + selectedLevel2 + " DicksMcGee");
 	if (selectedLevel2 == 1) {
-		$( "#setCheckboxLvl0" ).hide();
-		$( "#setCheckboxLvl1" ).show();
-		$( "#setCheckboxLvl2" ).hide();
-		$( "#setCheckboxLvl3" ).hide();
-		$( "#setCheckboxLvl4" ).hide();
+		$( "#setCheckboxLvl0_2" ).hide();
+		$( "#setCheckboxLvl1_2" ).show();
+		$( "#setCheckboxLvl2_2" ).hide();
+		$( "#setCheckboxLvl3_2" ).hide();
+		$( "#setCheckboxLvl4_2" ).hide();
 	} else if (selectedLevel2 == 2) {
-		$( "#setCheckboxLvl0" ).hide();
-		$( "#setCheckboxLvl1" ).hide();
-		$( "#setCheckboxLvl2" ).show();
-		$( "#setCheckboxLvl3" ).hide();
-		$( "#setCheckboxLvl4" ).hide();
+		$( "#setCheckboxLvl0_2" ).hide();
+		$( "#setCheckboxLvl1_2" ).hide();
+		$( "#setCheckboxLvl2_2" ).show();
+		$( "#setCheckboxLvl3_2" ).hide();
+		$( "#setCheckboxLvl4_2" ).hide();
 	} else if (selectedLevel2 == 3) {
-		$( "#setCheckboxLvl0" ).hide();
-		$( "#setCheckboxLvl1" ).hide();
-		$( "#setCheckboxLvl2" ).hide();
-		$( "#setCheckboxLvl3" ).show();
-		$( "#setCheckboxLvl4" ).hide();		
+		$( "#setCheckboxLvl0_2" ).hide();
+		$( "#setCheckboxLvl1_2" ).hide();
+		$( "#setCheckboxLvl2_2" ).hide();
+		$( "#setCheckboxLvl3_2" ).show();
+		$( "#setCheckboxLvl4_2" ).hide();		
 	} else if (selectedLevel2 == 4) {
-		$( "#setCheckboxLvl0" ).hide();
-		$( "#setCheckboxLvl1" ).hide();
-		$( "#setCheckboxLvl2" ).hide();
-		$( "#setCheckboxLvl3" ).hide();
-		$( "#setCheckboxLvl4" ).show();
+		$( "#setCheckboxLvl0_2" ).hide();
+		$( "#setCheckboxLvl1_2" ).hide();
+		$( "#setCheckboxLvl2_2" ).hide();
+		$( "#setCheckboxLvl3_2" ).hide();
+		$( "#setCheckboxLvl4_2" ).show();
 	}
 } 
 
