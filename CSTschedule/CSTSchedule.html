@@ -76,7 +76,9 @@
 					</div>
 				</div>
 			</div><!-- /content -->
-
+			<br>
+			<br>
+			<br>
 			<div id="footer" data-role="footer">
 
 				<div class="footerButtons">
@@ -99,24 +101,77 @@
 				<div class="userHeaderDiv">
 					<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">User1</a>
 				</div>
+
 				<div>
 					<a href="#add" id="addButton" class=" ui-btn ui-btn-aui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Add</a>
 				</div>	
+		<?php
+			include 'functions.php';
+			require_once('config.php');
+			session_start();
+
+			// Connect to server and select database.
+			mysql_connect(DB_HOST, DB_USER, DB_PASSWORD)or die("cannot connect, error: ".mysql_error());
+			mysql_select_db(DB_DATABASE)or die("cannot select DB, error: ".mysql_error());
+			$tbl_name="accounts"; // Table name
+		?>
+        <?php   
+            if (isLoggedIn()){
+                echo '<div class="loginInfo" id="userName">' . $_SESSION["SESS_LOGIN_NAME"] . $_SESSION["SESS_levelAndSet"] . '</div>';
+                echo '<div class="loginInfo"><form method="link" action="logout.php">
+                    <input type="submit" class="button" value="Logout"></form></div>';   
+          } else {
+                echo '<div class="loginInfo"><form method="link" action="login.php">
+                    <input type="submit" class="button" value="Login"></form></div>';
+                echo '<div class="loginInfo"><form method="link" action="register_page.php"><input type="submit" class="button" value="Register"></form></div>';
+                }   
+        ?>    
 			</div><!-- /header -->
 
 			<div role="main" id="scheduleContent" class="ui-content">
 
 				<a onClick="tableSelector('earlier', 'tableHere')" data-role="button" id="previousWeek" data-icon="arrow-l" data-iconpos="notext" data-form="ui-btn-up-a">Previous</a>
-				<a onClick="tableSelector('earlier', 'tableHere')" id="previousWeek" class=" ui-btn ui-btn-a ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" iconpos="notext" data-transition="pop">Previous</a>
+
 				<a onClick="tableSelector('later', 'tableHere')" data-role="button" id="nextWeek" data-icon="arrow-r" data-iconpos="notext" data-form="ui-btn-up-a">Next</a>
-				<a onClick="tableSelector('later', 'tableHere')" id="nextWeek" class=" ui-btn ui-btn-a ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Next</a>
 				<br />
-				<br />
-				<br />
+
 				<div id="tableHere"></div>
 
 			</div><!-- /content -->
+			
+			
+				
+			
 		</div><!-- /page -->
+
+		<!-- **************************Change schedule Dialog Box************************** -->
+		<div data-role="page" id="scheduleDialog">
+					<input type="date" name="changedate" value="" id="changeDate">
+
+					<div id="levelCollapsible2" data-role="collapsible" data-theme="b" data-content-theme="b">
+				    <h4 ><span id="lvlHeader2">Level</span></h4>
+				    <button id="lvl1" class="ui-btn ui-btn-a" value="1" onClick="menuSelector('lvl1', 'lvlHeader2'); getLevel('lvl1'); collapseLevel2()">Level 1</button>
+				    <button id="lvl2" class="ui-btn ui-btn-a" value="2" onClick="menuSelector('lvl2', 'lvlHeader2'); getLevel('lvl2'); collapseLevel2()">Level 2</button>
+				    <button id="lvl3" class="ui-btn ui-btn-a" value="3" onClick="menuSelector('lvl3', 'lvlHeader2'); getLevel('lvl3'); collapseLevel2()">Level 3</button>
+				    <button id="lvl4" class="ui-btn ui-btn-a" value="4" onClick="menuSelector('lvl4', 'lvlHeader2'); getLevel('lvl4'); collapseLevel2()">Level 4</button>
+				</div>
+				<div data-role="collapsible" id="setCollapsible2" data-theme="b" data-content-theme="b">
+				    <h4><span id="setHeader2">Set</span></h4>
+				    <button id="setA" class="ui-btn ui-btn-a" value="A" onClick="menuSelector('setA', 'setHeader2'); getSet('setA'); collapseSet2()">Set A</button>
+				    <button id="setB" class="ui-btn ui-btn-a" value="B" onClick="menuSelector('setB', 'setHeader2'); getSet('setB'); collapseSet2()">Set B</button>
+				    <button id="setC" class="ui-btn ui-btn-a" value="C" onClick="menuSelector('setC', 'setHeader2'); getSet('setC'); collapseSet2()">Set C</button>
+				    <button id="setD" class="ui-btn ui-btn-a" value="D" onClick="menuSelector('setD', 'setHeader2'); getSet('setD'); collapseSet2()">Set D</button>
+				    <button id="setE" class="ui-btn ui-btn-a" value="E" onClick="menuSelector('setE', 'setHeader2'); getSet('setE'); collapseSet2()">Set E</button>
+				    <button id="setG" class="ui-btn ui-btn-a" value="G" onClick="menuSelector('setG', 'setHeader2'); getSet('setG'); collapseSet2()">Set G</button>
+				    <button id="setL" class="ui-btn ui-btn-a" value="L" onClick="menuSelector('setL', 'setHeader2'); getSet('setL'); collapseSet2()">Set L</button>
+				    <button id="setO" class="ui-btn ui-btn-a" value="O" onClick="menuSelector('setO', 'setHeader2'); getSet('setO'); collapseSet2()">Set O</button>
+				    <button id="setQ" class="ui-btn ui-btn-a" value="Q" onClick="menuSelector('setQ', 'setHeader2'); getSet('setQ'); collapseSet2()">Set Q</button>
+				</div>
+
+					<a href="#schedule" onClick="dateUpdate(); tableSelectorDate('tableHere')" class=" ui-btn ui-btn-aui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop" data-rel="page">Get Schedule</a>
+
+
+		</div>
 
 		<!-- ***************************Event Info PAGE*************************** -->
 		<div id="eventInfo" data-role="page">
@@ -135,7 +190,7 @@
 				<br>
 				<a onclick="cancelEvent()" id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Delete class</a>
 				<br>
-				<a href="#schedule" id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Back</a>
+				<a href="#schedule" onclick="tableSelectorDate('tableHere')" id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Back</a>
 			</div><!-- /content -->
 		</div><!-- /page -->
 
@@ -151,8 +206,7 @@
 			<div role="main" class="ui-content">
 				
 				<h1 align="center">Modify Event</h1>
-				<form id="addForm" name="addForm" method="post" action="modify.php">
-
+				<form id="modForm" name="modForm" method="post" action="modify.php">
 					<label for="addEventName" id="eventname"></label>
 					<input type="text" id="addEventName" name="addEventName" placeholder="Event Name">
 
@@ -161,8 +215,9 @@
 
 					<label for="addLocation" id="location"></label>
 					<input type="text" id="addLocation" name="addLocation" placeholder="Location">
-					<select name="selLevel">
-						<option>Select Level</option>
+
+					<select name="selLevel" id="selLevel" onchange="dynamicSetCheckbox()">
+						<option value="noLvl">Select Level</option>
 						<option value="1">Level 1</option>
 			      		<option value="2">Level 2</option>
 			      		<option value="3">Level 3</option>
@@ -170,94 +225,309 @@
 					</select>
 
 					<div id="setAndNotificationDiv">
-					<div id="setList">
-			 			<select name="selSet">
-							<option>Select Set</option>
-							<option value="A">Set A</option>
-				      		<option value="B">Set B</option>
-				      		<option value="C">Set C</option>
-						</select>
+					<div id="setCheckboxLvl0" data-role="fieldcontain">
+			 			<fieldset data-role="controlgroup">
+						<legend>Set (select all that apply)</legend>
+						<label for="checkbox-1">Please Select Level First</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-1">
+			    		</fieldset>
+					</div>
+					<div id="setCheckboxLvl1" data-role="fieldcontain">
+			 			<fieldset data-role="controlgroup">
+						<legend>Set (select all that apply)</legend>
+						<label for="checkbox-1">Set A</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-1" value="setA">
+						<label for="checkbox-2">Set B</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-2" value="setB">
+						<label for="checkbox-3">Set C</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-3" value="setC">
+			    		</fieldset>
+					</div>
+					<div id="setCheckboxLvl2" data-role="fieldcontain">
+			 			<fieldset data-role="controlgroup">
+						<legend>Set (select all that apply)</legend>
+						<label for="checkbox-1">Set A</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-1" value="setA">
+						<label for="checkbox-2">Set B</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-2" value="setB">
+						<label for="checkbox-3">Set C</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-3" value="setC">
+						<label for="checkbox-4">Set D</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-4" value="setD">
+						<label for="checkbox-5">Set E</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-5" value="setE">
+			    		</fieldset>
+					</div>
+					<div id="setCheckboxLvl3" data-role="fieldcontain">
+			 			<fieldset data-role="controlgroup">
+						<legend>Set (select all that apply)</legend>
+						<label for="checkbox-3">Set C</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-3" value="setC">
+						<label for="checkbox-4">Set D</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-4" value="setD">
+						<label for="checkbox-7">Set L</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-7" value="setL">
+			    		</fieldset>
+					</div>
+					<div id="setCheckboxLvl4" data-role="fieldcontain">
+			 			<fieldset data-role="controlgroup">
+						<legend>Set (select all that apply)</legend>
+						<label for="checkbox-1">Set A</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-1" value="setA">
+						<label for="checkbox-2">Set B</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-2" value="setB">
+						<label for="checkbox-6">Set G</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-6" value="setG">
+						<label for="checkbox-8">Set O</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-8" value="setO">
+						<label for="checkbox-9">Set Q</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-9" value="setQ">
+			    		</fieldset>
 					</div>
 					<div id="addEventNotification">
 						<br>
-						<label for="notifySliderEmail">Notify by email:</label>
+						<label for="notifySlider1">Notify by email:</label>
 						<div class="sliderDiv">
-							<select name="notifySliderEmail" id="notifySliderEmail" data-role="slider">
-								<option value="0">No</option>
-								<option value="1">Yes</option>
+							<select name="slider" id="notifySlider1" data-role="slider">
+								<option value="yes">No</option>
+								<option value="no">Yes</option>
 							</select> 
 						</div>
-						<label for="notifySliderSMS">Notify by SMS:</label>
+						<label for="notifySlider1">Notify by SMS:</label>
 						<div class="sliderDiv">
-							<select name="notifySliderSMS" id="notifySliderSMS" data-role="slider">
-								<option value="0">No</option>
-								<option value="1">Yes</option>
+							<select name="slider" id="notifySlider2" data-role="slider">
+								<option value="yes">No</option>
+								<option value="no">Yes</option>
+							</select> 
+						</div>
+					</div>
+					</div>
+					<div id="timeButtons">
+						<select name="selStartTime" size="1">
+						<option value="">Select Start Time</option>
+						  <option value="8:00">8:00</option>
+						  <option value="8:30">8:30</option>
+						  <option value="9:00">9:00</option>
+						  <option value="9:30">9:30</option>
+						  <option value="10:00">10:00</option>
+						  <option value="10:30">10:30</option>
+						  <option value="11:00">11:00</option>
+						  <option value="11:30">11:30</option>
+						  <option value="12:00">12:00</option>
+						  <option value="12:30">12:30</option>
+						  <option value="13:00">13:00</option>
+						  <option value="13:30">13:30</option>
+						  <option value="14:00">14:00</option>
+						  <option value="14:30">14:30</option>
+						  <option value="15:00">15:00</option>
+						  <option value="15:30">15:30</option>
+						  <option value="16:00">16:00</option>
+						  <option value="16:30">16:30</option>
+						  <option value="17:00">17:00</option>
+						  <option value="17:30">17:30</option>
+						  
+						</select>
+						<select name="selEndTime" size="1">
+						<option value="">Select End Time</option>
+						  <option value="8:00">8:00</option>
+						  <option value="8:30">8:30</option>
+						  <option value="9:00">9:00</option>
+						  <option value="9:30">9:30</option>
+						  <option value="10:00">10:00</option>
+						  <option value="10:30">10:30</option>
+						  <option value="11:00">11:00</option>
+						  <option value="11:30">11:30</option>
+						  <option value="12:00">12:00</option>
+						  <option value="12:30">12:30</option>
+						  <option value="13:00">13:00</option>
+						  <option value="13:30">13:30</option>
+						  <option value="14:00">14:00</option>
+						  <option value="14:30">14:30</option>
+						  <option value="15:00">15:00</option>
+						  <option value="15:30">15:30</option>
+						  <option value="16:00">16:00</option>
+						  <option value="16:30">16:30</option>
+						  <option value="17:00">17:00</option>
+						  <option value="17:30">17:30</option>
+						</select>
+					</div>
+
+
+					<input type="date" name="date">
+					<input type="text" name="eventType" placeholder="Comments">
+					
+						<input class="button" type="submit" value="Update" name="Update" data-form="ui-btn-up-a" data-theme="a" data-icon="check">
+						<input class="button" type="reset" value="Reset" name="Reset" data-form="ui-btn-up-a" data-theme="a" data-icon="delete">		
+						<input  name="key" class="hiddenInfo" value="">	
+					
+				</form>
+				
+			</div><!-- /content -->
+		</div><!-- /page -->
+
+<!--***************************ADD SCHEDULE PAGE***************************-->
+		<div id="add" data-role="page">
+
+			<div id="navHeader" data-role="header">
+				<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home" data-transition="pop"/></a>
+				<div class="userHeaderDiv">
+					<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" >User1</a>
+				</div>
+				<div>
+					<a href="#schedule" id="scheduleButton" class=" ui-btn ui-btn-a ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Schedule</a>
+				</div>	
+			</div><!-- /header -->
+
+			<div role="main" class="ui-content">
+				<form id="addForm" name="addForm" method="post" action="add.php">
+					<input type="text" id="addEventName" name="addEventName" placeholder="Event Name">
+					<input type="text" id="addProfName" name="addProfName" placeholder="Instructor Name">
+					<input type="text" id="addLocation" name="addLocation" placeholder="Location">
+
+					<select name="selLevel2" id="selLevel2" onchange="dynamicSetCheckbox2()">
+						<option value="noLvl">Select Level</option>
+						<option value="1">Level 1</option>
+			      		<option value="2">Level 2</option>
+			      		<option value="3">Level 3</option>
+			      		<option value="4">Level 4</option>
+					</select>
+
+					<div id="setAndNotificationDiv">
+					<div id="setCheckboxLvl0_2" data-role="fieldcontain">
+			 			<fieldset data-role="controlgroup">
+						<legend>Set (select all that apply)</legend>
+						<label for="checkbox-1">Please Select Level First</label>
+						<input type="checkbox" name="checkboxSet" id="checkbox-1">
+			    		</fieldset>
+					</div>
+					<div id="setCheckboxLvl1_2" data-role="fieldcontain">
+			 			<fieldset data-role="controlgroup">
+						<legend>Set (select all that apply)</legend>
+						<label for="checkbox-1">Set A</label>
+						<input type="checkbox" name="checkboxSet[]" id="checkbox-1" value="setA">
+						<label for="checkbox-2">Set B</label>
+						<input type="checkbox" name="checkboxSet[]" id="checkbox-2" value="setB">
+						<label for="checkbox-3">Set C</label>
+						<input type="checkbox" name="checkboxSet[]" id="checkbox-3" value="setC">
+			    		</fieldset>
+					</div>
+					<div id="setCheckboxLvl2_2" data-role="fieldcontain">
+			 			<fieldset data-role="controlgroup">
+						<legend>Set (select all that apply)</legend>
+						<label for="checkbox-1">Set A</label>
+						<input type="checkbox" name="checkboxSet[]" id="checkbox-1" value="setA">
+						<label for="checkbox-2">Set B</label>
+						<input type="checkbox" name="checkboxSet[]" id="checkbox-2" value="setB">
+						<label for="checkbox-3">Set C</label>
+						<input type="checkbox" name="checkboxSet[]" id="checkbox-3" value="setC">
+						<label for="checkbox-4">Set D</label>
+						<input type="checkbox" name="checkboxSet[]" id="checkbox-4" value="setD">
+						<label for="checkbox-5">Set E</label>
+						<input type="checkbox" name="checkboxSet[]" id="checkbox-5" value="setE">
+			    		</fieldset>
+					</div>
+					<div id="setCheckboxLvl3_2" data-role="fieldcontain">
+			 			<fieldset data-role="controlgroup">
+						<legend>Set (select all that apply)</legend>
+						<label for="checkbox-3">Set C</label>
+						<input type="checkbox" name="checkboxSet[]" id="checkbox-3" value="setC">
+						<label for="checkbox-4">Set D</label>
+						<input type="checkbox" name="checkboxSet[]" id="checkbox-4" value="setD">
+						<label for="checkbox-7">Set L</label>
+						<input type="checkbox" name="checkboxSet[]" id="checkbox-7" value="setL">
+			    		</fieldset>
+					</div>
+					<div id="setCheckboxLvl4_2" data-role="fieldcontain">
+			 			<fieldset data-role="controlgroup">
+						<legend>Set (select all that apply)</legend>
+						<label for="checkbox-1">Set A</label>
+						<input type="checkbox" name="checkboxSet[]" id="checkbox-1" value="setA">
+						<label for="checkbox-2">Set B</label>
+						<input type="checkbox" name="checkboxSet[]" id="checkbox-2" value="setB">
+						<label for="checkbox-6">Set G</label>
+						<input type="checkbox" name="checkboxSet[]" id="checkbox-6" value="setG">
+						<label for="checkbox-8">Set O</label>
+						<input type="checkbox" name="checkboxSet[]" id="checkbox-8" value="setO">
+						<label for="checkbox-9">Set Q</label>
+						<input type="checkbox" name="checkboxSet[]" id="checkbox-9" value="setQ">
+			    		</fieldset>
+					</div>
+					<div id="addEventNotification">
+						<br>
+						<label for="notifySlider1">Notify by email:</label>
+						<div class="sliderDiv">
+							<select name="slider" id="notifySlider1" data-role="slider">
+								<option value="yes">No</option>
+								<option value="no">Yes</option>
+							</select> 
+						</div>
+						<label for="notifySlider1">Notify by SMS:</label>
+						<div class="sliderDiv">
+							<select name="slider" id="notifySlider2" data-role="slider">
+								<option value="yes">No</option>
+								<option value="no">Yes</option>
 							</select> 
 						</div>
 					</div>
 					</div>
 
 					<div id="timeButtons">
-					<select name="selStartTime" size="1">
-						<option>Select Start Time</option>
-						  <option>8:00</option>
-						  <option>8:30</option>
-						  <option>9:00</option>
-						  <option>9:30</option>
-						  <option>10:00</option>
-						  <option>10:30</option>
-						  <option>11:00</option>
-						  <option>11:30</option>
-						  <option>12:00</option>
-						  <option>12:30</option>
-						  <option>13:00</option>
-						  <option>13:30</option>
-						  <option>14:00</option>
-						  <option>14:30</option>
-						  <option>15:00</option>
-						  <option>15:30</option>
-						  <option>16:00</option>
-						  <option>16:30</option>
-						  <option>17:00</option>
-						  <option>17:30</option>
+						<select name="selStartTime" size="1">
+						<option value="">Select Start Time</option>
+						  <option value="8:00">8:00</option>
+						  <option value="8:30">8:30</option>
+						  <option value="9:00">9:00</option>
+						  <option value="9:30">9:30</option>
+						  <option value="10:00">10:00</option>
+						  <option value="10:30">10:30</option>
+						  <option value="11:00">11:00</option>
+						  <option value="11:30">11:30</option>
+						  <option value="12:00">12:00</option>
+						  <option value="12:30">12:30</option>
+						  <option value="13:00">13:00</option>
+						  <option value="13:30">13:30</option>
+						  <option value="14:00">14:00</option>
+						  <option value="14:30">14:30</option>
+						  <option value="15:00">15:00</option>
+						  <option value="15:30">15:30</option>
+						  <option value="16:00">16:00</option>
+						  <option value="16:30">16:30</option>
+						  <option value="17:00">17:00</option>
+						  <option value="17:30">17:30</option>
+						  
 						</select>
 						<select name="selEndTime" size="1">
-						<option>Select End Time</option>
-						  <option>6:00</option>
-						  <option>6:30</option>
-						  <option>7:00</option>
-						  <option>7:30</option>
-						  <option>8:00</option>
-						  <option>8:30</option>
-						  <option>9:00</option>
-						  <option>9:30</option>
-						  <option>10:00</option>
-						  <option>10:30</option>
-						  <option>11:00</option>
-						  <option>11:30</option>
-						  <option>12:00</option>
-						  <option>12:30</option>
-						  <option>13:00</option>
-						  <option>13:30</option>
-						  <option>14:00</option>
-						  <option>14:30</option>
-						  <option>15:00</option>
-						  <option>15:30</option>
-						  <option>16:00</option>
-						  <option>16:30</option>
-						  <option>17:00</option>
-						  <option>17:30</option>
+						<option value="">Select End Time</option>
+						  <option value="8:00">8:00</option>
+						  <option value="8:30">8:30</option>
+						  <option value="9:00">9:00</option>
+						  <option value="9:30">9:30</option>
+						  <option value="10:00">10:00</option>
+						  <option value="10:30">10:30</option>
+						  <option value="11:00">11:00</option>
+						  <option value="11:30">11:30</option>
+						  <option value="12:00">12:00</option>
+						  <option value="12:30">12:30</option>
+						  <option value="13:00">13:00</option>
+						  <option value="13:30">13:30</option>
+						  <option value="14:00">14:00</option>
+						  <option value="14:30">14:30</option>
+						  <option value="15:00">15:00</option>
+						  <option value="15:30">15:30</option>
+						  <option value="16:00">16:00</option>
+						  <option value="16:30">16:30</option>
+						  <option value="17:00">17:00</option>
+						  <option value="17:30">17:30</option>
 						</select>
 					</div>
-					<div>
+
 						<label for="date">Date Input:</label>
 						<input type="date" name="date" id="date">
-					</div>
 					<input type="text" id="eventType" name="eventType" placeholder="Comments">
 						<br><br>
-						<input class="button" type="submit" value="Update" name="Update" data-form="ui-btn-up-a" data-theme="a" data-icon="check" data-transition="pop">
-						<input class="button" type="reset" value="Reset" name="Reset" data-form="ui-btn-up-a" data-theme="a" data-icon="delete" data-transition="pop">		
-						<input class="hiddenInfo" name="key" value="">	
+						<input class="button" type="submit" value="Add" name="Add" data-form="ui-btn-up-a" data-theme="a" data-icon="check">
+						<input class="button" type="reset" value="Reset" name="Reset" data-form="ui-btn-up-a" data-theme="a" data-icon="delete">		
+				
 				</form>
 			</div><!-- /content -->
 		</div><!-- /page -->
@@ -360,153 +630,7 @@
 			</div><!-- /content -->
 		</div><!-- /page -->
 
-
-		<!--***************************OLD EDIT SCHEDULE PAGE***************************
-		<div id="edit" data-role="page">
-
-		<div id="navHeader" data-role="header">
-			<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
-			<div class="userHeaderDiv">
-			<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" >User1</a>
-			</div>	
-		</div>
-
-		<div role="main" class="ui-content">
-			<h1 align="center">Edit Schedule</h1>
-			<a href="#modify" id="modifyButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Modify Event</a>
-			<a href="#cancel" id="cancelButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">Cancel Class</a>
-		</div>
-		</div>
-		-->
-		<!--***************************ADD SCHEDULE PAGE***************************-->
-		<div id="add" data-role="page">
-
-			<div id="navHeader" data-role="header">
-				<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home" data-transition="pop"/></a>
-				<div class="userHeaderDiv">
-					<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" >User1</a>
-				</div>
-				<div>
-					<a href="#schedule" id="scheduleButton" class=" ui-btn ui-btn-a ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Schedule</a>
-				</div>	
-			</div><!-- /header -->
-
-			<div role="main" class="ui-content">
-				<h1 align="center">Add Event</h1>
-				<span id="eventname"></span>
-				<span id="location"></span>
-				<span id="instructor"></span>
-				<span id="from"></span>
-				<span id="to"></span>
-				<span id="event_date"></span>
-				<span id="comments"></span>
-				<p>
-				<form id="addForm" name="addForm" method="post" action="add.php">
-					<input type="text" id="addEventName" name="addEventName" placeholder="Event Name">
-					<input type="text" id="addProfName" name="addProfName" placeholder="Instructor Name">
-					<label for="addLocation" id="location"></label>
-					<input type="text" id="addLocation" name="addLocation" placeholder="Location">
-					<select name="selLevel">
-						<option>Select Level</option>
-						<option value="1">Level 1</option>
-			      		<option value="2">Level 2</option>
-			      		<option value="3">Level 3</option>
-			      		<option value="4">Level 4</option>
-					</select>
-
-					<div id="setAndNotificationDiv">
-					<div id="setList">
-			 			<select name="selSet">
-							<option>Select Set</option>
-							<option value="A">Set A</option>
-				      		<option value="B">Set B</option>
-				      		<option value="C">Set C</option>
-						</select>
-					</div>
-					<div id="addEventNotification">
-						<br>
-						<label for="notifySliderEmail">Notify by email:</label>
-						<div class="sliderDiv">
-							<select name="notifySliderEmail" id="notifySliderEmail" data-role="slider">
-								<option value="0">No</option>
-								<option value="1">Yes</option>
-							</select> 
-						</div>
-						<label for="notifySliderSMS">Notify by SMS:</label>
-						<div class="sliderDiv">
-							<select name="notifySliderSMS" id="notifySliderSMS" data-role="slider">
-								<option value="0">No</option>
-								<option value="1">Yes</option>
-							</select> 
-						</div>
-					</div>
-					</div>
-
-					<div id="timeButtons">
-					<select name="selStartTime" size="1">
-						<option>Select Start Time</option>
-						  <option>8:00</option>
-						  <option>8:30</option>
-						  <option>9:00</option>
-						  <option>9:30</option>
-						  <option>10:00</option>
-						  <option>10:30</option>
-						  <option>11:00</option>
-						  <option>11:30</option>
-						  <option>12:00</option>
-						  <option>12:30</option>
-						  <option>13:00</option>
-						  <option>13:30</option>
-						  <option>14:00</option>
-						  <option>14:30</option>
-						  <option>15:00</option>
-						  <option>15:30</option>
-						  <option>16:00</option>
-						  <option>16:30</option>
-						  <option>17:00</option>
-						  <option>17:30</option>
-						</select>
-						<select name="selEndTime" size="1">
-						<option>Select End Time</option>
-						  <option>6:00</option>
-						  <option>6:30</option>
-						  <option>7:00</option>
-						  <option>7:30</option>
-						  <option>8:00</option>
-						  <option>8:30</option>
-						  <option>9:00</option>
-						  <option>9:30</option>
-						  <option>10:00</option>
-						  <option>10:30</option>
-						  <option>11:00</option>
-						  <option>11:30</option>
-						  <option>12:00</option>
-						  <option>12:30</option>
-						  <option>13:00</option>
-						  <option>13:30</option>
-						  <option>14:00</option>
-						  <option>14:30</option>
-						  <option>15:00</option>
-						  <option>15:30</option>
-						  <option>16:00</option>
-						  <option>16:30</option>
-						  <option>17:00</option>
-						  <option>17:30</option>
-						</select>
-					</div>
-					<div>
-						<label for="date">Date Input:</label>
-						<input type="date" name="date" id="date">
-					</div>
-					<input type="text" id="eventType" name="eventType" placeholder="Comments">
-						<br><br>
-						<input class="button" type="submit" value="Add" name="Add" data-form="ui-btn-up-a" data-theme="a" data-icon="check" data-transition="pop">
-						<input class="button" type="reset" value="Reset" name="Reset" data-form="ui-btn-up-a" data-theme="a" data-icon="delete">		
-						<input class="hiddenInfo" name="key" value="">	
-				</form>
-			</div><!-- /content -->
-		</div><!-- /page -->
-
+		
 		<!-- ***************************USER PROFILE PAGE*************************** -->
 		<div id="profile" data-role="page">
 			<div id="navHeader" data-role="header">
