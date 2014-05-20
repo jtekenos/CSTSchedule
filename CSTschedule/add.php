@@ -34,12 +34,11 @@ $event = mysqli_real_escape_string($con, $_POST['addEventName']);
 $prof = mysqli_real_escape_string($con, $_POST['addProfName']);
 $location = mysqli_real_escape_string($con, $_POST['addLocation']);
 $eventType = mysqli_real_escape_string($con, $_POST['eventType']);
-$set = mysqli_real_escape_string($con, $_POST['selSet']);
-$level = mysqli_real_escape_string($con, $_POST['selLevel']);
+//$set = mysqli_real_escape_string($con, $_POST['selSet']);
+$level = mysqli_real_escape_string($con, $_POST['selLevel2']);
 $startTime = mysqli_real_escape_string($con, $_POST['selStartTime']);
 $endTime = mysqli_real_escape_string($con, $_POST['selEndTime']);
 $date = mysqli_real_escape_string($con, $_POST['date']);
-
 
 $levelSet = $level . $set;
 
@@ -67,7 +66,7 @@ if($location == "") {
 	echo "<h3>please specify the location<h3>";
 	$passed = 0;
 }
-if($level == "noLvl" or $set == "noSet") {
+if($level == "noLvl" or empty($_POST['checkboxSet'])) {
 	echo "<h3>please specify the level and set<h3>";
 	$passed = 0;
 }
@@ -77,41 +76,51 @@ if($date == "") {
 }
 
 
+if(!empty($_POST['checkboxSet'])) {
+    foreach($_POST['checkboxSet'] as $check) {
+    	$checkedSet =  substr($check,3,4);
+    	$levelSet = $level . $checkedSet;
+		$result = mysqli_query($con,"SELECT * FROM schdule1 WHERE event_date = '$date' AND level_id = '$levelSet'");
+		while($row = mysqli_fetch_array($result)) {
+		  $oldStartTBlock = tBlockConverter($row['timefrom']);
+		  $oldEndTBlock = tBlockConverter($row['timeto']);
+		  $oldtBlocks = $oldEndTBlock - $oldStartTBlock;
+		  
+		  for($i=$oldtBlocks-1; $i>=0; $i--){
+		  	$oldUsedBlock = $oldStartTBlock + $i;
 
-$result = mysqli_query($con,"SELECT * FROM schdule1 WHERE event_date = '$date' AND level_id = '$levelSet'");
-while($row = mysqli_fetch_array($result)) {
-  $oldStartTBlock = tBlockConverter($row['timefrom']);
-  $oldEndTBlock = tBlockConverter($row['timeto']);
-  $oldtBlocks = $oldEndTBlock - $oldStartTBlock;
-  
-  for($i=$oldtBlocks-1; $i>=0; $i--){
-  	$oldUsedBlock = $oldStartTBlock + $i;
-
-  	foreach ($usedBlockArray as $value) {
-  		if($oldUsedBlock == $value) {
-  			$passed = 2;
-  		}
+		  	foreach ($usedBlockArray as $value) {
+		  		if($oldUsedBlock == $value) {
+		  			$passed = 2;
+		  		}
+			}
+		  }
+		}
+		
 	}
-  }
 }
-if($passed == 2)
+
+if($passed == 2) {
  echo "<h3>please pick another time<h3>";
+}
 
 if($passed == 1) {
-	$sql="INSERT INTO schdule1 (eventname, location, timefrom, timeto, instructor, comments, level_id, timeBlocks, event_date)
-	VALUES ('$event','$location','$startTime','$endTime','$prof','$eventType', '$levelSet', '$tBlocks', '$date')";
-		
-	if (!mysqli_query($con,$sql)) {
-  		die('Error: ' . mysqli_error($con));
+	foreach($_POST['checkboxSet'] as $check) {
+    	$checkedSet =  substr($check,3,4);
+    	$levelSet = $level . $checkedSet;
+		$sql="INSERT INTO schdule1 (eventname, location, timefrom, timeto, instructor, comments, level_id, timeBlocks, event_date)
+		VALUES ('$event','$location','$startTime','$endTime','$prof','$eventType', '$levelSet', '$tBlocks', '$date')";
+			
+		if (!mysqli_query($con,$sql)) {
+	  		die('Error: ' . mysqli_error($con));
+		}
 	}
-	echo "<h2>Entry Added</h2>
-	<a href=\"CSTScheduleDenis.html#schedule\" onClick=\"tableSelectorDate('tableHere')\" id=\"changeScheduleButton\" class=\"ui-btn ui-btn-aui-shadow ui-corner-all\" data-form=\"ui-btn-up-a\" data-theme=\"a\" data-transition=\"pop\">schedule</a>";
-
 }
 
-
-//header("Location: CSTSchedule.html");
-
+if($passed == 1) {
+	echo "<h2>Entry Added</h2>
+		<a href=\"CSTScheduleDenis.html#schedule\" onClick=\"tableSelectorDate('tableHere')\" id=\"changeScheduleButton\" class=\"ui-btn ui-btn-aui-shadow ui-corner-all\" data-form=\"ui-btn-up-a\" data-theme=\"a\" data-transition=\"pop\">schedule</a>";
+}
 
 echo "<a href=\"CSTScheduleDenis.html#add\" id=\"changeScheduleButton\" class=\"ui-btn ui-btn-aui-shadow ui-corner-all\" data-form=\"ui-btn-up-a\" data-theme=\"a\" data-transition=\"pop\">back</a>";
 
