@@ -80,8 +80,8 @@ th,td,table {
 #footer {
 	background-color: #CCCCCC;
 	border: 0px;
-	position:absolute;
-	bottom:5px;
+	position:fixed;
+	bottom: 0px;
 	width: 100%;
 }
 
@@ -93,12 +93,11 @@ th,td,table {
 
 #LoginButton {
 	width:70%;
-	margin: 2px;
 	float:left;
 }
 
 #RegisterButton {
-	width: 33%;
+	width: 25%;
 	float: right;
 }
 
@@ -133,6 +132,10 @@ th,td,table {
 }
 
 .userHeaderDiv {
+	float: right;
+	padding-right: 5px;
+}
+.logoutUserInfo {
 	float: right;
 	padding-right: 5px;
 }
@@ -200,7 +203,16 @@ tr:nth-child(odd) {
 	max-width: 40%;
 	float: left;
 }
+#setCheckboxLvl0_2 {
+	max-width: 40%;
+	float: left;
+}
 #setCheckboxLvl1 {
+	display:none;
+	max-width: 40%;
+	float: left;
+}
+#setCheckboxLvl1_2 {
 	display:none;
 	max-width: 40%;
 	float: left;
@@ -210,12 +222,27 @@ tr:nth-child(odd) {
 	max-width: 40%;
 	float: left;
 }
+#setCheckboxLvl2_2 {
+	display:none;
+	max-width: 40%;
+	float: left;
+}
 #setCheckboxLvl3 {
 	display: none;
 	max-width: 40%;
 	float: left;
 }
+#setCheckboxLvl3_2 {
+	display: none;
+	max-width: 40%;
+	float: left;
+}
 #setCheckboxLvl4 {
+	display: none;
+	max-width: 40%;
+	float: left;
+}
+#setCheckboxLvl4_2 {
 	display: none;
 	max-width: 40%;
 	float: left;
@@ -276,10 +303,12 @@ table {
 
 #previousWeek {
 	float: left;
+	z-index: 1;
 }
 
 #nextWeek {
 	float: right;
+	z-index: 1;
 }
 
 #heading {
@@ -298,4 +327,22 @@ table {
 	margin-right: 20px;
 	margin-left: 20px;
 	text-align: center;
+}
+
+#changeScheduleButton {
+	width: 210px;
+	margin: auto;
+}
+#tableHere {
+	position: relative;
+	top: -15px;
+}
+
+#eventInfoContent {
+	font-size: 140%;
+	font-weight: bold;
+}
+
+#detailComments {
+	color: red;
 }

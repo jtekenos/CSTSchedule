@@ -5,7 +5,7 @@
 			<link rel="stylesheet" href="themes/BCITTheme.min.css" />
 			<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
 			<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css" />
-			<link rel="stylesheet" href="Style.css" />
+			<link rel="stylesheet" href="StyleSoran.css" />
 			<style type="text/css">
 			@-moz-document url-prefix() {
 					.linkSpan {
@@ -98,10 +98,6 @@
 
 			<div id="navHeader" data-role="header">
 				<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home" data-transition="pop"/></a>
-				<div class="userHeaderDiv">
-					<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">User1</a>
-				</div>
-
 				<div>
 					<a href="#add" id="addButton" class=" ui-btn ui-btn-aui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Add</a>
 				</div>	
@@ -117,13 +113,12 @@
 		?>
         <?php   
             if (isLoggedIn()){
-                echo '<div class="loginInfo" id="userName">' . $_SESSION["SESS_LOGIN_NAME"] . $_SESSION["SESS_levelAndSet"] . '</div>';
-                echo '<div class="loginInfo"><form method="link" action="logout.php">
-                    <input type="submit" class="button" value="Logout"></form></div>';   
+                echo "<div class=\"userHeaderDiv\"><a href=\"#profile\" id=\"UserHeaderButton\" class=\" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all\" data-form=\"ui-btn-up-a\" data-theme=\"a\" data-transition=\"pop\">" . $_SESSION["SESS_LOGIN_NAME"] . $_SESSION["SESS_levelAndSet"] . "</a></div>";
+                echo '<div class="logoutUserInfo"><form method="link" action="logout.php">
+                    <input type="submit" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop" value="Logout"></form></div>';   
           } else {
-                echo '<div class="loginInfo"><form method="link" action="login.php">
-                    <input type="submit" class="button" value="Login"></form></div>';
-                echo '<div class="loginInfo"><form method="link" action="register_page.php"><input type="submit" class="button" value="Register"></form></div>';
+                echo '<div id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop"><form method="link" action="login.php"></form></div>';
+                echo '<div id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop"><form method="link" action="register_page.php"></form></div>';
                 }   
         ?>    
 			</div><!-- /header -->
@@ -138,9 +133,6 @@
 				<div id="tableHere"></div>
 
 			</div><!-- /content -->
-			
-			
-				
 			
 		</div><!-- /page -->
 
