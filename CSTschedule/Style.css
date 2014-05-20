@@ -80,8 +80,8 @@ th,td,table {
 #footer {
 	background-color: #CCCCCC;
 	border: 0px;
-	position:absolute;
-	bottom:5px;
+	position:fixed;
+	bottom: 0px;
 	width: 100%;
 }
 
