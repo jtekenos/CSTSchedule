@@ -80,10 +80,19 @@ th,td,table {
 #footer {
 	background-color: #CCCCCC;
 	border: 0px;
+	position:absolute;
+	bottom: 5px;
+	width: 100%;
+}
+
+#indexFooter {
+	background-color: #CCCCCC;
+	border: 0px;
 	position:fixed;
 	bottom: 0px;
 	width: 100%;
 }
+
 
 .footerButtons {
 	margin: auto;

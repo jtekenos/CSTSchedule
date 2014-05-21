@@ -65,7 +65,13 @@ function collapseLevel2() {
 
 function dynamicSetCheckbox() {
 	var selectedLevel = $( "#selLevel" ).val();
-	if (selectedLevel == 1) {
+	if (selectedLevel == "noLvl") {
+		$( "#setCheckboxLvl0" ).show();
+		$( "#setCheckboxLvl1" ).hide();
+		$( "#setCheckboxLvl2" ).hide();
+		$( "#setCheckboxLvl3" ).hide();
+		$( "#setCheckboxLvl4" ).hide();		
+	} else if (selectedLevel == 1) {
 		$( "#setCheckboxLvl0" ).hide();
 		$( "#setCheckboxLvl1" ).show();
 		$( "#setCheckboxLvl2" ).hide();
@@ -94,7 +100,13 @@ function dynamicSetCheckbox() {
 
 function dynamicSetCheckbox2() {
 	var selectedLevel2 = $( "#selLevel2" ).val();
-	if (selectedLevel2 == 1) {
+	if (selectedLevel2 == 'noLvl') {
+		$( "#setCheckboxLvl0_2" ).show();
+		$( "#setCheckboxLvl1_2" ).hide();
+		$( "#setCheckboxLvl2_2" ).hide();
+		$( "#setCheckboxLvl3_2" ).hide();
+		$( "#setCheckboxLvl4_2" ).hide();	
+	} else if (selectedLevel2 == 1) {
 		$( "#setCheckboxLvl0_2" ).hide();
 		$( "#setCheckboxLvl1_2" ).show();
 		$( "#setCheckboxLvl2_2" ).hide();
