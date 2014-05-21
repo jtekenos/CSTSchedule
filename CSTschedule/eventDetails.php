@@ -17,12 +17,16 @@ $result = mysqli_query($con,"SELECT * FROM $tableName WHERE id = '$primaryKey'")
 
 while($row = mysqli_fetch_array($result)) {
 	if($field == "all") {
+		if($row['cancelled'] == 1) {
+	  	echo "<h2>CANCELLED</h2>";
+	  }
 	  echo  $row['eventname'], "<br>", 
 	  $row['event_date'], "<br>",
 	  $row['timefrom'], " - ", $row['timeto'], 
 	  "<br>", $row['location'], 
-	  "<br>", $row['instructor'],  
-	  "<br><span id=\"detailComments\">", $row['comments'], "</span><br>";
+	  "<br>", $row['instructor']; 
+
+	  echo "<br><span id=\"detailComments\">", $row['comments'], "</span><br>";
 }
 	else if($field == "location"){
 		echo $row['location'];

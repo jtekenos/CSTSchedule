@@ -189,12 +189,13 @@ tr:nth-child(odd) {
 	width: 100%;
 	height: 100%;
 	margin: 0px;
-	border-bottom: 0px;
+	border: 0px;
 	padding: 0px;
 	text-align: center;
 	text-decoration: none;
 	font-weight: bold;
 }
+
 
 #timeButtons {
 	clear:both;
@@ -275,6 +276,15 @@ label.error {
 	width: 18%;
 	position: relative;
 } 
+.filledCellCancel{
+	background-color: #FF5C33;
+	vertical-align: text-top;
+	color: white;
+	font-size: 75%;
+	text-align: center;
+	width: 18%;
+	position: relative;
+}
 
 .emptyCell {
 	width: 18%;
@@ -344,7 +354,7 @@ table {
 }
 
 #eventInfoContent {
-	font-size: 140%;
+	font-size: 120%;
 	font-weight: bold;
 }
 

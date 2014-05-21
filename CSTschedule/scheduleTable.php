@@ -106,13 +106,26 @@ for ($row=0; $row<20; $row++) {
 			$friSpan--;
 			$curSpan = $friSpan;
 		}
+
+
 	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '$timeFrom' and level_id = '$levelSet' and event_date = '$week'";
     $blk = mysql_query($blocks);
     $b = mysql_fetch_array($blk);
 	$spans = $b['timeBlocks'];
 
+	$blocks="SELECT * FROM $tbl_name WHERE timefrom = '$timeFrom' and level_id = '$levelSet' and event_date = '$week'";
+    $blk = mysql_query($blocks);
+    $b = mysql_fetch_array($blk);
+	$flag = $b['cancelled'];
+
 if($spans != null) {
-	$cellClass = "filledCell";
+	if($flag == 1) {
+		$cellClass = "filledCellCancel";
+	}
+	else {
+		$cellClass = "filledCell";
+	}
+	
 	if ($col == "1") {
 	  	$monSpan = $spans;
 	} elseif ($col == "2") {
@@ -136,12 +149,19 @@ if($curSpan < 1) {
 		$result=mysql_query($sql);   
 		while($rows=mysql_fetch_array($result)){ // Start looping table row
 			// ORDER BY id DESC is order result by descending
-		$cellId = $rows['id'];
-		echo "<a href=\"#eventInfo\" onClick=\"detailsJs('$cellId')\"><span class=\"linkSpan\"></span></a>";
-		echo $timeFrom, " - ", $rows['timeto'], "<br>",
-			$rows['eventname'], "<br>", 
-			$rows['location'];}
-		
+			$cellId = $rows['id'];
+			echo "<a href=\"#eventInfo\" onClick=\"detailsJs('$cellId')\"><span class=\"linkSpan\"></span></a>";
+			if($rows['cancelled'] == 1) {
+				echo "<div id=\"cancelMsg\">", $timeFrom, " - ", $rows['timeto'], "<br>",
+				$rows['eventname'], "<br>", 
+				"CANCELLED</div>";
+			}
+			else {
+				echo $timeFrom, " - ", $rows['timeto'], "<br>",
+				$rows['eventname'], "<br>", 
+				$rows['location'];
+			}
+		}
 	}
 	echo "</td>";
 	} 
