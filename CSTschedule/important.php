@@ -14,7 +14,7 @@ if (mysqli_connect_errno()) {
 }
 
 mysqli_query($con,"UPDATE $tableName SET special = 'i' WHERE id = '$primaryKey'");
-echo "Class cancelled";
+echo "Class marked as important";
 mysqli_close($con);
 
 ?>
