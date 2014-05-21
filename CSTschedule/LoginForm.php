@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="Style.css" />
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+<script src="http://jquery.bassistance.de/validate/jquery.validate.js"></script>
+<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
 <script src="functions.js"></script> 
 <meta charset="UTF-8">
 <title>CST Schedule</title>
@@ -15,9 +17,9 @@
 <body>
 
 <div id="navHeader" data-role="header">
-	<a href="http://okoceanfisheries.host56.com/CSTschedule/CSTSchedule.html#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
+	<a href="http://okoceanfisheries.host56.com/CSTschedule/CSTSchedule.html" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home"/></a>
 	<div class="userHeaderDiv">
-	<a href="http://okoceanfisheries.host56.com/CSTschedule/CSTSchedule.html#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">User1</a>
+	<a href="http://okoceanfisheries.host56.com/CSTschedule/CSTSchedule.html#profile" rel="external" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a">User1</a>
 	</div>
 </div><!-- /header -->
 	<?php
@@ -35,11 +37,25 @@
 <h1 align="center">User Login</h1>
 <div role="main" class="ui-content">
 <form id="loginForm" name="loginForm" method="post" action="login.php" data-ajax="false">
-	<input type="text" id="username" name="username">
-	<input type="password" id="password" name="password">
+	<input type="text" id="username" name="username" placeholder="Username" required>
+	<input type="password" id="password" name="password" placeholder="Password" required>
+	<script>
+		$( "#loginForm" ).validate({
+			messages: {
+				uName: "Username is required.",
+				email: {
+					required: "Email is required",
+					txtEmail: "Please provide valid email"
+				}
+			}
+		});
+	</script>
+
+
 
 	<div id="RegisterButtonDiv">
-	<input id="LoginButton" class="button" type="submit" value="Login" name="Login">	
+	<input id="LoginButton" class="button" type="submit" value="Login" name="Login" data-form="ui-btn-up-a" data-theme="a" data-icon="check">	
+	<input class="button" type="reset" value="Reset" name="Reset" data-form="ui-btn-up-a" data-theme="a" data-icon="delete">	
 	</div>
 </form>
 </div><!-- /content -->
