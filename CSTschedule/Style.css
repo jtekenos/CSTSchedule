@@ -58,15 +58,13 @@
 }
 
 #GetScheduleButton {
-	width: 90%;
+	width: 130px;
 	margin: auto;
-	padding: 5px 0;
 }
 
-#importantButton {
-	width: 90%;
+#eventButtons {
+	width: 80%;
 	margin: auto;
-	padding: 5px 0;
 }
 
 th,td,table {
