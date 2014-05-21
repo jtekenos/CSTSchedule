@@ -288,6 +288,19 @@ xmlhttp.open("GET","cancel.php?q=" + primaryKey + "&q2=" + levelSet,true);
   xmlhttp.send();
 }
 
+function importantEvent() { 
+ var xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      document.getElementById("eventInfoContent").innerHTML=xmlhttp.responseText;
+    }
+  }
+
+xmlhttp.open("GET","important.php?q=" + primaryKey + "&q2=" + levelSet,true);
+
+  xmlhttp.send();
+}
+
 function fillFields() {
 	document.getElementsByName("key")[0].value=primaryKey;
 	pullField("eventname", "eventname");

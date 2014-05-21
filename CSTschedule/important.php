@@ -13,7 +13,7 @@ if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-mysqli_query($con,"UPDATE $tableName SET special = 'c' WHERE id = '$primaryKey'");
+mysqli_query($con,"UPDATE $tableName SET special = 'i' WHERE id = '$primaryKey'");
 echo "Class cancelled";
 mysqli_close($con);
 
