@@ -14,7 +14,7 @@ if (mysqli_connect_errno()) {
 }
 
 mysqli_query($con,"DELETE FROM schdule1 WHERE id = '$primaryKey'");
-echo "entry Deleted";
+echo "Class deleted";
 mysqli_close($con);
 
 ?>
