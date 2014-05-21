@@ -1,3 +1,5 @@
+/*displays level and set on appropriate collapsible bars, displays appropriate sets 
+on level selected, and collapses level id*/
 function menuSelector(sourceId, destinationId) {
 	var clickedMenu = document.getElementById(sourceId).innerHTML;
 	var destinationMenu = document.getElementById(destinationId).innerHTML;
@@ -50,6 +52,7 @@ function menuSelector(sourceId, destinationId) {
 	} 
 }
 
+//collapses set collapsible on index page
 function collapseSet() {
 	$("#setCollapsible").collapsible({collapsed:true})
 }
@@ -62,7 +65,7 @@ function collapseLevel2() {
 	$("#levelCollapsible2").collapsible({collapsed:true});
 }
 
-
+//displays a fieldset of checkboxes for sets based on level selected on #modifyPage
 function dynamicSetCheckbox() {
 	var selectedLevel = $( "#selLevel" ).val();
 	if (selectedLevel == "noLvl") {
@@ -98,6 +101,7 @@ function dynamicSetCheckbox() {
 	}
 } 
 
+//displays a fieldset of checkboxes for sets based on level selected on #add
 function dynamicSetCheckbox2() {
 	var selectedLevel2 = $( "#selLevel2" ).val();
 	if (selectedLevel2 == 'noLvl') {
@@ -143,6 +147,11 @@ function getSet(setId) {
 	return storeSet;
 }
 
+function noLvlSet() {
+	if (storeLevel ="" || storeSet="") {
+		$("#errNoSet").html('Please select a level and set');
+	}
+}
 // picks the current week to display a schedule for it (not currently used)
 function weekPicker() {
 	var today = new Date();
@@ -185,10 +194,10 @@ function tableSelector(direction, tableId) {
   }
 
 if(direction == "current") {
-	xmlhttp.open("GET","scheduleTable.php?q1=&q2=" + levelSet,true);
+	xmlhttp.open("GET","http://okoceanfisheries.host56.com/CSTschedule/scheduleTable.php?q1=&q2=" + levelSet,true);
 }
 else {
-	xmlhttp.open("GET","scheduleTable.php?q1=" + numDate  + "&q2=" + levelSet, true);
+	xmlhttp.open("GET","http://okoceanfisheries.host56.com/CSTschedule/scheduleTable.php?q1=" + numDate  + "&q2=" + levelSet, true);
 }
   
   xmlhttp.send();
@@ -215,7 +224,7 @@ function tableSelectorDate(tableId) {
 	    }
 	  }
 
-	xmlhttp.open("GET","scheduleTable.php?q1=" + numDate  + "&q2=" + levelSet, true);
+	xmlhttp.open("GET","http://okoceanfisheries.host56.com/CSTschedule/scheduleTable.php?q1=" + numDate  + "&q2=" + levelSet, true);
 
   
   xmlhttp.send(); 
@@ -233,7 +242,7 @@ function detailsJs(sourceId) {
       document.getElementById("eventInfoContent").innerHTML=xmlhttp.responseText;
     }
   }
-	xmlhttp.open("GET","eventDetails.php?q1="+primaryKey + "&q2=" + field +
+	xmlhttp.open("GET","http://okoceanfisheries.host56.com/CSTschedule/eventDetails.php?q1="+primaryKey + "&q2=" + field +
 		"&q3=" + levelSet, true);
 	xmlhttp.send();
 }
@@ -247,7 +256,7 @@ function pullField(dataField, destinationId) {
       document.getElementById(destinationId).innerHTML=xmlhttp.responseText;
     }
   }
-	xmlhttp.open("GET","eventDetails.php?q1="+primaryKey + "&q2=" + 
+	xmlhttp.open("GET","http://okoceanfisheries.host56.com/CSTschedule/eventDetails.php?q1="+primaryKey + "&q2=" + 
 		field + "&q3=" + levelSet,true);
 	xmlhttp.send();
 }
