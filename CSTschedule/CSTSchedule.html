@@ -5,7 +5,6 @@
 			<link rel="stylesheet" href="themes/BCITTheme.min.css" />
 			<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
 			<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css" />
-			<link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.min.css" /> 
 			<link rel="stylesheet" href="Style.css" />
 			<link rel="icon" href="themes/images/favicon.gif" type="image/gif"/>
 			<style type="text/css">
@@ -25,10 +24,7 @@
 			<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 			<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 			<script src="http://jquery.bassistance.de/validate/jquery.validate.js"></script>
-			<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>	
-			<script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.core.min.js"></script>
-			<script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.mode.flipbox.min.js"></script>
-			<script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/i18n/jquery.mobile.datebox.i18n.en_US.utf8.js"></script>
+			<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
 			<script src="functions.js"></script> 
 		<meta charset="UTF-8">
 		<title>CST Schedule</title>
@@ -62,7 +58,7 @@
 				    <button id="setO" class="ui-btn ui-btn-a" value="O" onClick="menuSelector('setO', 'setHeader'); getSet('setO'); collapseSet()">Set O</button>
 				    <button id="setQ" class="ui-btn ui-btn-a" value="Q" onClick="menuSelector('setQ', 'setHeader'); getSet('setQ'); collapseSet()">Set Q</button>
 				</div>
-				<a href="#schedule" onclick="tableSelector('current', 'tableHere')"id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Get Schedule</a>
+				<a href="#schedule" onclick="tableSelector('current', 'tableHere'); userInfo()" id="GetScheduleButton" class=" ui-btn ui-btn-a ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">Get Schedule</a>
 				<div id="errNoSet"></div>
 				<div id="twitterFeedDiv">
 					<div id="twitterFeedWrapper">
@@ -84,13 +80,8 @@
 			</div><!-- /content -->
 			<br>
 			<br>
-<<<<<<< HEAD
 			<br>
 			<div id="indexFooter" data-role="footer">
-=======
-			
-			<div id="footer" data-role="footer">
->>>>>>> Date-selector-
 
 				<div class="footerButtons">
 					<div id="loginButtonDiv">
@@ -171,6 +162,7 @@
 				<div class="userHeaderDiv">
 					<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">User1</a>
 				</div>
+				<div
 			</div><!-- /header -->
 			<div role="main" class="ui-content">
 
@@ -193,7 +185,7 @@
 			<div id="navHeader" data-role="header">
 				<a href="#index" id="backButton"><img src="homeButton.jpg" width="45" height="45" alt="Home" data-transition="pop"/></a>
 				<div class="userHeaderDiv">
-					<a href="#profile" id="UserHeaderButton" class=" ui-btn ui-btn-a ui-icon-gear ui-btn-icon-left ui-shadow ui-corner-all" data-form="ui-btn-up-a" data-theme="a" data-transition="pop">User1</a>
+					
 				</div>
 			</div><!-- /header -->
 			<div role="main" class="ui-content">
@@ -506,9 +498,8 @@
 						</select>
 					</div>
 
-						<label for="mydate">Date Input:</label>
-						<input name="mydate" id="mydate" type="date" data-role="datebox"
-   					data-options='{"mode": "flipbox"}'>
+						<label for="date">Date Input:</label>
+						<input type="date" name="date" id="date">
 					<input type="text" id="eventType" name="eventType" placeholder="Comments">
 						<br><br>
 						<input class="button" type="submit" value="Add" name="Add" data-form="ui-btn-up-a" data-theme="a" data-icon="check">
