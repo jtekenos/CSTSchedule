@@ -311,3 +311,18 @@ function fillFields() {
 	pullField("event_date", "event_date");
 	pullField("comments", "comments");
 }
+//displays the schedule for selected week and set Ajax => scheduleTable.php
+function loginUserName(destoinationId) { 
+
+ var xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      document.getElementById(destinationId).innerHTML=xmlhttp.responseText;
+    }
+}
+	xmlhttp.open("GET","http://okoceanfisheries.host56.com/CSTschedule/loginUserName.php", true);
+
+
+  xmlhttp.send();
+}
+
